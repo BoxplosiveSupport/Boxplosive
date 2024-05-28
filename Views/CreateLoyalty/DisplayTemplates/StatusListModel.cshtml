@@ -1,0 +1,42 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.StatusListModel
+
+<div class="panel panel-secondary">
+    <div class="panel-body">
+        <h2 class="panel-color">Loyalty</h2>
+        <ol class="status-list">
+            <li class="@Model.BasicsStyle"><a href="#datapanel-basics">Basics <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.TimeframeStyle"><a href="#datapanel-timeframe">Timeframe <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.RewardsStyle"><a href="#datapanel-rewards">Rewards <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.SavingsStyle"><a href="#datapanel-savings">Savings <span class="icon icon-check pull-right"></span></a></li>
+        </ol>
+
+        @if (UserRolesPermissions.EnableDisable(MVC.CreateLoyalty.ActionNames.ContinueLater, MVC.CreateLoyalty.GetType().Namespace, MVC.CreateLoyalty.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.CreateLoyalty.ActionNames.ContinueLater, MVC.CreateLoyalty.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.CreateLoyalty.ActionNames.ContinueLater" class="btn btn-success btn-block">Continue later</button>
+            }
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.CreateLoyalty.ActionNames.ReadyToPublish, MVC.CreateLoyalty.GetType().Namespace, MVC.CreateLoyalty.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.CreateLoyalty.ActionNames.ReadyToPublish, MVC.CreateLoyalty.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.CreateLoyalty.ActionNames.ReadyToPublish" class="btn btn-success btn-block @Model.PublishStyle">Ready to publish</button>
+            }
+        }
+    </div>
+</div>
+
+<div class="panel">
+    @foreach (var errorMessage in Model.ErrorMessages.Keys)
+    {
+        <div class="text-danger">
+            <strong>@errorMessage</strong>
+        </div>
+    }
+</div>

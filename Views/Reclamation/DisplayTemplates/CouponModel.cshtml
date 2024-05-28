@@ -1,0 +1,43 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Reclamation
+@using nl.boxplosive.Service.ServiceContract.CustomerService.DataContracts
+@using nl.boxplosive.Service.ServiceModel.Customer
+@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.CouponModel
+
+@{
+    var CouponsTabClaimTypeArgs = new Type[] { typeof(CouponTabModel), typeof(string), typeof(int) };
+    var EditCouponTypeArgs = new Type[] { typeof(int), typeof(int), typeof(CustomerDetailsType), typeof(string) };
+
+    var searchValueModel = (ReclamationSearchValueModel)ViewData["SearchValueModel"];
+}
+
+<tr>
+    <td>@(Model.DateModified.HasValue ? Model.DateModified.Value.ToLocalTimeInOperatingTimeZone().ToString("dd-MM-yyyy HH:mm") : "")</td>
+    <td>@Model.Id</td>
+    <td>@Model.PromotionName</td>
+    <td>@Model.Status</td>
+    <td>@Model.StartsAt.ToLocalTimeInOperatingTimeZone().ToString("dd-MM-yyyy HH:mm")</td>
+    <td>@Model.EndsAt.ToLocalTimeInOperatingTimeZone().ToString("dd-MM-yyyy HH:mm")</td>
+    <td>@Model.RedemptionsLeft</td>
+    <td class="actions">
+        @if (UserRolesPermissions.EnableDisable(MVC.Reclamation.ActionNames.CouponsTabClaim, MVC.Reclamation.GetType().Namespace, MVC.Reclamation.Name, User, typeArgs: CouponsTabClaimTypeArgs))
+        {
+            if (Model.Status == GetCustomerCouponsRequest.CouponStatus.Reserved)
+            {
+                <button type="submit" data-action="save" class="icon-btn icon-check" title="Claim" data-form-post="@Url.Action(MVC.Reclamation.ActionNames.CouponsTabClaim, MVC.Reclamation.Name)" data-vars='[{"name":"reservationId","value":@Model.ReservationId}]'>
+                    <span class="sr-only">Claim</span>
+                </button>
+            }
+        }
+        @if (UserRolesPermissions.EnableDisable(MVC.Reclamation.ActionNames.EditCoupon, MVC.Reclamation.GetType().Namespace, MVC.Reclamation.Name, User, typeArgs: EditCouponTypeArgs))
+        {
+            if (Model.Status == GetCustomerCouponsRequest.CouponStatus.Reserved
+                || Model.Status == GetCustomerCouponsRequest.CouponStatus.Claimed)
+            {
+                @Html.ActionLink(" ", MVC.Reclamation.ActionNames.EditCoupon, MVC.Reclamation.Name, 
+                    new { reservationId = Model.ReservationId, customerId = searchValueModel.CustomerId, searchType = searchValueModel.SearchType, searchTerm = searchValueModel.SearchTerm },
+                    new { @id = "editcoupon_" + Model.ReservationId, @class = "icon-btn icon-edit" })
+            }
+        }
+    </td>
+</tr>

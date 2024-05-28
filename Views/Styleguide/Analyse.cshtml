@@ -1,0 +1,361 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<form class="well form">
+  <div class="row">
+    <div class="col-sm-6 form-group">
+      <label for="Analyse_Store" class="sr-only">Store</label>
+      <input type="search"
+             class="form-control"
+             name="analyse-store"
+             id="Analyse_Store"
+             data-boxautocomplete
+             data-source="ReturnJSON?file=~/Ajax-Stub/stores.json"
+             data-minlength="3"
+             data-scrollsteplength="10"
+             data-idto="#storeid"
+             data-itemtemplate="#storebrowseritemtemplate"
+             placeholder="Find store" />
+      <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+      <input type="hidden" name="storeid" id="storeid" />
+    </div>
+    <div class="col-sm-6 form-group">
+      <label for="Analyse_Campaign" class="sr-only">Campaign</label>
+      <input type="search"
+             class="form-control"
+             name="analyse-campaign"
+             id="Analyse_Campaign"
+             data-boxautocomplete
+             data-source="ReturnJSON?file=~/Ajax-Stub/stores.json"
+             data-minlength="3"
+             data-scrollsteplength="10"
+             data-idto="#campaignid"
+             data-itemtemplate="#storebrowseritemtemplate"
+             placeholder="Find campaign" />
+      <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+      <input type="hidden" name="campaignid" id="campaignid" />
+    </div>
+  </div>
+  <div class="row" data-range>
+    <label for="Analyse_Groupby" class="sr-only">Group</label>
+    <div class="col-sm-2 form-group">
+      <select class="form-control" id="Analyse_Groupby" name="analyse-groupby">
+        <option value="0">By day</option>
+        <option value="1">By month</option>
+        <option value="2">By year</option>
+      </select>
+    </div>
+    <div class="col-sm-4 form-horizontal">
+      <div class="form-group">
+        <label for="Analyse_From" class="col-sm-3 control-label text-right">From</label>
+        <div class="col-sm-9">
+          <input name="fromdate"
+                 class="form-control"
+                 id="Analyse_From"
+                 aria-required="true"
+                 type="date"
+                 placeholder="yy-mm-dd"
+                 data-rule-required="true"
+                 data-msg-required="From date is required."
+                 data-from>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 form-horizontal">
+      <div class="form-group">
+        <label for="Analyse_To" class="col-sm-3 control-label text-right">To</label>
+        <div class="col-sm-9">
+          <input value="2015-03-30"
+                 name="todate"
+                 class="form-control"
+                 id="Analyse_To"
+                 aria-required="true"
+                 type="date"
+                 placeholder="yy-mm-dd"
+                 data-rule-required="true"
+                 data-msg-required="To is required."
+                 data-to>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2 form-group">
+      <button type="submit" class="btn btn-default btn-block">Filter</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/mustache" id="storebrowseritemtemplate">
+  <li>
+    {{#isChecklist}}
+    <span>
+      {{#checked}}<span class="icon-box icon-check"></span>{{/checked}}
+      {{#subchecked}}<span class="icon-box icon-min"></span>{{/subchecked}}
+      {{^checked}}{{^subchecked}}<span class="icon-box"></span>{{/subchecked}}{{/checked}}
+    </span>
+    {{/isChecklist}}
+    {{^isChecklist}}{{#folder}}<span class="icon icon-folder"></span>{{/folder}}{{/isChecklist}}
+    {{#label}}<span class="labeltext">{{label}}</span>{{/label}}
+    {{#sublabel}}<small tabindex="0">{{sublabel}}</small>{{/sublabel}}
+  </li>
+</script>
+
+<section>
+  <h2>Coupons</h2>
+  <div class="row">
+    <div data-chart="Line">
+      <div class="col-sm-8">
+        <div>
+          <canvas width="400" height="250"></canvas>
+        </div>
+        <script type="application/json" data-data>
+          {
+            "labels": ["January", "February", "March", "April", "May", "June", "July"],
+            "datasets": [
+              {
+                  "label": "Issued",
+                  "fillColor": "rgba(0, 0, 0, 0)",
+                  "strokeColor": "#bacee5",
+                  "pointColor": "#bacee5",
+                  "pointStrokeColor": "#bacee5",
+                  "pointHighlightFill": "#fff",
+                  "pointHighlightStroke": "#bacee5",
+                  "data": [65, 59, 80, 81, 56, 55, 40]
+              },
+              {
+                  "label": "Claimed",
+                  "fillColor": "rgba(0, 0, 0, 0)",
+                  "strokeColor": "#1f54a2",
+                  "pointColor": "#1f54a2",
+                  "pointStrokeColor": "#1f54a2",
+                  "pointHighlightFill": "#fff",
+                  "pointHighlightStroke": "#1f54a2",
+                  "data": [28, 48, 40, 19, 86, 27, 90]
+              },
+              {
+                  "label": "Cashed",
+                  "fillColor": "rgba(0, 0, 0, 0)",
+                  "strokeColor": "#b5b0a8",
+                  "pointColor": "#b5b0a8",
+                  "pointStrokeColor": "#b5b0a8",
+                  "pointHighlightFill": "#fff",
+                  "pointHighlightStroke": "#b5b0a8",
+                  "data": [18, 20, 30, 35, 10, 15, 30]
+              }
+            ]
+          }
+        </script>
+        <script type="application/json" data-options>
+          {
+            "scaleShowGridLines" : true,
+            "scaleGridLineWidth" : 1,
+            "scaleShowHorizontalLines": true,
+            "scaleShowVerticalLines": true,
+            "bezierCurve" : true,
+            "bezierCurveTension" : 0.4,
+            "pointDot" : true,
+            "pointDotRadius" : 4,
+            "pointDotStrokeWidth" : 1,
+            "pointHitDetectionRadius" : 20,
+            "datasetStroke" : true,
+            "datasetStrokeWidth" : 2,
+            "datasetFill" : true,
+            "multiTooltipTemplate": "<%= value %> <%= datasetLabel %>"
+          }
+        </script>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-sm-offset-1">
+        <h3>Legend</h3>
+        <div data-legend></div>
+      </div>
+    </div>
+    <div class="col-xs-8 col-sm-3 col-sm-offset-1" data-chart="Bar">
+      <h3>Average</h3>
+      <div>
+        <canvas width="400" height="300"></canvas>
+      </div>
+      <script type="application/json" data-data>
+        {
+          "labels": ["Issued", "Claimed", "Cashed"],
+          "datasets": [
+            {
+              "data": [65, 28, 35],
+              "strokeColor": "#fff"
+            }
+          ]
+        }
+      </script>
+      <script type="application/json" data-options>
+        {
+          "scaleShowLabels": true,
+          "scaleBeginAtZero": true,
+          "scaleShowGridLines": true,
+          "scaleShowHorizontalLines": true,
+          "scaleShowVerticalLines": false,
+          "barShowStroke": true,
+          "barStrokeWidth": 2,
+          "barValueSpacing": 10,
+          "barDatasetSpacing": 10,
+          "tooltipTemplate": "<%= value %>",
+          "stickTooltips": true,
+          "centeredInlineValues" : false,
+          "fillColors": ["#bacee5","#1f54a2","#b5b0a8"],
+          "highlightFills": ["#a7b9ce","#1c4c92","#a39e97"],
+          "tooltipEvents": []
+        }
+      </script>
+    </div>
+  </div>
+</section>
+<hr />
+<section>
+  <h2>Points</h2>
+  <div class="row">
+    <div data-chart="Line">
+      <div class="col-sm-8">
+        <div>
+          <canvas width="400" height="250"></canvas>
+        </div>
+        <script type="application/json" data-data>
+          {
+            "labels": ["January", "February", "March", "April", "May", "June", "July"],
+            "datasets": [
+              {
+                  "label": "Used",
+                  "fillColor": "rgba(0, 0, 0, 0)",
+                  "strokeColor": "#1f54a2",
+                  "pointColor": "#1f54a2",
+                  "pointStrokeColor": "#1f54a2",
+                  "pointHighlightFill": "#fff",
+                  "pointHighlightStroke": "#1f54a2",
+                  "data": [50, 30, 67, 230, 299, 105, 62]
+              },
+              {
+                  "label": "Given",
+                  "fillColor": "rgba(0, 0, 0, 0)",
+                  "strokeColor": "#bacee5",
+                  "pointColor": "#bacee5",
+                  "pointStrokeColor": "#bacee5",
+                  "pointHighlightFill": "#fff",
+                  "pointHighlightStroke": "#bacee5",
+                  "data": [300, 250, 125, 210, 215, 127, 150]
+              }
+            ]
+          }
+        </script>
+        <script type="application/json" data-options>
+          {
+            "scaleShowGridLines" : true,
+            "scaleGridLineWidth" : 1,
+            "scaleShowHorizontalLines": true,
+            "scaleShowVerticalLines": true,
+            "bezierCurve" : true,
+            "bezierCurveTension" : 0.4,
+            "pointDot" : true,
+            "pointDotRadius" : 4,
+            "pointDotStrokeWidth" : 1,
+            "pointHitDetectionRadius" : 20,
+            "datasetStroke" : true,
+            "datasetStrokeWidth" : 2,
+            "datasetFill" : true,
+            "multiTooltipTemplate": "<%= value %> <%= datasetLabel %>"
+          }
+        </script>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-sm-offset-1">
+        <h3>Legend</h3>
+        <div data-legend></div>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-sm-offset-1" data-chart="Pie">
+      <h3>Average</h3>
+      <div>
+        <canvas width="400" height="400"></canvas>
+      </div>
+      <script type="application/json" data-data>
+        [
+          {
+              "value": 120,
+              "color":"#1f54a2",
+              "label": "Used"
+          },
+          {
+              "value": 197,
+              "color": "#bacee5",
+              "label": "Given"
+          }
+        ]
+      </script>
+      <script type="application/json" data-options>
+        {
+            "segmentShowStroke" : true,
+            "segmentStrokeColor" : "#fff",
+            "segmentStrokeWidth" : 2,
+            "animationSteps" : 100,
+            "animationEasing" : "easeOutBounce",
+            "animateRotate" : true,
+            "animateScale" : false,
+            "stickTooltips": true,
+            "tooltipEvents": []
+        }
+      </script>
+    </div>
+  </div>
+</section>
+<hr />
+<section>
+  <h2>Discount</h2>
+  <div class="row">
+    <div data-chart="Line">
+      <div class="col-sm-8">
+        <div>
+          <canvas width="400" height="250"></canvas>
+        </div>
+        <script type="application/json" data-data>
+          {
+            "labels": ["January", "February", "March", "April", "May", "June", "July"],
+            "datasets": [
+              {
+                "label": "Used",
+                "fillColor": "rgba(0, 0, 0, 0)",
+                "strokeColor": "#bacee5",
+                "pointColor": "#bacee5",
+                "pointStrokeColor": "#bacee5",
+                "pointHighlightFill": "#fff",
+                "pointHighlightStroke": "#bacee5",
+                "data": [1234.23, 1324.43, 2345.43, 3245.12, 1235.34, 2113.23, 1043.34]
+              }
+            ]
+          }
+        </script>
+        <script type="application/json" data-options>
+          {
+            "scaleShowGridLines" : true,
+            "scaleGridLineWidth" : 1,
+            "scaleShowHorizontalLines": true,
+            "scaleShowVerticalLines": true,
+            "bezierCurve" : true,
+            "bezierCurveTension" : 0.4,
+            "pointDot" : true,
+            "pointDotRadius" : 4,
+            "pointDotStrokeWidth" : 1,
+            "pointHitDetectionRadius" : 20,
+            "datasetStroke" : true,
+            "datasetStrokeWidth" : 2,
+            "datasetFill" : true
+          }
+        </script>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h3>Average</h3>
+        <p class="statistic-number">&euro; 1.796,40</p>
+      </div>
+    </div>
+  </div>
+</section>
+

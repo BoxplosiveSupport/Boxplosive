@@ -1,0 +1,30 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Modal
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true" id=@Model.Id>
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title">@Html.Raw(@Model.Title)</h4>
+            </div>
+            <div class="modal-body" style="background-color: white; padding-top: 15px;">
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div>@Html.Raw(Model.Description)</div>
+                }
+                @if (Model.ShowSubject)
+                {
+                    <div class="modal-body-subject-replaceable"></div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Question))
+                {
+                    <div>@Html.Raw(Model.Question)</div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-ok">OK</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-cancel" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

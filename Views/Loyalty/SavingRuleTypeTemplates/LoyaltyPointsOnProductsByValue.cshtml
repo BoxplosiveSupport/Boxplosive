@@ -1,0 +1,16 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+	var readOnly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+}
+
+<div class="well"
+	 data-repeatable
+	 data-orderup="true">
+
+	@Html.Partial(MVC.Loyalty.Views.SavingRuleTypeTemplates.SavingsRuleCommonTemplate, Model)
+
+	<div class="form form-horizontal">
+		@Html.EditorFor(m => m.SelectedRule.Amount, "Numeric", new { labelText = Model.SelectedRule.AmountText, readOnly = readOnly })
+	</div>
+</div>

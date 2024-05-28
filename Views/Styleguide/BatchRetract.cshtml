@@ -1,0 +1,27 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<form class="form" action="batches">
+  <p>Do you want to retract batch <strong>Lorem ipsum</strong>?</p>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" />
+      Retract all attached promotions and thus affect the following batches:
+    </label>
+  </div>
+  <ul>
+    <li>Batch 12423NH</li>
+    <li>Batch 32546HK</li>
+    <li>Batch 4334HG</li>
+  </ul>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Confirm" />
+    <a href="Batch" class="btn btn-link">Cancel</a>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.sticky .tosticky {
+  display:none;
+}
+
+@media (min-width: $screen-sm-min) {
+  .sticky {
+    &.affix {
+      top:0;
+    }
+  }
+}
+  
+@media (max-width: $screen-xs-max) {
+  .sticky {
+    position:static;
+    &.affix .tosticky {
+      display:block;
+    }
+  }
+}

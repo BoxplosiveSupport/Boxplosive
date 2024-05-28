@@ -1,0 +1,14 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.SegmentationStepModel
+
+<section class="datapanel">
+    <div class="datapanel-heading">
+        <h2>2. Segmentation</h2>
+    </div>
+    <div class="datapanel-body">
+        <p class="row">
+            @Html.LabelFor(m => m.SegmentName, new { @class = "col-sm-3" })
+            @Html.DisplayFor(m => m.SegmentName, "span", new { @class = "col-sm-6" })
+        </p>
+    </div>
+</section>

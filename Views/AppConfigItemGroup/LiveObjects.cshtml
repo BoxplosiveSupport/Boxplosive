@@ -1,0 +1,15 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models
+
+@model AppConfigItemGroupModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@if (Model.LiveObjects.Any())
+{
+    @Html.EditorFor(m => m.LiveObjects)
+}
+else
+{
+    @Html.Partial("NoRecords")
+}

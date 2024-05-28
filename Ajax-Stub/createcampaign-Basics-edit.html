@@ -1,0 +1,53 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>1. Basics</h2>
+  </div>
+  <div class="datapanel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Title" aria-required="true">Title <small>(for internal use)</small></label>
+        <div class="col-sm-8">
+          <input class="form-control" data-msg-required="The Title field is required." data-rule-required="true" id="Campaign_Title" name="Campaign.Title" type="text" value="" aria-required="true">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Description" aria-required="true">Description <small>(for internal use)</small></label>
+        <div class="col-sm-8">
+          <textarea class="form-control" data-msg-required="The Title field is required." data-rule-required="true" id="Campaign_Description" name="Campaign.Description" type="text" value="" aria-required="true"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="wymeditor" class="col-sm-4 control-label">HTML</label>
+        <div class="col-sm-8" data-wymeditor>
+          <textarea id="wymeditor" name="wymeditor" class="form-control" data-rule-required="true" aria-required="true">
+            &lt;p&gt;Lorem ipsum&lt;/p&gt;
+          </textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Loyalty_Programme" aria-required="true">Loyalty programme</label>
+        <div class="col-sm-8">
+          <select class="form-control" data-msg-required="The Title field is required." data-rule-required="true" id="Campaign_Loyalty_Programme" name="Campaign.Loyalty.Programme" type="text" value="" aria-required="true">
+            <option value="">Choose a programm</option>
+            <option value="HealthLife">HealthLife</option>
+            <option value="Lorem ipsum">Lorem ipsum</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Loyalty_Pts" aria-required="true">Loyalty pts. required <small>Optional</small></label>
+        <div class="col-sm-4">
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   class="form-control"
+                   id="Campaign_Loyalty_Pts"
+                   name="Campaign.Loyalty.Pts"
+                   min="0" />
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+      <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+    </div>
+  </div>
+</section>

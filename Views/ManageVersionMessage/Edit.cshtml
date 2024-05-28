@@ -1,0 +1,32 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ManageVersionMessage.VersionMessageModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(MVC.ManageVersionMessage.ActionNames.Edit, MVC.ManageVersionMessage.Name, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.New)
+    if (!Model.New)
+    {
+        @Html.HiddenFor(m => m.AppVersion)
+    }
+
+    <div class="form-horizontal">
+        <div id="greetingMessageEdit" class="well">
+            @Html.EditorFor(m => m.AppVersion, new { readOnly = !Model.New, labelClass = "col-sm-3", textboxClass = "col-sm-5" })
+            @Html.EditorFor(m => m.AlertMessage, "MultilineText", new { labelClass = "col-sm-3", rows = 8 })
+            @Html.EditorFor(m => m.ErrorMessage, "MultilineText", new { labelClass = "col-sm-3", rows = 8 })
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.ManageVersionMessage.ActionNames.Index, MVC.ManageVersionMessage.Name,
+                    new { page = Model.Page }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

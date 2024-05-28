@@ -1,0 +1,46 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.ManageVersionMessage.VersionMessageItemsModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>Startup Messages</h2>
+
+<div class="table-responsive">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(dummy => Model.VersionMessageItems.FirstOrDefault().AppVersion)</th>
+                <th>@Html.DisplayNameFor(dummy => Model.VersionMessageItems.FirstOrDefault().AlertMessage)</th>
+                <th>@Html.DisplayNameFor(dummy => Model.VersionMessageItems.FirstOrDefault().ErrorMessage)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.VersionMessageItems)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.AppVersion)</td>
+                    <td>@Html.DisplayFor(model => item.AlertMessage)</td>
+                    <td>@Html.DisplayFor(model => item.ErrorMessage)</td>
+                    <td class="actions">
+                        @Html.ActionLinkIcon("Edit", MVC.ManageVersionMessage.ActionNames.Edit, new { version = @item.AppVersion }, new { @class = "icon-btn icon-edit" }, new { @class = "sr-only" })
+                        @Html.ActionLinkIcon("Delete", MVC.ManageVersionMessage.ActionNames.Delete, new { version = @item.AppVersion }, new { @class = "icon-btn icon-remove" }, new { @class = "sr-only" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+        <td colspan="3"></td>
+        <td class="actions">
+            @Html.ActionLinkIcon("Add", MVC.ManageVersionMessage.ActionNames.Edit, null, new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+        </td>
+        </tfoot>
+    </table>
+</div>

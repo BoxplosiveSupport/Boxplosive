@@ -1,0 +1,95 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@using nl.boxplosive.Configuration;
+@using nl.boxplosive.BackOffice.Mvc.Enums;
+@model List<ProductModel>
+
+@{
+    var allInputsReadonly = ViewData["allInputsReadonly"] as bool? ?? false;
+    var countLabelText = ViewData["countLabelText"] as string;
+    var labelText = ViewData["labelText"] as string;
+    var inputNameForProducts = ViewData["inputNameForProducts"] as string;
+    var multiProductSource = ViewData["multiProductSource"] as string;
+    var selectedRuleIndex = ViewData["selectedRuleIndex"] as int?;
+    StepType stepType = ViewData["StepType"] != null ? (StepType)ViewData["StepType"] : StepType.None;
+
+    string productInputNameForId = inputNameForProducts + "[{{index}}].Id";
+    string productInputNameForName = inputNameForProducts + "[{{index}}].Name";
+    string productInputNameForRemove = inputNameForProducts + "[{{index}}].Remove";
+}
+
+<div data-repeatable data-orderup="true">
+    @Html.Label(labelText)
+    @if (!allInputsReadonly)
+    {
+        <div class="form">
+            <div class="row">
+                @Html.Partial(MVC.Shared.Views.EditorTemplates.ProductBrowser,
+                    new ViewDataDictionary
+                    {
+                        { "MultiProductSource", multiProductSource },
+                        { "DownloadFileNamePrefix", labelText },
+                        { "SelectedRuleIndex", selectedRuleIndex },
+                        { "StepType", stepType }
+                    })
+            </div>
+        </div>
+    }
+    <div data-repeatablelist>
+        @if (Model != null && Model.Count > 0)
+        {
+            if (Model.Count < AppConfig.Settings.ProductListThreshold)
+            {
+                for (var i = Model.Count - 1; i >= 0; i--)
+                {
+                    <div class="innerwell" data-repeatableitem>
+                        @if (!allInputsReadonly)
+                        {
+                            <button type="button" class="close" data-action="remove"><span class="sr-only">Remove</span></button>
+                        }
+                        @Html.HiddenFor(m => Model[i].Remove, new { data_removetag = "" })
+                        @Html.HiddenFor(m => Model[i].Id)
+                        <div class="form-inline">
+                            <div class="form-group">
+                                @Html.HiddenFor(m => Model[i].Name)
+                                <strong class="form-control-static">@Html.DisplayFor(m => Model[i].Name)</strong>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="innerwell">
+                    <div class="form-inline">
+                        <strong class="form-control-static">@Model.Count @countLabelText</strong>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <script type="text/mustache" data-template-multiitemscount>
+        <div class="innerwell">
+            <div class="form-inline">
+                <strong class="form-control-static">{{{count}}}</strong>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/mustache" data-template>
+        <div class="innerwell" data-repeatableitem>
+            @if (!allInputsReadonly)
+            {
+                <button type="button" class="close" data-action="remove" title="Remove">
+                    <span class="sr-only">Remove</span>
+                </button>
+            }
+            <input type="hidden" name="@productInputNameForRemove" value="False" data-removetag />
+            <input type="hidden" name="@productInputNameForId" value="{{id}}" />
+            <div class="form-inline">
+                <input type="hidden" name="@productInputNameForRemove" value="{{{label}}}" />
+                <strong class="form-control-static">{{{label}}}</strong>
+            </div>
+        </div>
+    </script>
+</div>

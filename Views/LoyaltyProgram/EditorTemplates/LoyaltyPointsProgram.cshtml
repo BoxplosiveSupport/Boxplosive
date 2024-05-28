@@ -1,0 +1,42 @@
+﻿@model nl.boxplosive.Business.Sdk.Entities.LoyaltyPointsProgram
+
+@{
+    string displayFullForm = Model.SharePointsEnabled ? "" : "display: none";
+}
+
+@Html.HiddenFor(m => m.Id)
+<div>
+    <div class="form-group">
+        @Html.Label("Enable share points and stamps", new { @class = "control-label col-sm-4" })
+        <div class="col-sm-8">
+            <div class="col-sm-1">
+                @Html.CheckBoxFor(r => r.SharePointsEnabled, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+
+    <div id="full-form" class="well" style="@displayFullForm">
+        <div class="form-group">
+            @Html.Label("Validity period (days)", new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(r => r.SharePointsValidityPeriodText, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Message subject", new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(r => r.SharePointsMessageSubject, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Message body", new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(r => r.SharePointsMessageBody, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+
+        @Html.EditorFor(m => m.SharePointsLandingMessage, "HtmlEditor", new { readOnly = true, displayJson = true, labelText = "Landing message" })
+
+        @Html.EditorFor(m => m.SharePointsConfirmationMessage, "HtmlEditor", new { readOnly = true, displayJson = true, labelText = "Confirmation message" })
+    </div>
+</div>

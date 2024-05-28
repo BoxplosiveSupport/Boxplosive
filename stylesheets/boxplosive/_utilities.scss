@@ -1,0 +1,47 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+%loading {
+  .cssanimations & {
+    &:after {
+      content:'';
+      background-size:1em 1em;
+      background-image:url(../images/loader.png);
+      background-position:center center;
+      background-repeat:no-repeat;
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:1em;
+      height:1em;
+      margin:-0.5em 0 0 -0.5em;
+      @include animation(loader 0.8s linear infinite);
+    }
+  }
+}
+
+@-webkit-keyframes loader {
+    from  {@include rotate(0deg)}
+    to  {@include rotate(-360deg)}
+}
+
+@keyframes loader {
+    from  {@include rotate(0deg)}
+    to  {@include rotate(-360deg)}
+}
+
+[data-upload] {
+  .btn {
+    margin-bottom:$line-height-computed/2;
+  }
+  .progress, .text-danger {
+    display:none;
+    margin-bottom:$line-height-computed/2;
+  }
+}
+
+.rotate {
+    @include rotate(-90deg)
+}

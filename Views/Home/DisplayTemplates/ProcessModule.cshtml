@@ -1,0 +1,55 @@
+﻿@using nl.boxplosive.Service.ProcessModel
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.Home.ProcessModule
+
+@{
+    var enableAction = UserRolesPermissions.EnableDisable(Model.ActionMetadata, User);
+    var enableDelete = UserRolesPermissions.EnableDisable(Model.DeleteMetadata, User);
+
+    // using styles on a instead of span because it would change format of page
+    var forceDisableLinkStyle = enableAction ? "" : "pointer-events: none; cursor: default;";
+}
+
+<li class="media">
+
+    <a style="@forceDisableLinkStyle" href="@Model.ActionUrl" class="media-left">
+
+        @if (!String.IsNullOrEmpty(Model.IconImgUrl))
+        {
+            <span class="thumbnail">
+                <img src="@Model.IconImgUrl" />
+            </span>
+        }
+        else
+        {
+            <span class="thumbnail noimage">
+                <span class="icon icon-coupon"></span>
+            </span>
+        }
+
+        <a style="@forceDisableLinkStyle" href="@Model.ActionUrl" class="media-body">
+            @if (Model.ProcessType == CampaignProcessType.Modify && enableAction)
+            {
+                <span class="icon icon-edit"></span>
+            }
+            @Model.Type - @Model.Title<br />
+            <small>
+                @Model.StartDate.ToShortDateString() - @Model.EndDate.ToShortDateString()
+            </small>
+        </a>
+
+        @if (enableDelete)
+        {
+            <div class="media-right">
+                <div class="btn-group-block">
+                    <a href="@Model.DeleteUrl" class="btn icon icon-remove" title="Remove">
+                        <span class="sr-only">Remove</span>
+                    </a>
+                </div>
+            </div>
+        }
+
+    </a>
+
+</li>

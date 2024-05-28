@@ -1,0 +1,6 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Placeholder
+@model PlaceholderImageModel
+
+@Html.Partial("PlaceholderBase", Model)
+@Html.HiddenFor(m => m.Url)
+@Html.EditorFor(m => m.PostedFile, new { labelText = Model.Placeholder.Label, uploadActionUrl = Url.Action(MVC.Platform.UploadImage(Html.NameFor(m => m.PostedFile).ToString(), Html.NameFor(m => m.Url).ToString(), Html.IdFor(m => m.Url).ToString())), imageUrl = Model.Url, fileUrlField = Html.IdFor(m => m.Url) })

@@ -1,0 +1,30 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>4. Discount</h2>
+  </div>
+  <div class="datapanel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Discount_Type" aria-required="true">Discount type</label>
+        <div class="col-sm-8">
+          <select class="form-control"
+                  data-change="forcesave"
+                  data-msg-required="The Title field is required."
+                  data-rule-required="true"
+                  id="Campaign_Discount_Type"
+                  name="CampaignDiscountType"
+                  type="text" value=""
+                  aria-required="true">
+            <option value="">Choose a discount type</option>
+            <option value="generic">Generic</option>
+            <option value="x+1">X + 1</option>
+            <option value="percentage">% Discount</option>
+            <option value="fixedprice">Fixed Price</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+      <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+    </div>
+  </div>
+</section>

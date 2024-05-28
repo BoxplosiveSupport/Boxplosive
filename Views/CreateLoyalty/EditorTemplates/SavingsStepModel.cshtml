@@ -1,0 +1,63 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>4. Savings</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(m => m.RuleType, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(m => m.RuleType, true, Model.RuleTypes, "Choose a type", new { @class = "form-control", data_change = "forcesave" })
+                    @Html.ValidationMessageFor(m => m.RuleType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @if (Model.SavingRules.Count > 0)
+            {
+                <hr />
+            }
+            @if (Model.SelectedRule != null && Model.SelectedRule.ErrorMessages.Count > 0)
+            {
+                <div class="form-group">
+                    @foreach (var error in Model.SelectedRule.ErrorMessages)
+                    {
+                        <span class="text-danger" style="padding-left: 10px;">@Model.SelectedRule.Type.GetDescription() : @error</span>
+                    }
+                </div>
+            }
+            @for (var i = 0; i < Model.SavingRules.Count; i++)
+            {
+                var rowClass = Model.SavingRules[i].ErrorMessages.Count == 0 ? "" : "text-danger";
+
+                <div class="form-group" data-repeatableitem>
+                    @Html.HiddenFor(m => Model.SavingRules[i].Id)
+                    @Html.HiddenFor(m => Model.SavingRules[i].CouponCode)
+                    @Html.HiddenFor(m => Model.SavingRules[i].Amount)
+                    @Html.HiddenFor(m => Model.SavingRules[i].Remove, new { data_removetag = "" })
+                    @Html.HiddenFor(m => Model.SavingRules[i].Type)
+                    <span class="col-xs-9 word-overflow-wrap @rowClass">@Html.DisplayFor(m => Model.SavingRules[i].Name)</span>
+                    <span class="col-xs-3 text-right">
+                        <button type="submit" class="icon-btn icon-edit" data-action="edit" name="ruleIndex" value="@i"><span class="sr-only">Edit</span></button>
+                        <button type="button" class="icon-btn icon-remove" data-action="delete" name="ruleIndex" value="@i"><span class="sr-only">Remove</span></button>
+                    </span>
+                </div>
+            }
+            @if (Model.SavingRules.Count > 0)
+            {
+                <hr />
+            }
+            @Html.EditorFor(m => m.AnonymousBalanceLimit, "Numeric")
+            <div class="form-group">
+                @Html.LabelFor(m => m.SavingsDisplayType, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(m => m.SavingsDisplayType, true, Model.SavingsDisplayTypes, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SavingsDisplayType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+        </div>
+    </div>
+</section>

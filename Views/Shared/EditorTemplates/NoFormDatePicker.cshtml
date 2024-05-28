@@ -1,0 +1,13 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model DateTime?
+
+@{
+    string date = "";
+    if (Model.HasValue)
+    {
+        date = Model.Value.ToString("yyyy-MM-dd");
+    }
+}
+<div class="col-sm-8">
+    @Html.TextBoxFor(m => m, true, date, new { @class = "form-control", @type = "date", placeholder = "yy-mm-dd" })
+</div>

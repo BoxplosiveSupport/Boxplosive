@@ -1,0 +1,69 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.DiscountStepModel
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>4. Discount</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            @Html.EditorFor(m => m.RuleType, "RuleType")
+            @if (Model.DiscountRules.Count > 0)
+            {
+                <hr />
+            }
+            @for (var i = 0; i < Model.DiscountRules.Count; i++)
+            {
+                var ruleType = Model.DiscountRules[i].Type;
+                var rowClass = Model.DiscountRules[i].ErrorMessages.Count == 0 ? "" : "text-danger";
+
+                <div class="form-group" data-repeatableitem>
+                    @Html.HiddenFor(m => Model.DiscountRules[i].Id)
+                    @Html.HiddenFor(m => Model.DiscountRules[i].Message)
+                    @Html.HiddenFor(m => Model.DiscountRules[i].Remove, new { data_removetag = "" })                    
+                    @switch (ruleType)
+                    {
+                        case DiscountRuleType.CentsDiscountAtYProducts:
+                        case DiscountRuleType.CentsDiscountOnProducts:
+                        case DiscountRuleType.CentsDiscountOnTransaction:
+                        case DiscountRuleType.FixedPriceOnProductSet:
+                        case DiscountRuleType.FixedPriceOnProducts:
+                        case DiscountRuleType.PercentsDiscountAtYProducts:
+                        case DiscountRuleType.PercentsDiscountOnProducts:
+                        case DiscountRuleType.PercentsDiscountOnTransaction:
+                            <span class="col-xs-9 @rowClass">
+                                @Html.DisplayFor(m => Model.DiscountRules[i].AmountText) @Html.DisplayFor(m => Model.DiscountRules[i].Amount)
+                            </span>
+                            break;
+                        case DiscountRuleType.BuyXGetYFree:
+                        case DiscountRuleType.XPlusYFree:
+                            <span class="col-xs-9 @rowClass">@Html.DisplayFor(m => Model.DiscountRules[i].RequiredAmount) + @Html.DisplayFor(m => Model.DiscountRules[i].ApplicableAmount) Free</span>
+                            break;
+                        case DiscountRuleType.Message:
+                            <span class="col-xs-9 @rowClass">@Html.DisplayFor(m => Model.DiscountRules[i].MessageType)</span>
+                            break;
+                        case DiscountRuleType.GrantLoyaltyPoints:
+                            <span class="col-xs-9 @rowClass">
+                                @Html.LabelFor(m => Model.DiscountRules[i].NumberOfLoyaltyPoints) @Html.DisplayFor(m => Model.DiscountRules[i].NumberOfLoyaltyPoints)
+                            </span>
+                            break;
+                        default:
+                            <span class="col-xs-9 @rowClass"></span>
+                            break;
+                    }
+                    <span class="col-xs-3 text-right">
+                        <button type="submit" class="icon-btn icon-edit" data-action="edit" name="ruleIndex" value="@i"><span class="sr-only">Edit</span></button>
+                        <button type="submit" class="icon-btn icon-remove" data-action="delete" name="ruleIndex" value="@i"><span class="sr-only">Remove</span></button>
+                    </span>
+                </div>
+            }
+            @if (Model.DiscountRules.Count > 0)
+            {
+                <hr />
+            }
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+            <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+        </div>
+    </div>
+</section>

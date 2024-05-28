@@ -1,0 +1,19 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ModifyLoyalty.ModifyLoyaltyModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Loyalty.Id)
+
+    <div class="form-group">
+        <p>Do you want to delete loyalty <b>@String.Format("{0}", Model.Loyalty.Basics.Title)</b>?</p>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Confirm" />
+        @Html.ActionLink("Cancel", MVC.Home.ActionNames.Index, MVC.Home.Name, null, new { @class = "btn btn-link" })
+    </div>
+}

@@ -1,0 +1,43 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.PublishPromotion.PublishPromotionModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Promotion.Id)
+
+    <div class="row">
+        <div class="col-sm-3">
+            <nav class="sticky">
+                <div class="panel panel-secondary">
+                    <div class="panel-body">
+                        <h2 class="panel-color">Promotion</h2>
+                        <button type="submit" class="btn btn-primary btn-block" value="Edit" name="action:Edit">Edit</button>
+                        <button type="submit" class="btn btn-success btn-block" value="Publish" name="action:Publish">Publish</button>
+                    </div>
+                </div>
+                <a href="#primaryheader" type="button" class="tosticky text-center icon icon-actions"></a>
+            </nav>
+        </div>
+        <main class="col-sm-9">
+            <div>
+                @Html.DisplayFor(m => m.Promotion.Basics)
+            </div>
+            <div>
+                @Html.DisplayFor(m => m.Promotion.Segmentation)
+            </div>
+            <div>
+                @Html.DisplayFor(m => m.Promotion.Timeframe)
+            </div>
+            <div>
+                @Html.DisplayFor(m => m.Promotion.Discount, "DiscountStep", new { editEnabled = false })
+            </div>
+            <div>
+                @Html.DisplayFor(m => m.Promotion.Promotion)
+            </div>
+        </main>
+    </div>
+}

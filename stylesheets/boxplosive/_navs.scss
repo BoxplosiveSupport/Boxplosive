@@ -1,0 +1,8 @@
+﻿.nav-pills {
+  margin:0 -2px;
+  > li {
+    &, + li {
+      margin:4px 2px;
+    }
+  }
+}

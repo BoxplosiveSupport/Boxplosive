@@ -1,0 +1,40 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.ModifyPromotion.StatusListModel
+
+<div class="panel panel-secondary">
+    <div class="panel-body">
+        <h2 class="panel-color">Promotion - @Model.PromotionCode</h2>
+        <ol class="status-list">
+            <li class="@Model.BasicsStyle"><a href="#datapanel-basics">Basics <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.SegmentationStyle"><a href="#datapanel-segmentation">Segmentation <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.TimeframeStyle"><a href="#datapanel-timeframe">Timeframe <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.DiscountStyle"><a href="#datapanel-discount">Discount <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.PromotionStyle"><a href="#datapanel-promotion">Promotion <span class="icon icon-check pull-right"></span></a></li>
+        </ol>
+
+        @using (Html.BeginForm(MVC.ModifyPromotion.ActionNames.Cancel, MVC.ModifyPromotion.Name))
+        {
+            @Html.AntiForgeryToken()
+            <button name="@MVC.ModifyPromotion.ActionNames.Cancel" class="btn btn-info btn-block">Cancel</button>
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.ModifyPromotion.ActionNames.ContinueLater, MVC.ModifyPromotion.GetType().Namespace, MVC.ModifyPromotion.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.ModifyPromotion.ActionNames.ContinueLater, MVC.ModifyPromotion.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.ModifyPromotion.ActionNames.ContinueLater" class="btn btn-success btn-block">Continue later</button>
+            }
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.ModifyPromotion.ActionNames.Publish, MVC.ModifyPromotion.GetType().Namespace, MVC.ModifyPromotion.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.ModifyPromotion.ActionNames.Publish, MVC.ModifyPromotion.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.ModifyPromotion.ActionNames.Publish" class="btn btn-success btn-block @Model.PublishStyle">Publish</button>
+            }
+        }
+    </div>
+</div>

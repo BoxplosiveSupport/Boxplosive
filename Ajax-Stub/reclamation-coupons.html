@@ -1,0 +1,110 @@
+﻿<div class="panel-body">
+  <h3 class="sr-only">Coupons</h3>
+  <div class="row form">
+    <div class="form-group col-sm-5 col-md-4">
+      <select class="form-control" id="couponstatuses" name="couponstatuses" data-change="saveget">
+        <option selected="selected" value="0">Show all statuses</option>
+        <option value="1">Show reserved only</option>
+        <option value="2">Show claimed only</option>
+        <option value="3">Show cleared only</option>
+      </select>
+    </div>
+    <div class="col-sm-12 visible-xs-block visible-sm-block">
+      <hr />
+    </div>
+    <div class="col-sm-7 col-md-4 col-md-offset-1 form-group">
+      <label for="Analyse_From" class="sr-only">Choose promotion</label>
+      <input type="search"
+             class="form-control ui-autocomplete-input"
+             name="choosepromotion"
+             data-boxautocomplete=""
+             data-source="/BackOffice/Styleguide/ReturnJSON?file=../Ajax-Stub/stores.json"
+             data-minlength="3"
+             data-scrollsteplength="10"
+             data-idto="#promotionid"
+             autocomplete="off"
+             placeholder="Choose promotion">
+      <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+      <input type="hidden" name="promotionid" id="promotionid">
+    </div>
+    <div class="col-sm-5 col-md-2 form-group">
+      <button type="submit" class="btn btn-default btn-block" data-action="save">Add reservation</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date modified</th>
+          <th>ID</th>
+          <th>Promotion</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><time datetime="2015-07-06">6 Jul 2015</time></td>
+          <td>CPN001</td>
+          <td>Lorem ipsum</td>
+          <td>Reserved</td>
+          <td class="actions">
+            <a href="" class="icon-btn icon-check" title="Claim"><span class="sr-only">Claim</span></a>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-05">5 Jul 2015</time></td>
+          <td>CPN001</td>
+          <td>Lorem ipsum</td>
+          <td>Reserved</td>
+          <td class="actions">
+            <a href="" class="icon-btn icon-check" title="Claim"><span class="sr-only">Claim</span></a>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-05">5 Jul 2015</time></td>
+          <td>CPN001</td>
+          <td>Lorem ipsum</td>
+          <td>Claimed</td>
+          <td class="actions"></td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-04">4 Jul 2015</time></td>
+          <td>CPN001</td>
+          <td>Lorem ipsum</td>
+          <td>Cleared</td>
+          <td class="actions"></td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-04">4 Jul 2015</time></td>
+          <td>CPN001</td>
+          <td>Lorem ipsum</td>
+          <td>Claimed</td>
+          <td class="actions"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous" class="icon-btn icon-back" data-action="saveget" data-vars='[{"name":"page","value":1}]'>
+        <span class="sr-only" aria-hidden="true">Previous</span>
+      </a>
+    </li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":1}]'>1</a></li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":2}]'>2</a></li>
+    <li class="active"><a href="#" data-action="saveget" data-vars='[{"name":"page","value":3}]'>3</a></li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":4}]'>4</a></li>
+    <li>...</li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":5}]'>5</a></li>
+    <li>
+      <a href="#" aria-label="Next" class="icon-btn icon-forth" data-action="saveget" data-vars='[{"name":"page","value":3}]'>
+        <span class="sr-only" aria-hidden="true">Next</span>
+      </a>
+    </li>
+  </ul>
+
+
+  <a href="" class="close" data-closealltabs><span class="sr-only">Sluiten</span></a>
+</div>

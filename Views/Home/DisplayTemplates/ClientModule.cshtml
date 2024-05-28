@@ -1,0 +1,13 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Home.ProcessModule
+    
+<li class="col-xs-6 col-sm-4">
+    <a href="@Model.ActionUrl" class="panel processmodule panel-default">
+        <div class="panel-heading">
+            <span class="icon icon-module-alt"></span>
+            <h2 class="h4">@Model.Title</h2>
+        </div>
+        <div class="panel-body">
+            <p>@Model.CounterDescription</p>
+        </div>
+    </a>
+</li>

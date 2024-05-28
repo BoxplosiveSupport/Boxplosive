@@ -1,0 +1,131 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.Webhook
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+
+@model WebhookEventIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm(Model.GetSearchRouteValues()))
+{
+    @Html.AntiForgeryToken()
+    <div class="well form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.EventType, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.EventType, true, Model.EventTypes, htmlAttributes: new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            @Html.EditorFor(m => m.From, "DatePicker", new { onChangeSubmitForm = true, minDate = DateTime.MinValue, noFormGroup = true, labelClass = "col-sm-2", textboxClass = "col-sm-4" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.EventState, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.EventState, true, Model.EventStates, htmlAttributes: new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            @Html.EditorFor(m => m.To, "DatePicker", new { onChangeSubmitForm = true, minDate = DateTime.MinValue, noFormGroup = true, labelClass = "col-sm-2", textboxClass = "col-sm-4" })
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                @if (Model.PagedList.TotalItemCount > WebhookEventIndexModel.ReplayEventLimitCount)
+                {
+                    <div id="filter-warning" class="alert alert-warning" role="alert" style="margin-bottom:0px;"><span class="icon icon-danger"></span> <strong>There are more than 10,000 items in your filter, this is the maximum we allow to be replayed.</strong></div>
+                }
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" value="Replay filter" name="ReplayFilerType" id="filter-btn" class="btn btn-default pull-right" />
+            </div>
+        </div>
+    </div>
+    <table class="table" style="margin-top:0px;">
+        <thead>
+            <tr>
+                <th>@Html.CheckBox("WebhookEventSelectAll")</th>
+                <th>@Model.Column_EventType</th>
+                <th>@Model.Column_State</th>
+                <th>@Model.Column_PostedDate</th>
+                <th>@Model.Column_HttpResponseCode</th>
+                <th>@Model.Column_HttpResponseErrorMessage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.PagedList.Count; i++)
+            {
+                <tr>
+                    <td>@Html.CheckBox("WebhookEventSelected_" + Model.PagedList[i].Id)</td>
+                    <td>@Html.DisplayFor(m => Model.PagedList[i].EventType)</td>
+                    <td>@Html.DisplayFor(m => Model.PagedList[i].State)</td>
+                    <td>@Model.PagedList[i].PostedDate.ToLocalTimeInOperatingTimeZone().ToString("g")</td>
+                    <td>@Html.DisplayFor(m => Model.PagedList[i].HttpResponseCode)</td>
+                    <td>
+                        @if (!string.IsNullOrWhiteSpace(@Model.PagedList[i].HttpResponseErrorMessage))
+                        {
+                            <div style="width:262px;">
+                                <div id="HttpResponseErrorMessage-@Model.PagedList[i].Id" title="@Model.PagedList[i].HttpResponseErrorMessage" style="float:left;width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">@Html.DisplayFor(m => Model.PagedList[i].HttpResponseErrorMessage)</div>
+                                <span _event_id="@Model.PagedList[i].Id" title="Copy full Response message" class="icon icon-btn icon-copy" style="float:right;margin-left:5px;"></span>
+                                <span _event_id="@Model.PagedList[i].Id" title="Show full Response message" class="icon icon-btn icon-actions" style="float:right;margin-left:5px;"></span>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot class="well">
+            <tr>
+                <td colspan="6">
+                    <div style="position:relative;">
+                        @Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.WebhookEvent.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                        @Html.DropDownListFor(m => m.PageSize, true, Model.PageSizes, htmlAttributes: new { onchange = "this.form.submit();", @class = "form-control pull-right", style = "position:absolute;top:0;right:0;width:auto" })
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#WebhookEventSelectAll').click(function() {
+                var checked = $(this).prop('checked');
+                $('.table input:checkbox').prop('checked', checked);
+            });
+
+            $('.table input:checkbox').click(function () {
+                if ($('.table input:checkbox:checked').length > 0) {
+                    $('#filter-btn').val('Replay selection');
+                    $('#filter-warning').hide();
+                }
+                else {
+                    $('#filter-btn').val('Replay filter');
+                    $('#filter-warning').show();
+                }
+            });
+
+            $('.icon-actions').click(function () {
+                var eventId = $(this).attr('_event_id');
+
+                // Get the text field
+                var copyText = $('#HttpResponseErrorMessage-' + eventId).attr('title');
+
+                // Alert the copied text
+                alert(copyText);
+            });
+
+            /*https://www.w3schools.com/howto/howto_js_copy_clipboard.asp*/
+            $('.icon-copy').click(function () {
+                var eventId = $(this).attr('_event_id');
+
+                // Get the text field
+                var copyText = $('#HttpResponseErrorMessage-' + eventId).attr('title');
+
+                // Copy the text inside the text field
+                navigator.clipboard.writeText(copyText);
+
+                // Alert the copied text
+                alert('Copied Response message to clipboard');
+            });
+        });
+    </script>
+}

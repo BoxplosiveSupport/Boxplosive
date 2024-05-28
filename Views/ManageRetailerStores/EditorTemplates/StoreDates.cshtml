@@ -1,0 +1,50 @@
+﻿@model List<nl.boxplosive.BackOffice.Mvc.Models.ManageRetailerStores.RetailerStoreDateModel>
+
+<div class="table-responsive" data-repeatable>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Default</th>
+                <th>Day/Date</th>
+                <th>Closed</th>
+                <th>Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-repeatablelist>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                @Html.EditorFor(m => m[i])
+            }
+        </tbody>
+        <tfoot>
+        <td colspan="4"></td>
+        <td class="actions">
+            <button type="button" class="icon-btn icon-plus pull-right" data-action="addrepeatable"><span class="sr-only">Toevoegen</span></button>
+            @*@Html.ActionLinkIcon("Add", "Edit", null, new { @class = "icon-btn icon-plus", data_action = "addrepeatable" }, new { @class = "sr-only" })*@
+        </td>
+        </tfoot>
+
+    </table>
+    <script type="text/mustache" data-template>
+        <tr data-repeatableitem>
+            <td>
+                @Html.Hidden("[{{index}}].Id", 0)
+                @Html.Hidden("[{{index}}].RetailerId", 0)
+                @Html.Hidden("[{{index}}].RetailerStoreId", 0)
+                @Html.Hidden("[{{index}}].Day", null)
+                @Html.Hidden("[{{index}}].Remove", false, new {data_removetag = ""})
+            </td>
+            <td>@Html.Editor("[{{index}}].Date", "DatePicker")</td>
+            <td>@Html.Editor("[{{index}}].Closed", "Boolean")</td>
+            <td data-range>
+                @Html.Editor("[{{index}}].TimeFrom", "TimePicker", new { data_from = "" })
+                @Html.Editor("[{{index}}].TimeTill", "TimePicker", new { data_to = "" })
+            </td>
+            <td>
+                <button type="button" class="icon-btn icon-remove pull-right" data-action="remove"><span class="sr-only">Remove</span></button>
+            </td>
+        </tr>
+
+    </script>
+</div>

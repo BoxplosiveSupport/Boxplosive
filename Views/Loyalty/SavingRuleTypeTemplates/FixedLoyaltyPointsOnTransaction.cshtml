@@ -1,0 +1,37 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var readOnly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+    var readonlyHtmlAttribute = new { }.AddRouteValue("readonly", "readonly", readOnly);
+}
+
+<div class="well">
+
+    @Html.Partial(MVC.Loyalty.Views.SavingRuleTypeTemplates.SavingsRuleCommonTemplate, Model)
+
+    <div class="form form-horizontal">
+
+        @if (Model.SelectedRule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnTransactionInDaysOfWeek)
+        {
+            <div class="form-group">
+                <legend class="col-sm-2 control-label">@Html.LabelFor(m => m.SelectedRule.DaysOfWeek)</legend>
+                <div class="col-sm-9 checkbox" style="margin-left: 60px;">
+                    <ul class="list-unstyled row">
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Monday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Monday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Tuesday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Tuesday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Wednesday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Wednesday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Thursday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Thursday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Friday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Friday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Saturday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Saturday)</li>
+                        <li class="checkbox col-sm-4">@Html.CheckBoxFor(m => m.SelectedRule.Sunday, readonlyHtmlAttribute) @Html.LabelFor(m => m.SelectedRule.Sunday)</li>
+                    </ul>
+                </div>
+            </div>
+        }
+
+        @Html.EditorFor(m => m.SelectedRule.RequiredAmount, "Numeric", new { labelText = Model.SelectedRule.RequiredAmountText, noSpinner = true, readOnly = readOnly })
+        @Html.EditorFor(m => m.SelectedRule.Amount, "Numeric", new { labelText = Model.SelectedRule.AmountText, readOnly = readOnly })
+    </div>
+</div>

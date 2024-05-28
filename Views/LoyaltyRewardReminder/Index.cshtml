@@ -1,0 +1,45 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyRewardReminder.RewardReminderOverview
+@{
+    ViewBag.Title = "Reminder rewards";
+}
+
+<h2>Reminder rewards</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Starts at</th>
+            <th>Ends at</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @if (Model.Rewards.Any())
+    {
+        foreach (var reward in Model.Rewards)
+        {
+            <tr>
+                <td>@reward.Title</td>
+                <td>@reward.CampaignId</td>
+                <td>@reward.TypeText</td>
+                <td>@reward.StartsAt.ToString("g")</td>
+                <td>@reward.EndsAt.ToString("g")</td>
+                <td>@reward.Status</td>
+                <td class="actions">
+                    <a href="@Url.Action(MVC.LoyaltyRewardReminder.ActionNames.Edit, MVC.LoyaltyRewardReminder.Name, new { id = reward.Id, type = reward.Type })" class="icon-btn icon-danger" title="ReminderMail"><span class="sr-only">Reminder</span></a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">No results found</td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,35 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Home.PublishModel
+
+<div class="col-sm-5">
+    <h3 class="h2">Draft campaigns (@Model.Drafts.Count)</h3>
+    @if (Model.Drafts != null && Model.Drafts.Count > 0)
+    {
+        <ul class="media-list">
+            @foreach (var draft in Model.Drafts)
+            {
+                @Html.DisplayFor(m => draft)
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No draft campaigns found</p>
+    }
+    <hr class="visible-xs" />
+</div>
+<div class="col-sm-6 col-sm-offset-1">
+    <h3 class="h2">Ready campaigns (@Model.ReadyToPublish.Count)</h3>
+    @if (Model.ReadyToPublish != null && Model.ReadyToPublish.Count > 0)
+    {
+        <ul class="media-list">
+            @foreach (var campaign in Model.ReadyToPublish)
+            {
+                @Html.DisplayFor(m => campaign)
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No ready campaigns found</p>
+    }
+</div>

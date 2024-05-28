@@ -1,0 +1,219 @@
+// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.form-control-cancel {
+  position:absolute!important;
+  top:$padding-base-vertical;
+  cursor:pointer;
+  border:none;
+  padding:0;
+  background:none;
+  .form-group &, .form > * > & {
+    right:$grid-gutter-width;
+  }
+  &.icon-btn, .icon-btn {
+    &:before {
+      background:$input-border;
+      display:block;
+      margin:0;
+    }
+    &:hover:before {
+      background:$text-color;
+    }
+  }
+}
+
+input[required]:not(:valid) ~ .form-control-cancel, input:disabled ~ .form-control-cancel {
+  display:none;
+}
+
+label {
+  font-weight:normal;
+}
+
+.control-label {
+  border:none;
+  font-size:inherit;
+  color:inherit;
+}
+
+.control-label, .checkbox, .radio {
+  small {
+    display:block;
+    color:$gray-light;
+    .form-inline & {
+      display:inline;
+      margin:0;
+    }
+    @media (min-width: $screen-sm-min) {
+      margin:-0.25em 0 -1.5em 0;
+    }
+  }
+}
+
+.form-control {
+  @include box-shadow(none);
+}
+
+.form-group {
+  margin-bottom:1.25em;
+}
+
+// TODO: change widths into variables
+
+@media (min-width: $screen-sm-min) {
+  .inputw-xxs {   &, .form-inline & {width:6em;}}
+  .inputw-xs {    &, .form-inline & {width:8em;}}
+  .inputw-sm {    &, .form-inline & {width:10em;}}
+  .inputw-md {    &, .form-inline & {width:12em;}}
+  .inputw-lg {    &, .form-inline & {width:16em;}}
+  .inputw-xlg {   &, .form-inline & {width:18em;}}
+  .inputw-xxlg {  &, .form-inline & {width:22em;}}
+}
+
+textarea.form-control {
+  resize:vertical;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-top:0.375em;
+}
+
+.form-horizontal {
+  @media (min-width: $screen-sm-min) {
+    .control-label {
+      padding-bottom: ($padding-base-vertical + 1);
+    }
+  }
+  .form-group-lg {
+    @media (min-width: $screen-sm-min) {
+      .control-label {
+        padding-bottom: (($padding-large-vertical * $line-height-large) + 1);
+      }
+    }
+  }
+  .form-group-sm {
+    @media (min-width: $screen-sm-min) {
+      .control-label {
+        padding-bottom: ($padding-small-vertical + 1);
+      }
+    }
+  }
+}
+
+.filebtn {
+  background:none;
+  border:none;
+  padding-bottom:3px;
+  margin-bottom:-3px;
+  width:100%;
+}
+
+.filebtn::-webkit-file-upload-button {
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family:inherit;
+  border:none;
+  background:$btn-default-bg;
+  color:$btn-default-color;
+  @include box-shadow(0 3px 0 $btn-default-border);
+  padding: $padding-base-vertical $padding-base-horizontal;
+  border-radius:$border-radius-base;
+  position:relative;
+  top:0;
+  @include transition(all 0.1s ease);
+  &:focus, &:hover {
+    background-color: $btn-default-border;
+    @include box-shadow(0 3px 0 darken($btn-default-border, 10%));
+  }
+  &:active {
+    top:3px;
+    @include box-shadow(none);
+  }
+}
+
+.filebtn::-ms-browse {
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family:inherit;
+  border:none;
+  background:$btn-default-bg;
+  color:$btn-default-color;
+  box-shadow: 0 3px 0 $btn-default-border;
+  padding: $padding-base-vertical $padding-base-horizontal;
+  border-radius:$border-radius-base;
+  position:relative;
+  &:focus, &:hover {
+    background-color: $btn-default-border;
+    box-shadow: 0 3px 0 darken($btn-default-border, 10%);
+  }
+  &:active {
+    background-color: $btn-default-border;
+    box-shadow: none;
+  }
+}
+
+.filebtn::-ms-value {
+  width:auto;
+  border: 1px solid $input-border;
+  border-radius: $input-border-radius;
+  background-color: $input-bg;
+  height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  padding: $padding-base-vertical $padding-base-horizontal;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  box-sizing: border-box;
+}
+
+.form-horizontal {
+  @media (min-width: $screen-sm-min) {
+    .control-label {
+      text-align: left;
+      &.text-right {
+        text-align: right;
+      }
+    }
+  }
+}
+
+select.form-control {
+  @include box-shadow(0 3px 0 $input-border);
+}
+
+@media (min-width: $screen-sm-min) {
+  .form-inline {
+    margin-left:-0.25em;
+    margin-right:-0.25em;
+    &, .form-group {
+      > * {
+        margin-left:0.25em;
+        margin-right:0.25em;
+      }
+    }
+    .form-group > * {
+      &:first-child {
+        margin-left:0;
+      }
+      &:last-child {
+        margin-right:0;
+      }
+    }
+  }
+}
+
+.no-overflow{
+    overflow: hidden;
+}
+
+.border-top{
+    border-top: 1px solid #b5b0a8;
+}
+
+.border-bottom{
+    border-bottom: 1px solid #b5b0a8;
+}

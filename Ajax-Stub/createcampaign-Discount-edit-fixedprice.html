@@ -1,0 +1,62 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>4. Discount</h2>
+  </div>
+  <div class="datapanel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-4 control-label required" for="Campaign_Discount_Type" aria-required="true">Discount type</label>
+        <div class="col-sm-8">
+          <select class="form-control"
+                  data-change="forcesave"
+                  data-msg-required="The discount type is required."
+                  data-rule-required="true"
+                  id="Campaign_Discount_Type"
+                  name="CampaignDiscountType"
+                  type="text"
+                  aria-required="true">
+            <option value="">Choose a discount type</option>
+            <option value="generic">Generic</option>
+            <option value="x+1">X + 1</option>
+            <option value="percentage">% Discount</option>
+            <option value="fixedprice" selected>Fixed Price</option>
+          </select>
+        </div>
+      </div>
+      <div class="well">
+        <div class="form-group">
+          <label class="col-sm-4 control-label required" for="Campaign_Discount_Product_ID" aria-required="true">Product ID</label>
+          <div class="col-sm-8">
+            <select class="form-control"
+                    data-msg-required="The product id is required."
+                    data-rule-required="true"
+                    id="Campaign_Discount_Product_ID"
+                    name="Campaign.Discount.Product.ID"
+                    type="text"
+                    aria-required="true">
+              <option value="">Choose a product ID</option>
+              <option value="1001">1001</option>
+              <option value="1002">1002</option>
+              <option value="1003">1003</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label required" for="Campaign_Discount_Fixed_Price" aria-required="true">Price <small>(Cents)</small></label>
+          <div class="col-sm-8">
+          <input type="number"
+                  class="form-control"
+                  ata-msg-required="The percentage is required."
+                  data-rule-required="true"
+                  id="Campaign_Discount_Fixed_Price"
+                  name="Campaign.Discount.Fixed.Price"
+                  min="0"
+                  aria-required="true" />
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+      <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+    </div>
+  </div>
+</section>

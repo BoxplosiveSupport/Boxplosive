@@ -1,0 +1,40 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.ManageRetailerStores.RetailerStoreDateModel
+
+<tr data-repeatableitem>
+    <td>
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.RetailerId)
+        @Html.HiddenFor(m => m.RetailerStoreId)
+        @Html.HiddenFor(m => m.Day)
+        @Html.HiddenFor(m => m.Remove, new { data_removetag = "" })
+
+        @if (Model.Day != null && Model.RetailerStoreId > -1)
+        {
+            @Html.EditorFor(m => m.KeepDefault)
+        }
+    </td>
+    <td>
+        @if (Model.Day != null)
+        {
+            @Html.DisplayFor(m => m.Day)
+        }
+        else
+        {
+            @Html.EditorFor(m => m.Date, "DatePicker")
+        }
+    </td>
+    <td>@Html.EditorFor(m => m.Closed)</td>
+    <td data-range="60">
+        @Html.EditorFor(m => m.TimeFrom, "TimePicker", new { data_from = "" })
+        @Html.EditorFor(m => m.TimeTill, "TimePicker", new { data_to = "" })
+    </td>
+
+    <td class="actions">
+        @if (Model.Id > 0 && Model.Day == null)
+        {
+            <button type="button" class="icon-btn icon-remove pull-right" data-action="remove"><span class="sr-only">Remove</span></button>
+            @*@Html.ActionLinkIcon("Delete", "Delete", new { id = @Model.Id }, new { @class = "icon-btn icon-remove" }, new { @class = "sr-only" })*@
+        }
+    </td>
+</tr>

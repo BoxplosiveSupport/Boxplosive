@@ -1,0 +1,24 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyEventDefinition.LoyaltyEventDefinitionModel
+
+@{
+    bool triggerTypeHasError = !ViewData.ModelState.IsValidField(Model.Field_TriggerType);
+    bool customerIndicationHasError = !ViewData.ModelState.IsValidField(Model.Field_CustomerIndication);
+}
+
+@Html.Partial("ActionCreateCoupon", Model)
+
+<div class="form-group">
+    @Html.LabelFor(m => m.TriggerType, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-5 @Html.Raw(triggerTypeHasError ? "has-error" : "")">
+        @Html.DropDownListFor(m => m.TriggerType, true, Model.TriggerTypes, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TriggerType, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CustomerIndication, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-5 @Html.Raw(customerIndicationHasError ? "has-error" : "")">
+        @Html.DropDownListFor(m => m.CustomerIndication, true, Model.CustomerIndications, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CustomerIndication, "", new { @class = "text-danger" })
+    </div>
+</div>

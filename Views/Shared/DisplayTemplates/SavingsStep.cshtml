@@ -1,0 +1,187 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.Configuration
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var editEnabled = ViewData["editEnabled"] as bool? ?? true;
+    var panelTitle = ViewData["panelTitle"] as string ?? "4. Savings";
+
+    string sectionDataActionValue = "";
+    var styling = "";
+    if (editEnabled)
+    {
+        sectionDataActionValue = "data-action=edit";
+        if (Model.IsValid.HasValue && Model.IsValid.Value)
+        {
+            styling = " datapanel-success";
+        }
+        else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+        {
+            styling = " datapanel-danger";
+        }
+    }
+}
+
+<section class="datapanel @styling" @sectionDataActionValue>
+    <div class="datapanel-heading">
+        <h2>@panelTitle</h2>
+        @if (editEnabled)
+        {
+            <div class="actions">
+                <button id="savings-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+            </div>
+        }
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            <div class="table-responsive popout">
+                <div class="table table-condensed word-overflow-wrap no-overflow">
+                    @foreach (var rule in Model.SavingRules)
+                    {
+                        <div class="row border-top border-bottom">
+                            <div class="col-sm-6">
+                                <strong>@Html.DisplayFor(m => rule.Name)</strong>
+                                <br />
+                                @Html.DisplayFor(m => rule.Type)
+                                <br />
+                                @Html.DisplayNameFor(m => rule.StartDate)
+                                <span class="pull-right">
+                                    @Html.Raw(rule.StartDate.Add(rule.From).ToString("dd-MM-yyyy HH:mm"))
+                                </span><br />
+                                @Html.DisplayNameFor(m => rule.EndDate)
+                                <span class="pull-right">
+                                    @Html.Raw(rule.EndDate.Add(rule.To).ToString("dd-MM-yyyy HH:mm"))
+                                </span>
+                            </div>
+                            <div class="col-sm-6">
+                                @if (rule.ProductsOptional || !(rule.SelectedProducts == null || rule.SelectedProducts.Count == 0))
+                                {
+                                    @Html.DisplayNameFor(m => rule.NumberOfProductsText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.NumberOfProductsText)
+                                    </span><br />
+                                }
+
+                                @if (rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnTransactionInDaysOfWeek)
+                                {
+                                    @Html.LabelFor(m => rule.DaysOfWeek)
+                                    foreach (string day in rule.DaysOfWeek.SplitEnumValuesToString((byte)rule.DaysOfWeek))
+                                    {
+                                        if (day != "None")
+                                        {
+                                            <span class="pull-right">
+                                                <strong>@day</strong>
+                                            </span><br />
+                                        }
+                                    }
+                                }
+
+                                @if (rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts ||
+                                     rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProductsInTransaction ||
+                                     rule.Type == SavingsRuleTypeModel.LoyaltyPointsOnProductsByValue)
+                                {
+                                    @Html.DisplayFor(m => rule.AmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.Amount)
+                                    </span><br />
+                                    if (AppConfig.Settings.Feature_SuppressPointsForRewards &&
+                                        rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts &&
+                                        rule.SuppressPointsForRewards)
+                                    {
+                                        @Html.DisplayNameFor(m => rule.SuppressPointsForRewards)
+                                        <span class="pull-right">
+                                            @Html.Raw("Yes")
+                                        </span><br />
+                                    }
+                                    @Html.DisplayFor(m => rule.RequiredAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.RequiredAmount)
+                                    </span>
+                                    if (rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts ||
+                                        rule.Type == SavingsRuleTypeModel.LoyaltyPointsOnProductsByValue)
+                                    {
+                                        <br />
+                                        @Html.DisplayFor(m => rule.ApplicableAmountText)
+                                        <span class="pull-right">
+                                            @Html.DisplayFor(m => rule.ApplicableAmount)
+                                        </span>
+                                    }
+                                }
+                                else if (rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnTransaction ||
+                                         rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnTransactionInDaysOfWeek ||
+                                         rule.Type == SavingsRuleTypeModel.LoyaltyPointsOnTransactionByValue)
+                                {
+                                    @Html.DisplayFor(m => rule.RequiredAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.RequiredAmount)
+                                    </span><br />
+                                    @Html.DisplayFor(m => rule.AmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.Amount)
+                                    </span>
+                                }
+                                else if (rule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnUniqueProductsInTransaction ||
+                                         rule.Type == SavingsRuleTypeModel.LoyaltyPointsOnProductsInTransactionByValue)
+                                {
+                                    @Html.DisplayFor(m => rule.AmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.Amount)
+                                    </span>
+                                }
+                                else if (rule.Type == SavingsRuleTypeModel.CodeActionSaving)
+                                {
+                                    @Html.DisplayNameFor(m => rule.CodeAction_AdditionalSettings_Points)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.CodeAction_AdditionalSettings_Points)
+                                    </span>
+                                    <br />
+                                    @Html.DisplayNameFor(m => rule.CodeAction_Tag)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.CodeAction_Tag)
+                                    </span>
+                                    <br />
+                                    @Html.DisplayNameFor(m => rule.CodeActionType_Type)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.CodeActionType_Type)
+                                    </span>
+                                }
+                                <br />
+                                @Html.DisplayFor(m => rule.RepeatableAmountText)
+                                <span class="pull-right">
+                                    @switch (rule.RepeatableAmount)
+                                    {
+                                        case 1:
+                                            @("Don't repeat")
+                                            break;
+                                        case int.MaxValue:
+                                            @("Unlimited repeat")
+                                            break;
+                                        default:
+                                            @String.Format("Repeat {0} times", rule.RepeatableAmount)
+                                            break;
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong>@Html.LabelFor(m => m.AnonymousBalanceLimit)</strong>
+                            <span class="pull-right">@Html.DisplayFor(m => m.AnonymousBalanceLimit)</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <strong>@Html.LabelFor(m => m.SavingsDisplayType)</strong>
+                            <span class="pull-right">@Html.DisplayFor(m => m.SavingsDisplayType)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

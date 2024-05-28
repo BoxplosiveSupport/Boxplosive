@@ -1,0 +1,31 @@
+﻿@using nl.boxplosive.Business.Sdk.AppConfigItem
+@using nl.boxplosive.Sdk
+
+@model AppConfigItemDraftBso
+
+@{
+    var userHasEditPermission = (bool)ViewData["UserHasEditPermission"];
+    bool isDisabled = !userHasEditPermission || Model.DraftStatus == DraftStatus.Ready;
+
+    var htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" } };
+    if (isDisabled)
+    {
+        htmlAttributes.Add("disabled", "disabled");
+    }
+}
+
+<div class="form-group">
+    @Html.HiddenFor(r => r.DraftId)
+    @Html.HiddenFor(r => r.Key)
+    @Html.HiddenFor(r => r.DraftStatus)
+    @Html.HiddenFor(r => r.DraftVersion)
+    @Html.HiddenFor(r => r.LiveObject.Id)
+    @Html.LabelFor(r => r.Key, Model.Key, new { @class = "control-label col-sm-4" })
+    <div class="col-sm-8">
+        @if (isDisabled)
+        {
+            @Html.HiddenFor(r => r.Value)
+        }
+        @Html.TextBoxFor(r => r.Value, htmlAttributes)
+    </div>
+</div>

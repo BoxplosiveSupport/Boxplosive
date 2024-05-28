@@ -1,0 +1,40 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Areas.Admin.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Admin
+
+@model AdminModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<nav class="panel panel-primary">
+    <div class="panel-body">
+        <ul class="nav nav-pills">
+            @if (UserRolesPermissions.EnableDisable(MVC.AdminArea.AppConfigItem.ActionNames.Index, MVC.AdminArea.AppConfigItem.GetType().Namespace, MVC.AdminArea.AppConfigItem.Name, User, true))
+            {
+                <li>
+                    @Html.ActionLink(AppConfigItemController.PageTitle_Index, MVC.AdminArea.AppConfigItem.Index())
+                </li>
+            }
+            @if (UserRolesPermissions.EnableDisable(MVC.AdminArea.Template.ActionNames.Index, MVC.AdminArea.Template.GetType().Namespace, MVC.AdminArea.Template.Name, User, true))
+            {
+                <li>
+                    @Html.ActionLink(TemplateController.PageTitle_Index, MVC.AdminArea.Template.Index())
+                </li>
+            }
+            @if (UserRolesPermissions.EnableDisable(MVC.AdminArea.Placeholder.ActionNames.Index, MVC.AdminArea.Placeholder.GetType().Namespace, MVC.AdminArea.Placeholder.Name, User, true))
+            {
+                <li>
+                    @Html.ActionLink(PlaceholderController.PageTitle_Index, MVC.AdminArea.Placeholder.Index())
+                </li>
+            }
+            @if (!Model.IsWebsealAuthenticationEnabled
+                && UserRolesPermissions.EnableDisable(MVC.AdminArea.Issuer.ActionNames.Index, MVC.AdminArea.Issuer.GetType().Namespace, MVC.AdminArea.Issuer.Name, User, true))
+            {
+                <li>
+                    @Html.ActionLink(IssuerController.PageTitle_Index, MVC.AdminArea.Issuer.Index())
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

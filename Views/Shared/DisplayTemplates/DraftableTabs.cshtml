@@ -1,0 +1,18 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@using nl.boxplosive.Sdk
+
+@model IDraftListProperties
+
+@{
+    var currentTab = (DraftableTab)ViewData["currentTab"];
+    var routeValues = ViewData["routeValues"];
+
+    var liveTab = new TabModel() { Title = "Live", State = Model.LiveTabState(currentTab == DraftableTab.Live), ActionName = "Live", RouteValues = routeValues };
+    var stagingTab = new TabModel() { Title = "Staging", State = Model.StagingTabState(currentTab == DraftableTab.Staging), ActionName = "Staging", RouteValues = routeValues };
+}
+
+@Html.Partial("TabBarBegin")
+@Html.DisplayFor(m => liveTab, "Tab")
+@Html.DisplayFor(m => stagingTab, "Tab")
+@Html.Partial("TabBarEnd")

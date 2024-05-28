@@ -1,0 +1,115 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.pagination {
+  display:block;
+  padding-left: 0;
+  margin: 0 0 $line-height-computed 0;
+  text-align:center;
+  .table + &, .table-responsive + & {
+    margin-top:-$line-height-computed;
+    background:$gray-lighter;
+    padding:$line-height-computed 10px;
+    .panel & {
+      background:transparent;
+    }
+  }
+  @media screen and (max-width: $screen-xs-max) {
+    .table-responsive + & {
+      margin-top:-($line-height-computed * 0.75);
+    }
+  }
+  > li {
+    display: inline; // Remove list-style and block-level defaults
+    > a,
+    > span {
+      position: relative;
+      padding: $padding-base-vertical $padding-base-horizontal;
+      line-height: $line-height-base;
+      text-decoration: none;
+      color: $pagination-color;
+      background-color: $pagination-bg;
+      border: 1px solid $pagination-border;
+      margin-left: -1px;
+      border-radius: $border-radius-base;
+      display:inline-block;
+    }
+    &:first-child > .icon-btn {
+      padding-left:0;
+    }
+    &:last-child > .icon-btn {
+      padding-right:0;
+    }
+  }
+
+
+  > li > a,
+  > li > span {
+    &:hover,
+    &:focus {
+      color: $pagination-hover-color;
+      background-color: $pagination-hover-bg;
+      border-color: $pagination-hover-border;
+    }
+    &.icon-btn {
+      &:hover,
+      &:focus {
+        background-color:transparent;
+        border-color:transparent;
+      }
+    }
+  }
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 2;
+      color: $pagination-active-color;
+      background-color: $pagination-active-bg;
+      border-color: $pagination-active-border;
+      cursor: default;
+      font-weight:bold;
+    }
+  }
+
+  > .disabled {
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      color: $pagination-disabled-color;
+      background-color: $pagination-disabled-bg;
+      border-color: $pagination-disabled-border;
+      cursor: $cursor-disabled;
+    }
+  }
+
+  > li > .icon-btn {
+    &:hover,
+    &:focus {
+      background-color:transparent;
+    }
+  }
+  a.icon-btn:before {
+    background-color:$pagination-color;
+  }
+}
+
+// Sizing
+// --------------------------------------------------
+
+// Large
+.pagination-lg {
+  @include pagination-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $border-radius-large);
+}
+
+// Small
+.pagination-sm {
+  @include pagination-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $border-radius-small);
+}

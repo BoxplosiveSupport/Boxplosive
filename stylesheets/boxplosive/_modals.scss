@@ -1,0 +1,23 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+// Actual modal
+.modal-content {
+  @include box-shadow(0 3px 0 $modal-content-border-color);
+}
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+  border-bottom:none;
+  + .modal-body {
+    padding-top:0;
+  }
+}
+
+// Title text within header
+.modal-title {
+  @extend .h3;
+}

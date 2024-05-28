@@ -1,0 +1,109 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.Business.Sdk.LoyaltyPoints
+@using nl.boxplosive.Sdk
+
+@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyPointsProgram.LoyaltyPointsProgramDraftModel
+
+@{
+    var userHasEditPermission = (bool)ViewData["UserHasEditPermission"];
+    bool isDisabled = !userHasEditPermission || Model.DraftStatus == DraftStatus.Ready;
+
+    var htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" } };
+    if (isDisabled)
+    {
+        htmlAttributes.Add("disabled", "disabled");
+        ViewData.Add(new KeyValuePair<string, object>("disabled", "disabled"));
+    }
+
+    string sharePointsValidityPeriodTextClasses = "";
+    ModelState value = null;
+    if (ViewData.ModelState.TryGetValue("Draft.SharePointsValidityPeriodText", out value) && value.Errors.Any())
+    {
+        sharePointsValidityPeriodTextClasses += "has-error";
+    }
+
+    string sharePointsMessageSubjectClasses = "";
+    if (ViewData.ModelState.TryGetValue("Draft.SharePointsMessageSubject", out value) && value.Errors.Any())
+    {
+        sharePointsMessageSubjectClasses += "has-error";
+    }
+
+    bool sharePointsMessageBodyHasError = false;
+    if (ViewData.ModelState.TryGetValue("Draft.SharePointsMessageBody", out value) && value.Errors.Any())
+    {
+        sharePointsMessageBodyHasError = true;
+    }
+
+    bool sharePointsLandingMessageHasError = false;
+    if (ViewData.ModelState.TryGetValue("Draft.SharePointsLandingMessage", out value) && value.Errors.Any())
+    {
+        sharePointsLandingMessageHasError = true;
+    }
+
+    bool sharePointsConfirmationMessageHasError = false;
+    if (ViewData.ModelState.TryGetValue("Draft.SharePointsConfirmationMessage", out value) && value.Errors.Any())
+    {
+        sharePointsConfirmationMessageHasError = true;
+    }
+
+    string displayFullForm = Model.SharePointsEnabled ? "" : "display: none";
+}
+
+<div>
+    @Html.HiddenFor(r => r.DraftId)
+    @Html.HiddenFor(r => r.LiveId)
+    @Html.HiddenFor(r => r.DraftStatus)
+    @Html.HiddenFor(r => r.DraftVersion)
+    @Html.HiddenFor(r => r.DraftCreatedAt)
+    @Html.HiddenFor(r => r.DraftUpdatedAt)
+    <div class="form-group">
+        @Html.LabelFor(r => r.SharePointsEnabled, new { @class = "control-label col-sm-4" })
+        <div class="col-sm-8">
+            @if (isDisabled)
+            {
+                @Html.HiddenFor(r => r.SharePointsEnabled)
+            }
+            <div class="col-sm-1">
+                @Html.CheckBoxFor(r => r.SharePointsEnabled, htmlAttributes)
+            </div>
+        </div>
+    </div>
+
+    <div id="full-form" class="well" style="@displayFullForm">
+        <div class="form-group">
+            @if (isDisabled)
+            {
+                @Html.HiddenFor(r => r.SharePointsValidityPeriodText)
+            }
+            @Html.LabelFor(r => r.SharePointsValidityPeriodText, new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8 @sharePointsValidityPeriodTextClasses">
+                @Html.TextBoxFor(r => r.SharePointsValidityPeriodText, htmlAttributes)
+                @Html.ValidationMessageFor(m => m.SharePointsValidityPeriodText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (isDisabled)
+            {
+                @Html.HiddenFor(r => r.SharePointsMessageSubject)
+            }
+            @Html.LabelFor(r => r.SharePointsMessageSubject, new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8 @sharePointsMessageSubjectClasses">
+                @Html.TextBoxFor(r => r.SharePointsMessageSubject, htmlAttributes)
+                @Html.ValidationMessageFor(m => m.SharePointsMessageSubject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (isDisabled)
+        {
+            @Html.HiddenFor(r => r.SharePointsMessageBody)
+            @Html.HiddenFor(r => r.SharePointsLandingMessage)
+            @Html.HiddenFor(r => r.SharePointsConfirmationMessage)
+        }
+
+        @Html.EditorFor(r => r.SharePointsMessageBody, "MultilineText", new { hasError = sharePointsMessageBodyHasError })
+
+        @Html.EditorFor(m => m.SharePointsLandingMessage, "HtmlEditor", new { readOnly = isDisabled, displayJson = true })
+
+        @Html.EditorFor(m => m.SharePointsConfirmationMessage, "HtmlEditor", new { readOnly = isDisabled, displayJson = true })
+    </div>
+</div>

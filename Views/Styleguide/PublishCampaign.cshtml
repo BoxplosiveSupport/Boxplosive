@@ -1,0 +1,140 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+
+<div class="datapanel">
+  <div class="datapanel-body">
+    <h2>Publishing 2 campaigns</h2>
+    <p>All Kips Cheeses, Campaign name lorem ipsum</p>
+    <form class="form-horizontal">
+      <hr class="popout" />
+      <div class="form-group">
+        <label for="publishdate" class="col-sm-3 control-label">Publish date</label>
+        <div class="col-sm-3">
+          <input type="date" id="publishdate" name="publishdate" class="form-control" placeholder="yy-mm-dd" min="2015-03-17" max="2016-11-10" data-msg-required="Publish date is required." data-rule-required="true" aria-required="true">
+        </div>
+        <label for="publishtime" class="col-sm-3 control-label">Publish time</label>
+        <div class="col-sm-3">
+          <input type="time" id="publistime" name="publishtime" class="form-control" placeholder="hh:mm" data-msg-required="Publish time is required." data-rule-required="true" aria-required="true">
+        </div>
+      </div>
+      <hr class="popout" />
+      <fieldset class="form-group">
+        <legend class="col-sm-3 control-label">Publish to</legend>
+        <div class="col-sm-9">
+          <ul class="row list-unstyled">
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="website">Website</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="email">E-mail</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="app">App</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="banner">Banner</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="printen">Printen</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="developers">Developers</label></li>
+          </ul>
+        </div>
+      </fieldset>
+      <div class="well popout">
+        <div class="row">
+          <div class="col-sm-3 control-label">Preview</div>
+          <div class="col-sm-9" role="tabpanel">
+            <ul id="myTab" class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="#preview-website" id="preview-website-tab" role="tab" data-toggle="tab" aria-controls="preview website" aria-expanded="true">Website</a></li>
+              <li role="presentation"><a href="#preview-email" id="preview-email-tab" role="tab" data-toggle="tab" aria-controls="preview email">E-mail</a></li>
+              <li role="presentation"><a href="#preview-app" id="preview-app-tab" role="tab" data-toggle="tab" aria-controls="preview app">App</a></li>
+              <li role="presentation"><a href="#preview-banner" id="preview-banner-tab" role="tab" data-toggle="tab" aria-controls="preview banner">Banner</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="preview-website" aria-labelledby="preview-website-tab">
+                <img src="/images/cc.jpg" class="img-responsive">
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="preview-email" aria-labelledby="preview-email-tab">
+                <p>LUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="preview-app" aria-labelledby="preview-app-tab">
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="preview-banner" aria-labelledby="preview-banner-tab">
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="popout" />
+      <div class="form-group">
+        <label for="maximumcoupons" class="col-sm-3 control-label">Maximum coupons <small>(use 0 for unlimited)</small></label>
+        <div class="col-sm-3">
+          <input type="number"
+                  id="maximumcoupons"
+                  name="maximumcoupons"
+                  class="form-control"
+                  data-msg-required="Maximum coupons is required."
+                  data-rule-required="true" />
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label" id="maxperclient">Max. per client</label>
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   name="maxperclient"
+                   class="form-control"
+                   id="maxperclient"
+                   min="0"
+                   max="10"
+                   data-msg-required="Max. per client is required."
+                   data-rule-required="true" />
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label" for="maxpertransaction" min="0">Max. per transaction</label>
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   name="maxpertransactions"
+                   class="form-control"
+                   id="maxpertransaction"
+                   min="0"
+                   max="100"
+                   data-msg-required="Max. per transaction is required."
+                   data-rule-required="true" />
+          </div>
+        </div>
+      </div>
+      <hr class="popout" />
+      <fieldset class="form-group">
+        <legend class="col-sm-3 control-label">Customers</legend>
+        <div class="col-sm-9">
+          <div class="radio">
+            <label>
+              <input type="radio" name="customers" id="customers1" value="customers1" checked="">
+              Anonymous customers
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="customers" id="customers2" value="customers2">
+              Registered customers
+            </label>
+          </div>
+          <div class="radio row">
+            <div class ="col-sm-5">
+              <label>
+                <input type="radio" name="customers" id="customers3" value="customers3">
+                Only specific customers
+                <small>(upload csv file)</small>
+              </label>
+            </div>
+            <div class="col-sm-7">
+              <input type="file" id="customerscsv" name="customerscsv" class="filebtn filebtn-default">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <hr class="popout" />
+      <button type="submit" class="btn btn-primary">Publish now</button>
+      <br />
+      <br />
+    </form>
+  </div>
+</div>

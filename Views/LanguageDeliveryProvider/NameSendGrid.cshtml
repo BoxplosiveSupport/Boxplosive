@@ -1,0 +1,22 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.LanguageDeliveryProvider.LanguageDeliveryProviderModel
+@{
+    var labelNames = Model.GetPropertyLabelNamesByDeliveryProviderName();
+}
+
+@for (int i = 0; i < Model.Properties.Count; i++)
+{
+    @Html.HiddenFor(m => m.Properties[i].Id);
+    @Html.HiddenFor(m => m.Properties[i].Active);
+    @Html.HiddenFor(m => m.Properties[i].Name);
+    <div class="form-group">
+        @Html.LabelForRequired(m => m.Properties[i].Name, new { @class = "col-sm-4 control-label" }, labelNames[@Model.Properties[i].Name])
+        <div class="col-sm-5 @Html.Raw(Model.Properties_ValidationMessage.ContainsKey(Model.Properties[i].Name) ? "has-error" : "")">
+            @Html.TextBoxFor(m => m.Properties[i].Value, true, null, htmlAttributes: new { @class = "form-control", autocomplete = "nope" })
+            @if (Model.Properties_ValidationMessage.ContainsKey(Model.Properties[i].Name))
+            {
+                @Html.ValidationMessageFor(m => m.Properties[i].Value, Model.Properties_ValidationMessage[Model.Properties[i].Name], new { @class = "text-danger" })
+            }
+        </div>
+    </div>
+}

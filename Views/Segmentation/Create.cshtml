@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.Segmentation
+@model SegmentationCreateModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Version)
+    <div class="form-horizontal">
+        <div id="LoyaltyEventDefinitionForm" class="well">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.Name)
+            <div class="form-group">
+                @Html.LabelFor(m => m.RetailerStoreIds, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4 @Html.Raw(!ViewData.ModelState.IsValidField("RetailerStoreIds") ? "has-error" : string.Empty)">
+                    @Html.ListBoxFor(m => m.RetailerStoreIds, true, Model.RetailerStores, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RetailerStoreIds, null, new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.Segmentation.ActionNames.Index, MVC.Segmentation.Name, null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

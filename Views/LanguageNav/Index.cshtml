@@ -1,0 +1,39 @@
+﻿@using System.Reflection
+@using nl.boxplosive.BackOffice.Mvc.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.LanguageNav
+@model LanguageNavModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<nav class="panel panel-primary">
+    <div class="panel-body">
+        <ul class="nav nav-pills">
+            @if (User.IsAllowed(((LanguageMessageTemplateController.IndexDelegate)MVC.LanguageMessageTemplate.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Language message templates", MVC.LanguageMessageTemplate.ActionNames.Index, MVC.LanguageMessageTemplate.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((LanguageDeliveryProviderController.IndexDelegate)MVC.LanguageDeliveryProvider.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Language delivery providers", MVC.LanguageDeliveryProvider.ActionNames.Index, MVC.LanguageDeliveryProvider.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((LanguageMessageGroupController.IndexDelegate)MVC.LanguageMessageGroup.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Language message groups", MVC.LanguageMessageGroup.ActionNames.Index, MVC.LanguageMessageGroup.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((LanguageController.IndexDelegate)MVC.Language.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Languages", MVC.Language.ActionNames.Index, MVC.Language.Name)
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

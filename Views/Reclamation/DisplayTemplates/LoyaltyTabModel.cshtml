@@ -1,0 +1,76 @@
+﻿@using System.Reflection
+@using nl.boxplosive.BackOffice.Mvc.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.LoyaltyTabModel
+
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "";
+    var addMutationPermission = User.IsAllowed(((ReclamationController.LoyaltyTabDelegate)MVC.Reclamation.LoyaltyTab).GetMethodInfo());
+    var addMutationDisabled = (!addMutationPermission || Model.HasBalanceInfo) ? "disabled" : string.Empty;
+}
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal panel-body" style="padding-top:50px;">
+    <h3 class="sr-only">Loyalty programs</h3>
+    @if (Model.HasBalanceInfo)
+    {
+        <div class="form-group" style="margin-bottom:0px;">
+            @foreach (var info in Model.BalanceInfo)
+            {
+                <div id="result-message" class="alert alert-warning" role="alert" style="margin-bottom:13px;margin-left:10px;margin-right:10px;">
+                    <span class="icon icon-danger" style="margin-right:10px;"></span><strong>@info</strong>
+                </div>
+            }
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-sm-4">
+            @Html.DropDownListFor(m => m.SelectedLoyaltyProgram, Model.LoyaltyPrograms, new { @class = "form-control", data_change = "forcesaveget" })
+        </div>
+        <div class="col-sm-4">
+            <p class="form-control-static">Total points: <strong>@Model.TotalPoints</strong></p>
+        </div>
+        <div class="col-sm-4" style="display:flex;justify-content:flex-end">
+            @if (addMutationPermission)
+            {
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseMutationEdit" role="button" aria-expanded="false" aria-controls="collapseExample">Edit panel</a>
+            }
+        </div>
+    </div>
+    @if (addMutationPermission)
+    {
+        <div class="well form-group collapse" id="collapseMutationEdit" style="margin-left:0;margin-right:0;padding-bottom:0px;">
+            @Html.EditorFor(m => m.MutationCreditDebitType, "Enum", new { labelClass = "col-sm-4 col-sm-offset-4", labelStyle = "text-align:right;", inputContainerClass = "col-sm-4" })
+            @Html.EditorFor(m => m.MutationAmount, "Numeric", new { labelClass = "col-sm-4 col-sm-offset-4", labelStyle = "text-align:right;" })
+            @Html.EditorFor(m => m.Comment, new { labelClass = "col-sm-4 col-sm-offset-4", labelStyle = "text-align:right;" })
+            <div class="form-group">
+                <div class="col-sm-2 col-sm-offset-10">
+                    <button type="submit" class="btn btn-default btn-block" data-action="save" @addMutationDisabled>Add mutation</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="table-responsive" style="padding-left:10px;padding-right:10px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-sm-2"><strong>Date issued</strong></th>
+                        <th class="col-sm-1"><strong>Credit</strong></th>
+                        <th class="col-sm-1"><strong>Debit</strong></th>
+                        <th class="col-sm-3"><strong>Source</strong></th>
+                        <th class="col-sm-5"><strong>Comment</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var mutation in Model.LoyaltyMutations)
+                    {
+                        @Html.DisplayFor(m => mutation)
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.DisplayFor(m => m.Pagination, new { outerStyle = "margin-bottom:0;padding-bottom:0;" })
+    </div>
+    <a href="" class="close" data-closealltabs><span class="sr-only">Close</span></a>
+</div>

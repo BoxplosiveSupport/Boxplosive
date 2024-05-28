@@ -1,0 +1,36 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.SegmentationStepModel
+
+@{
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+    }
+}
+
+<section class="datapanel @styling" data-action="edit">
+    <div class="datapanel-heading">
+        <h2>2. Segmentation</h2>
+        <div class="actions">
+            <button id="segmentation-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            <p class="row">
+                @Html.LabelFor(m => m.SegmentName, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => m.SegmentName, "span", new { @class = "col-sm-6" })
+            </p>
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

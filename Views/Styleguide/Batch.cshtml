@@ -1,0 +1,188 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<div class="datapanel">
+  <div class="datapanel-body">
+    <h2>Lotem ipsum dolor sit amet</h2>
+    <p>All Kips Cheeses, Campaign name lorem ipsum</p>
+    <div class="form-horizontal">
+      <hr class="popout">
+      <div class="form-group">
+        <label for="publishdate" class="col-sm-3 control-label h3">Publish date</label>
+        <div class="col-sm-3">
+          <p class="form-control-static">20-05-2015</p>
+        </div>
+        <label for="publishtime" class="col-sm-3 control-label h3">Publish time</label>
+        <div class="col-sm-3">
+          <p class="form-control-static">28-05-2015</p>
+        </div>
+      </div>
+      <hr class="popout">
+      <div class="form-group">
+        <label class="col-sm-3 control-label h3">Publish to</label>
+        <div class="col-sm-9" role="tabpanel">
+          <ul id="myTab" class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#preview-website" id="preview-website-tab" role="tab" data-toggle="tab" aria-controls="preview website" aria-expanded="true">Website</a></li>
+            <li role="presentation"><a href="#preview-email" id="preview-email-tab" role="tab" data-toggle="tab" aria-controls="preview email">E-mail</a></li>
+            <li role="presentation"><a href="#preview-app" id="preview-app-tab" role="tab" data-toggle="tab" aria-controls="preview app">App</a></li>
+            <li role="presentation"><a href="#preview-banner" id="preview-banner-tab" role="tab" data-toggle="tab" aria-controls="preview banner">Banner</a></li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="preview-website" aria-labelledby="preview-website-tab">
+              <img src="~/images/logo.png" class="img-responsive">
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="preview-email" aria-labelledby="preview-email-tab">
+              <p>LUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="preview-app" aria-labelledby="preview-app-tab">
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="preview-banner" aria-labelledby="preview-banner-tab">
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="popout">
+      <div class="form-group">
+        <label for="maximumcoupons" class="col-sm-3 control-label h3">Maximum coupons</label>
+        <div class="col-sm-3">
+          <p class="form-control-static">3</p>
+        </div>
+        <div class="col-sm-3">
+          <p class="form-control-static">5 Max. per client</p>
+        </div>
+        <div class="col-sm-3">
+          <p class="form-control-static">2 Max. per transaction</p>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h3>Promotions</h3>
+    <p>23 imported, <span class="badge danger"><span class="icon icon-danger"></span> 22</span> failures, <span class="badge info"><span class="icon icon-retract"></span> 1</span> retracted</p>
+
+    <div class="table-responsive popout">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>ID</th>
+            <th>Customers</th>
+            <th>Starts at</th>
+            <th>Ends at</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="danger">
+            <td>Unknown</td>
+            <td>2XIDR</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="actions"><a href="#" class="icon-btn icon-remove" title="Remove"><span class="sr-only">Remove</span></a></td>
+          </tr>
+          <tr data-rowclick="/" class="danger">
+            <td>SingleProductDiscount</td>
+            <td>2XIDN</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+              <span class="badge danger icon icon-danger" title="26 failures"> 26 <span class="sr-only">failures</span></span>
+            </td>
+            <td>20-2-2015 14:08</td>
+            <td>20-2-2015 14:08</td>
+            <td class="actions">
+              <a href="#" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+              <a href="#" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+            </td>
+          </tr>
+          <tr data-rowclick="/" class="warning">
+            <td>SingleProductDiscount</td>
+            <td>4EXGA</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+              <span class="badge danger icon icon-danger" title="2 failures"> 1 <span class="sr-only">failures</span></span>
+            </td>
+            <td>17-4-2015 14:32</td>
+            <td>17-4-2016 14:32</td>
+            <td class="actions">
+              <a href="#" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+              <a href="#" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+            </td>
+          </tr>
+          <tr data-rowclick="/">
+            <td>SingleProductDiscount</td>
+            <td>4EXGB</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+            </td>
+            <td>17-4-2015 14:32</td>
+            <td>17-4-2016 14:32</td>
+            <td class="actions">
+              <a href="#" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+              <a href="#" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+            </td>
+          </tr>
+          <tr data-rowclick="/">
+            <td>SingleProductDiscount</td>
+            <td>4KLRQ</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+            </td>
+            <td>20-2-2015 14:08</td>
+            <td>20-2-2015 14:08</td>
+            <td class="actions">
+              <a href="#" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+              <a href="#" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+            </td>
+          </tr>
+          <tr data-rowclick="/" class="text-muted">
+            <td>Simple coupon campaign</td>
+            <td>4SYMW</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+              <span class="badge danger icon icon-danger" title="26 failures"> 26 <span class="sr-only">failures</span></span>
+            </td>
+            <td>11-3-2015 17:01</td>
+            <td>31-12-9999 23:59</td>
+            <td class="actions">
+              Retracted
+            </td>
+          </tr>
+          <tr data-rowclick="/" class="text-muted">
+            <td>Simple coupon campaign</td>
+            <td>5CZHL</td>
+            <td title="23 imported">
+              38 <span class="sr-only">imported</span>
+            </td>
+            <td>11-3-2015 15:30</td>
+            <td>20-2-2015 14:08</td>
+            <td class="actions">
+              Expired
+            </td>
+          </tr>
+          <tr class="text-muted">
+            <td>Unknown</td>
+            <td>2XIDI</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="actions">
+              Removed
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <a href="BatchRetract" class="btn btn-primary"><span class="icon icon-retract"></span> Retract batch</a>
+  </div>
+</div>

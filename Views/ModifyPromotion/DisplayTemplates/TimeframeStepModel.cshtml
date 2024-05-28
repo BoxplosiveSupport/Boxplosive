@@ -1,0 +1,47 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.PromotionTimeframeStepModel
+@{
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+    }
+}
+
+<section class="datapanel @styling" data-action="edit">
+    <div class="datapanel-heading">
+        <h2>3. Timeframe</h2>
+        <div class="actions">
+            <button id="timeframe-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            var visibleFromDateTime = Model.VisibleFromDate.ToShortDateString() + " " + @Model.VisibleFromTime.ToString(@"hh\:mm");
+            <p class="row">
+                @Html.LabelFor(m => m.VisibleFromDate, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => visibleFromDateTime, "span", new { @class = "col-sm-6" })
+            </p>
+            var startDateTime = Model.StartDate.ToShortDateString() + " " + Model.StartTime.ToString(@"hh\:mm");
+            <p class="row">
+                @Html.LabelFor(m => m.StartDate, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => startDateTime, "span", new { @class = "col-sm-6" })
+            </p>
+            var endDateTime = Model.EndDate.ToShortDateString() + " " + @Model.EndTime.ToString(@"hh\:mm");
+            <p class="row">
+                @Html.LabelFor(m => m.EndDate, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => endDateTime, "span", new { @class = "col-sm-6" })
+            </p>
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

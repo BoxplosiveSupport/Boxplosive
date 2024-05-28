@@ -1,0 +1,40 @@
+﻿@using System.Globalization
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.Data.Sdk.HtmlEditor
+@{
+    string modelId = Html.IdFor(m => m).ToString();
+
+    var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var displayJson = ViewData["displayJson"] != null && (bool)ViewData["displayJson"];
+    var labelText = ViewData["labelText"] as string;
+
+    var editorWrapperClass = "col-sm-8";
+    var editorClass = "form-control";
+    if (!displayJson)
+    {
+        editorClass += " wymtextarea";
+        editorWrapperClass += " data-wymeditor";
+    }
+
+    string value = null;
+    if (Model != null)
+    {
+        value = displayJson ? Model.Value.GetInternalJson(CultureInfo.CurrentCulture) : Model.Html;
+    }
+
+    string fieldName = ViewData.TemplateInfo.GetFullHtmlFieldName(null);
+    bool hasError = !ViewData.ModelState.IsValidField(fieldName);
+    if (hasError)
+    {
+        editorWrapperClass += " has-error";
+    }
+}
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = "col-sm-4 control-label" }, labelText)
+    <div class="@editorWrapperClass">
+        @Html.TextAreaFor(m => m, value, true, 8, 20, new { @class = editorClass }.AddRouteValue("disabled", "disabled", readOnly))
+        @Html.ValidationMessageFor(m => m, null, new { @class = "text-danger" })
+    </div>
+</div>
+@Html.Partial("CKEditorScript", new ViewDataDictionary { { "modelId", modelId } })

@@ -1,0 +1,61 @@
+﻿@import "../variables";
+
+@mixin datapanel-variant($border, $heading-text-color) {
+  border-top-color: $border;
+  .datapanel-heading {
+    &, * {
+        color:$heading-text-color;
+    }
+    a, button {
+      &:not(.btn) {
+          color:$heading-text-color;
+      }
+      &.icon, .icon {
+        &:before {
+          color:$heading-text-color;
+        }
+      }
+      &.icon-btn, .icon-btn {
+        &:before {
+          background-color:$heading-text-color;
+        }
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        &.icon, .icon {
+          &:before {
+            color:darken($heading-text-color,10%);
+          }
+        }
+        &.icon-btn, .icon-btn {
+          &:before {
+            background-color:darken($heading-text-color,10%);
+          }
+        }
+      } 
+    }
+  }
+  .datapanel-body {
+    clear:both;
+  }
+  .datapanel-color {
+    color:$heading-text-color;
+  }
+  .nav-pills {
+    a {
+      color:$heading-text-color;
+    }
+    > li {
+      // Active state
+      &.active > a {
+        &,
+        &:hover,
+        &:focus {
+          color: $nav-pills-active-link-hover-color;
+          background-color: $heading-text-color;
+        }
+      }
+    }
+  }
+}

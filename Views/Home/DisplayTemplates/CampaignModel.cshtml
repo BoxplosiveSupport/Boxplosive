@@ -1,0 +1,38 @@
+﻿@using nl.boxplosive.Service.ProcessModel
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.Home.CampaignModel
+
+@{
+    var enableModify = UserRolesPermissions.EnableDisable(Model.ModifyMetadata, User);
+    var enableCopy = UserRolesPermissions.EnableDisable(Model.CopyMetadata, User);
+    var enableClick = Model.Finished ? enableModify : enableCopy;
+
+    // using styles on a instead of span because it would change format of page
+    var forceDisableLinkStyle = enableClick ? "" : "pointer-events: none; cursor: default;";
+}
+
+<li class="media">
+
+    <a style="@forceDisableLinkStyle" href="@Model.ModifyUrl" class="media-left">
+        @if (!String.IsNullOrEmpty(Model.IconImgUrl))
+        {
+            <span class="thumbnail">
+                <img src="@Model.IconImgUrl" />
+            </span>
+        }
+        else
+        {
+            <span class="thumbnail noimage">
+                <span class="icon icon-coupon"></span>
+            </span>
+        }
+        <a style="@forceDisableLinkStyle" href="@(!Model.Finished ? Model.ModifyUrl : Model.CopyUrl)" class="media-body">
+            @Model.Title<br />
+            <small>
+                @Model.StartDate.Value.ToShortDateString() - @Model.ExpiryDate.Value.ToShortDateString()
+            </small>
+        </a>
+    </a>
+
+</li>

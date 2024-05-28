@@ -1,0 +1,47 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ModifyLoyalty.ModifyLoyaltyModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<div class="row"
+     data-partialsteps
+     data-get="@Url.Action(MVC.ModifyLoyalty.ActionNames.GetStepPartial, MVC.ModifyLoyalty.Name)">
+    <div class="col-sm-3">
+        <nav data-partial="status"
+             data-partialid="statuslist"
+             data-get="@Url.Action(MVC.ModifyLoyalty.ActionNames.GetStatusList, MVC.ModifyLoyalty.Name)">
+            @Html.DisplayFor(m => m.StatusList)
+        </nav>
+    </div>
+    <main class="col-sm-9">
+        <form id="datapanel-basics"
+              data-partial="step"
+              data-partialid="BasicStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.ModifyLoyalty.ActionNames.SetStepBasics, MVC.ModifyLoyalty.Name)">
+            @Html.DisplayFor(m => m.Loyalty.Basics)
+        </form>
+        <form id="datapanel-timeframe"
+              data-partial="step"
+              data-partialid="TimeframeStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.ModifyLoyalty.ActionNames.SetStepTimeframe, MVC.ModifyLoyalty.Name)">
+            @Html.DisplayFor(m => m.Loyalty.Timeframe)
+        </form>
+        <form id="datapanel-rewards"
+              data-partial="step"
+              data-partialid="RewardsStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.ModifyLoyalty.ActionNames.SetStepRewards, MVC.ModifyLoyalty.Name)">
+            @Html.DisplayFor(m => m.Loyalty.Rewards, "RewardsStep", new { isContinuousSaving = Model.Loyalty.Basics.IsContinuousSaving, panelTitle = "3. Rewards" })
+        </form>
+        <form id="datapanel-savings"
+              data-partial="step"
+              data-partialid="SavingsStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.ModifyLoyalty.ActionNames.SetStepSavings, MVC.ModifyLoyalty.Name)">
+            @Html.DisplayFor(m => m.Loyalty.Savings, "SavingsStep")
+        </form>
+    </main>
+</div>

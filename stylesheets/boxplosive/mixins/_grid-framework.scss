@@ -1,0 +1,37 @@
+﻿@import "../variables";
+
+@mixin calc-grid-row($index, $class, $type) {
+    @if ($type == height) {
+        .row-#{$class}-#{$index} {
+            > * {
+                padding-top:percentage(($index / $grid-columns));
+                position:relative;
+                > * {
+                    position:absolute;
+                    left:$grid-gutter-width / 2;
+                    right:$grid-gutter-width / 2;
+                    top:0;
+                    bottom:0;
+                    overflow:hidden;
+                }
+            }
+        }
+    }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-rows($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-row($i, $class, $type);
+  }
+}
+
+// Create grid for specific class
+@mixin make-grid($class) {
+  @include float-grid-columns($class);
+  @include loop-grid-columns($grid-columns, $class, width);
+  @include loop-grid-columns($grid-columns, $class, pull);
+  @include loop-grid-columns($grid-columns, $class, push);
+  @include loop-grid-columns($grid-columns, $class, offset);
+  @include loop-grid-rows($grid-columns, $class, height);
+}

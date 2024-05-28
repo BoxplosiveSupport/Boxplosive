@@ -1,0 +1,33 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model string
+
+@{
+    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["htmlAttributes"]);
+    if (!htmlAttributes.ContainsKey("class"))
+    {
+        htmlAttributes["class"] = "form-control";
+    }
+
+    var labelClass = ViewData["labelClass"] != null ? ViewData["labelClass"] : "col-sm-4";
+    var labelStyle = !string.IsNullOrWhiteSpace(ViewData["labelStyle"] as string) ? ViewData["labelStyle"] : string.Empty;
+    var noFormGroup = ViewData["noFormGroup"] != null;
+    var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var textboxClass = ViewData["textboxClass"] != null ? ViewData["textboxClass"] : "col-sm-4";
+
+    string fieldName = ViewData.TemplateInfo.GetFullHtmlFieldName(null);
+    bool hasError = !ViewData.ModelState.IsValidField(fieldName);
+    if (hasError)
+    {
+        textboxClass += " has-error";
+    }
+}
+
+@Html.Raw(!noFormGroup ? @"<div class=""form-group"">" : "")
+
+@Html.LabelForRequired(m => m, new { @class = labelClass + " control-label", style = labelStyle })
+<div class="@textboxClass">
+    @Html.TextBoxFor(m => m, true, null, htmlAttributes.AddRouteValue("readonly", "readonly", readOnly))
+    @Html.ValidationMessageFor(m => m, null, new { @class = "text-danger" })
+</div>
+
+@Html.Raw(!noFormGroup ? @"</div>" : "")

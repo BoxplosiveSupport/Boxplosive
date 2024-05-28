@@ -1,0 +1,40 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model TimeSpan?
+
+@{
+    var time = Model == null ? null : ((TimeSpan)Model).ToString(@"hh\:mm");
+    var dataFrom = ViewData["time_from"] != null;
+    var dataTo = ViewData["time_to"] != null;
+    var noFormGroup = ViewData["noFormGroup"] != null;
+    var showLabel = ViewData["noLabel"] == null;
+    var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var labelClass = ViewData["labelClass"] != null ? ViewData["labelClass"] : "col-sm-3";
+    var textboxClass = ViewData["textboxClass"] != null ? ViewData["textboxClass"] : "col-sm-3";
+    var labelText = ViewData["labelText"] as String;
+    var hasErrorClass = ViewData["hasError"] != null && (bool)ViewData["hasError"] ? " has-error" : "";
+}
+
+@Html.Raw(!noFormGroup ? @"<div class=""form-group"">" : "")
+
+@if (showLabel)
+{
+    @Html.LabelForRequired(m => m, new { @class = @labelClass + " control-label" }, labelText)
+}
+<div class="@textboxClass@hasErrorClass">
+
+    @Html.TextBoxFor(m => m, true, time,
+        new
+        {
+            @class = "form-control",
+            onclick = "addTimePicker(this)",
+            type = "time24h",
+            placeholder = "hh:mm"
+        }
+        .AddRouteValue("readonly", "readonly", readOnly)
+        .AddRouteValue("data-to", "", dataTo && !readOnly)
+        .AddRouteValue("data-from", "", dataFrom && !readOnly)
+    )
+    @Html.ValidationMessageFor(m => m, null, new { @class = "text-danger" })
+</div>
+
+@Html.Raw(!noFormGroup ? @"</div>" : "")

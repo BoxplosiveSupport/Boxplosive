@@ -1,0 +1,64 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.table {
+  background:transparent;
+  tbody {
+    border-bottom: 1px solid $table-border-color;
+    background: $table-bg;
+  }
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > :first-child {
+        padding-left:20px;
+      }
+      > :last-child {
+        padding-right:20px;
+      }
+    }
+  }
+  > thead > tr > th {
+    background:$gray-lighter;
+    vertical-align: bottom;
+    border-bottom: 1px solid $table-border-color;
+    font-weight:normal;
+    .panel & {
+      background:transparent;
+    }
+  }
+  th a {
+    color:inherit;
+  }
+  .actions {
+    width:1px;
+    text-align:right;
+    white-space:nowrap;
+    > * {
+      text-align:left;
+    }
+    .icon-btn + .icon-btn {
+      margin-left:0.5em;
+    }
+  }
+  .ascending:after {
+    @extend .caret-up;
+  }
+  .descending:after {
+    @extend .caret;
+  }
+  .ascending, .descending {
+    font-weight:bold;
+    &:after {
+      content:'';
+      margin-left:0.5em!important;
+    }
+  }
+}
+
+tr[data-rowclick] {
+  cursor:pointer;
+}

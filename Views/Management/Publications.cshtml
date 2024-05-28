@@ -1,0 +1,81 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Management
+@model nl.boxplosive.BackOffice.Mvc.Models.Management.PublicationsModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<div class="table-responsive">
+    @using (Html.BeginForm())
+    {
+        @Html.EditorFor(m => m.Filters)
+    }
+    @Html.DisplayFor(m => m.SelectedType)
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>ID</th>
+                <th>Visible from</th>
+                <th>Starts at</th>
+                <th>Ends at</th>
+                <th>Status</th>
+                @if (Model.SelectedType == PublicationsType.Loyalties)
+                {
+                    <th>Customers</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.Publications.Any())
+        {
+            foreach (var publication in Model.Publications)
+            {
+                <tr>
+                    <td>@publication.Title</td>
+                    <td>@publication.Id</td>
+                    <td>@(publication.VisibleFrom.HasValue ? publication.VisibleFrom.Value.ToLocalTimeInOperatingTimeZone().ToString("g") : "-")</td>
+                    <td>@publication.StartDate.ToLocalTimeInOperatingTimeZone().ToString("g")</td>
+                    <td>@(publication.ExpiryDate.HasValue ? publication.ExpiryDate.Value.ToLocalTimeInOperatingTimeZone().ToString("g") : "-")</td>
+                    <td>@publication.Status</td>
+                    @if (Model.SelectedType == PublicationsType.Loyalties)
+                    {
+                        <td>
+                            @Html.ActionLink(publication.IsPublic ? "Open" : "Members", MVC.ModifyLoyalty.Customers(int.Parse(publication.Id)))
+                        </td>
+                    }
+                    <td class="actions">
+                        @if (@publication.Status != "Expired" && Model.SelectedType == PublicationsType.Loyalties)
+                        {
+                            <a href="@Url.Action(MVC.ModifyLoyalty.GrantLoyaltyPoints(int.Parse(publication.Id)))" class="icon-btn icon-plus" title="Grant loyalty points" />
+                        }
+
+                        @if (@publication.Status != "Expired" && !String.IsNullOrEmpty(@publication.ReminderUrl))
+                        {
+                            <a href="@publication.ReminderUrl" class="icon-btn icon-danger" title="ReminderMail"><span class="sr-only">Reminder</span></a>
+                        }
+                        @if (@publication.Status != "Expired" && !String.IsNullOrEmpty(@publication.ModifyUrl))
+                        {
+                            <a href="@publication.ModifyUrl" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+                        }
+                        @if (@publication.Status != "Expired" && !String.IsNullOrEmpty(@publication.ConfigurationUrl))
+                        {
+                            <a href="@publication.ConfigurationUrl" class="icon-btn icon-rules" title="Share loyalty points"><span class="sr-only">Share loyalty points</span></a>
+                        }
+                        @if (!String.IsNullOrEmpty(@publication.CopyUrl))
+                        {
+                            @* // Please add process state check to prevent showing copy button for drafts *@
+                            <a href="@publication.CopyUrl" class="icon-btn icon-copy" title="Copy"><span class="sr-only">Copy</span></a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No results found</td>
+            </tr>
+        }
+    </table>
+    @Html.DisplayFor(m => m.Pagination)
+</div>

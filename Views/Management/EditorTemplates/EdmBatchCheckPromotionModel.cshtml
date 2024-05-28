@@ -1,0 +1,9 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Management.EdmBatchCheckPromotionModel
+
+<tr class="promotion row">
+    @Html.HiddenFor(m => m.Id)
+    <td class="promotion-check col">@Html.CheckBoxFor(m => m.IsChecked)</td>
+    <td class="promotion-id col">@Html.DisplayFor(m => m.Id)</td>
+    <td class="promotion-title col">@Html.DisplayFor(m => m.Title)</td>
+    <td class="promotion-inactivereservationcount col">@Html.DisplayFor(m => m.InactiveReservationCount)</td>
+</tr>

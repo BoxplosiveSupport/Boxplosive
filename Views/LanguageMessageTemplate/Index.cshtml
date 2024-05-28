@@ -1,0 +1,47 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.LanguageMessageTemplate
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+
+@model LanguageMessageTemplateIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink(Model.Column_Name, MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Name))</th>
+            <th>@Html.ActionLink(Model.Column_MessageGroup, MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetSortRouteValues(Model.Column_MessageGroup))</th>
+            <th>@Html.ActionLink(Model.Column_DeliveryProvider, MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetSortRouteValues(Model.Column_DeliveryProvider))</th>
+            <th>@Html.ActionLink(Model.Column_Default, MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Default))</th>
+            <th>@Html.ActionLink(Model.Column_Active, MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Active))</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedList)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.MessageGroupName)</td>
+                <td>@Html.DisplayFor(modelItem => item.DeliveryProviderName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Default)</td>
+                <td>@Html.DisplayFor(modelItem => item.Active)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon(MVC.LanguageMessageTemplate.ActionNames.Edit, MVC.LanguageMessageTemplate.Edit(item.Id), new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                    @Html.ModalButton(Model.ConfirmDeleteModal.Id, string.Empty, MVC.LanguageMessageTemplate.ActionNames.Delete, MVC.LanguageMessageTemplate.Name, item.Name, "Language message template",
+                        new { id = item.Id, name = item.Name, version = item.VersionText, page = Model.PagedList.PageNumber }, new { @class = "icon-btn icon-remove", title = "Delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="5">@Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.LanguageMessageTemplate.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)</td>
+            <td class="actions">@Html.ActionLinkIcon(MVC.LanguageMessageTemplate.ActionNames.Create, MVC.LanguageMessageTemplate.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

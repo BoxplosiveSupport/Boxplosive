@@ -1,0 +1,90 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+
+.btn {
+    color:$text-color;
+    position:relative;
+    top:0;
+    white-space:normal;
+    overflow:hidden;
+    border-width:0;
+    @include transition(all 0.1s ease);
+    &:active,
+    &.active {
+        @include box-shadow(none);
+    }
+    &,
+    &:active,
+    &.active {
+        &:focus,
+        &.focus {
+            outline:none;
+        }
+    }
+    &.loading {
+      color:transparent;
+      .no-cssanimations & {
+          background-image:url(../images/loader.gif)!important;
+          background-position:center center;
+          background-repeat:no-repeat;
+          text-indent:-9999px;
+      }
+      @extend %loading;
+      &:after {
+        font-size:1.5em;
+      }
+    }
+    [type=file] {
+      background:#fff;
+      cursor:pointer;
+      position: absolute;
+      top: -0.25em;
+      left: 0;
+      margin: 0;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      font-size: 4em;
+      direction: ltr;
+      cursor: pointer;
+      line-height:1;
+      min-height:100%;
+      min-width:100%;
+      &::-webkit-file-upload-button {
+        cursor:pointer;
+        padding:0;
+        border:none;
+        float:left;
+        line-height:1.5;
+        margin-top:-0.25em;
+      }
+      &::file-upload-button {
+        cursor:pointer;
+        padding:0;
+        border:none;
+        float:left;
+        line-height:1.5;
+        margin-top:-0.25em;
+      }
+    }
+}
+
+button.btn {
+    background:none;
+}
+
+// Block button
+// --------------------------------------------------
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+    margin-top: 15px;
+}

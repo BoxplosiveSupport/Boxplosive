@@ -1,0 +1,11 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model int
+           
+<div class="form-group">
+    @Html.Label("Amount", ViewData["Label"].ToString(), new { @class = "col-sm-4 control-label", @for = Html.IdFor(m => m) })
+    <div class="col-sm-4">
+        <div class="input-group" data-boxspinner>
+            @Html.TextBoxFor(m => m, true, null, new { @class = "form-control", @type = "number", min = "0" })
+        </div>
+    </div>
+</div>

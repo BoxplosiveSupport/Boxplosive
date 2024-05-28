@@ -1,0 +1,19 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.alert {
+  border-width:1px;
+  box-shadow:0 1px 0;
+  margin-bottom:20px;
+  >.icon {
+    font-size:1.5em;
+    vertical-align:middle;
+    &:before {
+      width:1em;
+      display:inline-block;
+      text-align:center;
+    }
+  }
+}

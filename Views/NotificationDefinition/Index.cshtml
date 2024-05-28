@@ -1,0 +1,57 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Factories
+@using PagedList.Mvc
+@model nl.boxplosive.BackOffice.Mvc.Models.NotificationDefinition.NotificationDefinitionsModel
+
+@{
+    ViewBag.Title = NotificationDefinitionFactory.ListPageTitle;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.LabelFor(model => model.Definitions.FirstOrDefault().Name)</th>
+            <th>@Html.LabelFor(model => model.Definitions.FirstOrDefault().Type)</th>
+            <th>@Html.LabelFor(model => model.Definitions.FirstOrDefault().CustomEvent)</th>
+            <th>@Html.LabelFor(model => model.Definitions.FirstOrDefault().Arguments)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Definitions)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.Name)</td>
+                <td>@Html.DisplayFor(model => item.Type)</td>
+                <td>@Html.DisplayFor(model => item.CustomEvent)</td>
+                <td>@Html.DisplayFor(model => item.Arguments)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon("Edit", "Edit",
+                        new { id = item.Id, page = Model.PagedList.PageNumber },
+                        new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+
+                    @Html.ModalButton(Model.ConfirmDeleteModal.Id,
+                        string.Empty,
+                        MVC.NotificationDefinition.ActionNames.Delete,
+                        MVC.NotificationDefinition.Name,
+                        item.Name,
+                        NotificationDefinitionFactory.ItemPageTitle,
+                        new { id = item.Id, version = item.VersionText, page = Model.PagedList.PageNumber },
+                        new { @class = "icon-btn icon-remove", title = "Delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="4">
+                @Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            </td>
+            <td class="actions">
+                @Html.ActionLinkIcon("Create New", "Create", null, new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

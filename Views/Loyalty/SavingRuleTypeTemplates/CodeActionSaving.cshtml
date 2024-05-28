@@ -1,0 +1,17 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var readOnly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+    var readonlyHtmlAttribute = new { }.AddRouteValue("readonly", "readonly", readOnly);
+}
+
+<div class="well">
+    @Html.Partial(MVC.Loyalty.Views.SavingRuleTypeTemplates.SavingsRuleCommonTemplate, Model)
+    <div class="form form-horizontal">
+        @Html.HiddenFor(m => m.SelectedRule.CodeAction_Id)
+        @Html.EditorFor(m => m.SelectedRule.CodeAction_AdditionalSettings_Points, "Numeric", new { readOnly = readOnly, labelClass = "col-sm-4", textboxClass = "col-sm-4" })
+        @Html.EditorFor(m => m.SelectedRule.CodeAction_Tag, "String", new { readOnly = readOnly, labelClass = "col-sm-4", textboxClass = "col-sm-8" })
+        @Html.EditorFor(m => m.SelectedRule.CodeActionType_Type, "Enum", new { readOnly = readOnly, labelClass = "col-sm-4", inputContainerClass = "col-sm-4" })
+    </div>
+</div>

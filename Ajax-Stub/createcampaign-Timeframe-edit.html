@@ -1,0 +1,78 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>3. Timeframe</h2>
+  </div>
+  <div class="datapanel-body">
+    <div class="form-horizontal">
+      <div class="form-group" data-range>
+        <label class="col-sm-2 control-label" for="Campaign_StartDate">Start date</label>
+        <div class="col-sm-4">
+          <input name="startdate"
+                 class="form-control"
+                 id="Campaign_StartDate"
+                 aria-required="true"
+                 type="date"
+                 placeholder="yy-mm-dd"
+                 data-rule-required="true"
+                 data-msg-required="Start date is required."
+                 data-from>
+        </div>
+        <label class="col-sm-2 control-label" for="Campaign_EndDate">End time</label>
+        <div class="col-sm-4">
+          <input value="2015-03-30"
+                 name="enddate"
+                 class="form-control"
+                 id="Campaign_EndDate"
+                 aria-required="true"
+                 type="date"
+                 placeholder="yy-mm-dd"
+                 data-rule-required="true"
+                 data-msg-required="End date is required."
+                 data-to>
+        </div>
+      </div>
+      <h3>Daily</h3>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="Campaign_StartTime">Start time</label>
+        <div class="col-sm-4">
+          <input name="starttime"
+                 class="form-control"
+                 id="Campaign_StartTime"
+                 aria-required="true"
+                 type="time"
+                 value="00:00"
+                 placeholder="hh:mm"
+                 data-rule-required="true"
+                 data-msg-required="Start time is required.">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="Campaign_EndTime">End time</label>
+        <div class="col-sm-4">
+          <input name="endtime"
+                 class="form-control"
+                 id="Campaign_EndTime"
+                 aria-required="true"
+                 type="time"
+                 value="00:00"
+                 placeholder="hh:mm"
+                 data-rule-required="true"
+                 data-msg-required="End time is required.">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="Campaign_Margin">Margin</label>
+        <div class="col-sm-4">
+          <select data-bind='value: Margin, disable: $root.Loading' name="margin" class="form-control" id="Campaign_Margin" aria-required="true" data-rule-required="true" data-msg-required="Margin is required.">
+            <option value="00:00:00:00:00">0 min.</option>
+            <option value="00:00:15:00:00">15 min.</option>
+            <option value="00:00:30:00:00">30 min.</option>
+            <option value="00:00:45:00:00">45 min.</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+      <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+    </div>
+  </div>
+</section>

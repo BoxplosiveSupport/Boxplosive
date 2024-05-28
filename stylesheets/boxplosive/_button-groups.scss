@@ -1,0 +1,50 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.btn-group-block {
+    display:table;
+    width:100%;
+    > * {
+      vertical-align:top;
+    }
+    > .btn, > * {
+        display:table-cell;
+        float:none;
+        text-align:left;
+        + .btn {
+            border-left:none;
+        }
+    }
+    .btn-group-body {
+        width:100%;
+        max-width:1px;
+        text-align:left;
+        text-decoration:none;
+    }
+    .btn.btn-group-body {
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+    > :first-child {
+      &, > :first-child {
+        padding-left:0;
+      }
+    }
+    > :last-child {
+      &, > :last-child {
+        padding-right:0;
+      }
+    }
+    @media (min-width: $screen-sm-min) {
+      .btn-prepend {
+        position:absolute;
+        right:100%;
+        + .btn {
+          padding-left:0;
+        }
+      }
+    }
+}

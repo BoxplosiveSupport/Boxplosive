@@ -1,0 +1,72 @@
+@import "../variables";
+
+@mixin button-variant($color, $background, $border) {
+  &, &.btn {
+    color: $color;
+    background-color: $background;
+    font-weight:bold;
+    @include box-shadow(0 3px 0 $border);
+  }
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $border;
+    @include box-shadow(0 3px 0 darken($border, 10%));
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+    top:3px;
+    @include box-shadow(none);
+  }
+  .input-group-btn & {
+    border-color: $border;
+    border-width:1px;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+      border-color: darken($border, 10%);
+    }
+  }
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    @include opacity(1);
+    &:not(.loading) {
+      color:$btn-default-border !important;
+      text-decoration:line-through;
+      background-color: $btn-default-bg !important;
+      @include box-shadow(0 3px 0 $btn-default-border !important);
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  padding: $padding-vertical+1 $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+  border-radius: $border-radius;
+  &.btn-block {
+      padding: $padding-vertical $padding-horizontal/2;
+  }
+  .media-btns & {
+    padding: $padding-vertical $padding-horizontal/2;
+  }
+  .boxshadow .input-group-btn & {
+    padding-top: $padding-vertical - 1;
+    padding-bottom: $padding-vertical - 2;
+  }
+}

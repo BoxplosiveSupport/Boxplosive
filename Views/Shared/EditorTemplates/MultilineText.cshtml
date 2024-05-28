@@ -1,0 +1,21 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model string
+
+@{
+    var labelText = ViewData["labelText"] != null ? ViewData["labelText"].ToString() : "";
+    var labelClass = ViewData["labelClass"] ?? "col-sm-4";
+    var readOnly =  (bool)(ViewData["readonly"] ?? false);
+    var disabled = ViewData["disabled"] != null && ViewData["disabled"].ToString() == "disabled";
+    var hasError = (bool)(ViewData["hasError"] ?? false);
+    int rows = (int)(ViewData["rows"] ?? 2);
+
+    string classes = hasError ? "has-error" : "";
+}
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = labelClass + " control-label" }, labelText)
+    <div class="col-sm-8 @classes">
+        @Html.TextAreaFor(m => m, true, rows, 20, new { @class = "form-control" }.AddRouteValue("readonly", "readonly", readOnly).AddRouteValue("disabled", "disabled", disabled))
+        @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+    </div>
+</div>

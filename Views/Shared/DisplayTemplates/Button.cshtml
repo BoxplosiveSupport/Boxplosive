@@ -1,0 +1,37 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+
+@{
+    string classes = "btn";
+    if ((bool)(ViewData["isDefault"] ?? false))
+    {
+        classes += " btn-default";
+    }
+
+    if ((bool)(ViewData["isPrimary"] ?? false))
+    {
+        classes += " btn-primary";
+    }
+
+    var state = (ButtonState)ViewData["state"];
+    var title = (string)ViewData["title"];
+    var modal = (bool)(ViewData["modal"] ?? false);
+    var formId = (string)ViewData["formid"];
+    var modalId = (string)ViewData["modalId"];
+    var routeValues = ViewData["routevalues"];
+
+    string disabled = state == ButtonState.Disabled ? "disabled=\"disabled\"" : null;
+}
+
+@if (state != ButtonState.Invisible)
+{
+    if (modal)
+    {
+        @Html.ModalSubmitButton(modalId, "Delete", "SubmitButton", @title, @formId, 
+            routeValues, new{ @class = classes }, state == ButtonState.Disabled)
+    }
+    else
+    {
+        <input type="submit" name="submitButton" class="@classes" value="@title" @Html.Raw(disabled)/>
+    }
+}

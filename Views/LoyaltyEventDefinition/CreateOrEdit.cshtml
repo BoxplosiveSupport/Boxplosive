@@ -1,0 +1,103 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.Sdk.Enums
+@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyEventDefinition.LoyaltyEventDefinitionModel
+
+@{
+    string action = Model.IsNew ? MVC.LoyaltyEventDefinition.ActionNames.Create : MVC.LoyaltyEventDefinition.ActionNames.Edit;
+    ViewBag.Title = action + " loyalty event";
+
+    bool startDateTimeHasError = !ViewData.ModelState.IsValidField(Model.Field_StartsAtDate);
+    bool endDateHasError = !ViewData.ModelState.IsValidField(Model.Field_EndsAtDate);
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(action, MVC.LoyaltyEventDefinition.Name))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Version)
+    @Html.HiddenFor(m => m.CreatedAt)
+    @Html.HiddenFor(m => m.UpdatedAt)
+    @Html.HiddenFor(m => m.Page)
+
+    if (!Model.IsNew)
+    {
+        @Html.HiddenFor(m => m.Type)
+        @Html.HiddenFor(m => m.Action)
+    }
+
+    <div class="form-horizontal">
+        <div id="LoyaltyEventDefinitionForm" class="well">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.EditorFor(m => m.Name, new { labelClass = "col-sm-3", textboxClass = "col-sm-5" })
+
+            <div class="form-group">
+                @Html.EditorFor(m => m.StartsAtDate, "DatePicker",
+                    new { data_from = "", hasError = startDateTimeHasError, labelText = Model.StartsAtDate, minDate = DateTime.MinValue, noFormGroup = true })
+                @Html.EditorFor(m => m.StartsAtTime, "TimePicker",
+                    new { data_from = "", hasError = startDateTimeHasError, noFormGroup = true, noLabel = true, textboxClass = "col-sm-2" })
+            </div>
+
+            <div class="form-group">
+                @Html.EditorFor(m => m.EndsAtDate, "DatePicker",
+                    new { data_to = "", hasError = endDateHasError, labelText = Model.EndsAtDate, minDate = DateTime.MinValue, noFormGroup = true })
+                @Html.EditorFor(m => m.EndsAtTime, "TimePicker",
+                    new { data_to = "", hasError = endDateHasError, noFormGroup = true, noLabel = true, textboxClass = "col-sm-2" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Type, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(m => m.Type, true, Model.Types, htmlAttributes: new { @class = "form-control" }.AddRouteValue("disabled", "disabled", !Model.IsNew))
+                    @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="type-partial">
+                @Html.Partial(Model.TypePartialViewName, Model)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Action, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(m => m.Action, true, Model.Actions, htmlAttributes: new { @class = "form-control" }.AddRouteValue("disabled", "disabled", !Model.IsNew))
+                    @Html.ValidationMessageFor(m => m.Action, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="action-partial">
+                @Html.Partial(Model.ActionPartialViewName, Model)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.LoyaltyEventDefinition.ActionNames.Index, MVC.LoyaltyEventDefinition.Name,
+                    new { page = Model.Page }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            var typePartialViewUrl = '@Url.Action(MVC.LoyaltyEventDefinition.ActionNames.GetTypePartialView, MVC.LoyaltyEventDefinition.Name)';
+            $('#Type').change(function () {
+                $.get(typePartialViewUrl, { selected: $(this).find(':selected').val() }, function (data) {
+                    $('#type-partial').html(data);
+                });
+            });
+
+            var actionPartialViewUrl = '@Url.Action(MVC.LoyaltyEventDefinition.ActionNames.GetActionPartialView, MVC.LoyaltyEventDefinition.Name)';
+            $('#Action').change(function () {
+                $.get(actionPartialViewUrl, { selected: $(this).find(':selected').val() }, function (data) {
+                    $('#action-partial').html(data);
+                });
+            });
+        });
+    </script>
+}

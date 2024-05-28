@@ -1,0 +1,23 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+
+@model TabModel
+
+@{
+    bool tabStateIsSelected = Model.State == TabState.Selected;
+
+    string liAttrs = tabStateIsSelected ? "class=\"active\"" : null;
+}
+
+@if (Model.State != TabState.Invisible)
+{
+<li @Html.Raw(liAttrs)>
+    @if (Model.State == TabState.Enabled)
+    {
+        @Html.ActionLink(Model.Title, Model.ActionName, Model.RouteValues)
+    }
+    else
+    {
+        <a>@Model.Title</a>
+    }
+</li>
+}

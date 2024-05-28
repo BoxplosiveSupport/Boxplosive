@@ -1,0 +1,46 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Factories
+@using PagedList.Mvc
+@model nl.boxplosive.BackOffice.Mvc.Models.AppCardStackDefinition.AppCardStackDefinitionPageModel
+
+@{
+    ViewBag.Title = AppCardStackDefinitionFactory.ListPageTitle;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th><label for="DisplayName">Display name</label></th>
+            <th><label for="Name">Name</label></th>
+            <th><label for="Order">Order</label></th>
+            <th><label for="CardSize">Card size</label></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Definitions)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.DisplayName)</td>
+                <td>@Html.DisplayFor(model => item.Name)</td>
+                <td>@Html.DisplayFor(model => item.Order)</td>
+                <td>@Html.DisplayFor(model => item.CardSize)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon("Edit", "Edit",
+                        new { id = item.Id, page = Model.PagedList.PageNumber },
+                        new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="4">
+                @Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            </td>
+            <td class="actions">
+                @Html.ActionLinkIcon("Create New", "Create", null, new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

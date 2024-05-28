@@ -1,0 +1,46 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model int?
+
+@{
+    var hasErrorClass = ViewData["hasError"] != null && (bool) ViewData["hasError"];
+    var labelClass = ViewData["labelClass"] != null ? ViewData["labelClass"] : "col-sm-4";
+    var labelStyle = !string.IsNullOrWhiteSpace(ViewData["labelStyle"] as string) ? ViewData["labelStyle"] : string.Empty;
+    var labelText = ViewData["labelText"] != null ? ViewData["labelText"].ToString() : null;
+    var maxValue = ViewData["maxValue"] != null ? ViewData["maxValue"].ToString() : null;
+    var minValue = ViewData["minValue"] != null ? ViewData["minValue"].ToString() : null;
+    var noInputGroup = ViewData["noInputGroup"] != null;
+    var noSpinner = ViewData["noSpinner"] != null && (bool)ViewData["noSpinner"];
+    var readOnly = ViewData["readOnly"] != null && (bool) ViewData["readOnly"];
+    var textboxClassValue = ViewData["textboxClass"] != null ? ViewData["textboxClass"] : "col-sm-4";
+
+    var inputDivClasses = new List<string>();
+    string dataBoxspinnerAttribute = null;
+    if (hasErrorClass)
+    {
+        inputDivClasses.Add("has-error");
+    }
+    if (!noInputGroup)
+    {
+        inputDivClasses.Add("input-group");
+
+        if (!readOnly && !noSpinner)
+        {
+            dataBoxspinnerAttribute = "data-boxspinner";
+        }
+    }
+
+    string inputDivClassValue = string.Join(" ", inputDivClasses);
+}
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = labelClass + " control-label", style = labelStyle }, labelText)
+    <div class="@textboxClassValue">
+        <div class="@inputDivClassValue" @Html.Raw(dataBoxspinnerAttribute)>
+            @Html.TextBoxFor(m => m, true, null, new { @class = textboxClassValue + " form-control", @type = "number" }
+                .AddRouteValue("min", minValue, !string.IsNullOrEmpty(minValue))
+                .AddRouteValue("max", maxValue, !string.IsNullOrEmpty(maxValue))
+                .AddRouteValue("readonly", "readonly", readOnly))
+            @Html.ValidationMessageFor(m => m, null, new {@class = "text-danger"})
+        </div>
+    </div>
+</div>

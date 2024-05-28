@@ -1,0 +1,64 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var readOnly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+}
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>4. Savings</h2>
+    </div>
+    <div class="datapanel-body">
+        <h3>@Html.DisplayFor(m => m.SelectedRule.Type)</h3>
+        @Html.HiddenFor(m => m.SelectedRule.CouponCode)
+        @Html.HiddenFor(m => m.SelectedRule.Type)
+        @Html.HiddenFor(m => m.SelectedRule.Id)
+        @Html.HiddenFor(m => m.AnonymousBalanceLimit)
+        @Html.HiddenFor(m => m.SavingsDisplayType)
+
+        @if (Model.SelectedRule.ErrorMessages != null && Model.SelectedRule.ErrorMessages.Count > 0)
+        {
+            foreach (var message in Model.SelectedRule.ErrorMessages)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <span class="icon icon-danger"></span>
+                    <strong>@Html.DisplayFor(m => message)</strong>
+                </div>
+            }
+        }
+
+        @switch (Model.SelectedRule.Type)
+        {
+            case SavingsRuleTypeModel.CodeActionSaving:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.CodeActionSaving);
+                break;
+            case SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts:
+            case SavingsRuleTypeModel.FixedLoyaltyPointsOnProductsInTransaction:
+            case SavingsRuleTypeModel.LoyaltyPointsOnProductsByValue:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.FixedLoyaltyPointsOnProducts, Model);
+                break;
+            case SavingsRuleTypeModel.FixedLoyaltyPointsOnTransaction:
+            case SavingsRuleTypeModel.FixedLoyaltyPointsOnTransactionInDaysOfWeek:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.FixedLoyaltyPointsOnTransaction, Model);
+                break;
+            case SavingsRuleTypeModel.FixedLoyaltyPointsOnUniqueProductsInTransaction:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.FixedLoyaltyPointsOnUniqueProductsInTransaction, Model);
+                break;
+            case SavingsRuleTypeModel.LoyaltyPointsOnProductsInTransactionByValue:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.LoyaltyPointsOnProductsByValue, Model);
+                break;
+            case SavingsRuleTypeModel.LoyaltyPointsOnTransactionByValue:
+                Html.RenderPartial(MVC.Loyalty.Views.SavingRuleTypeTemplates.LoyaltyPointsOnTransactionByValue);
+                break;
+        }
+
+        <div class="form form-horizontal">
+            @Html.EditorFor(m => m.SelectedRule.RepeatableAmount, "RepeatableTimes", new { labelText = "No. of times to repeat", readOnly = readOnly })
+        </div>
+
+        <button type="submit" class="btn btn-primary" data-action="saveandedit">@(Model.SelectedRule.Id == 0 ? "Add" : "Confirm")</button>
+        <button type="submit" class="btn btn-primary" data-action="edit">Cancel</button>
+    </div>
+</section>

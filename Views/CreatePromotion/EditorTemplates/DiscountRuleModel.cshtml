@@ -1,0 +1,185 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Enums
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.DiscountStepModel
+
+@{
+    var isSubsequentCombinedDiscount = Model.IsSubsequentCombinedDiscount();
+
+    bool hasErrors = (Model.SelectedRule.ErrorMessages != null && Model.SelectedRule.ErrorMessages.Count > 0);
+    string cancelDisabled = hasErrors ? " disabled" : "";
+}
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>4. Discount</h2>
+    </div>
+    <div class="datapanel-body">
+        <h3>@Html.DisplayFor(m => m.SelectedRule.Type)</h3>
+        @Html.HiddenFor(m => m.SelectedRule.Type)
+        @Html.HiddenFor(m => m.SelectedRule.Id)
+        @Html.HiddenFor(m => m.SelectedRule.IsSubsequentCombinedDiscount)
+        @if (Model.SelectedRule.Type > 0)
+        {
+            if (hasErrors)
+            {
+                foreach (var message in Model.SelectedRule.ErrorMessages)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <span class="icon icon-danger"></span>
+                        <strong>@Html.DisplayFor(m => message)</strong>
+                    </div>
+                }
+            }
+            <div id="AddProductErrorMessage" class="alert alert-danger" role="alert" style="display: none"></div>
+            <div class="well">
+                @if (Model.SelectedRule.HasTriggerProducts)
+                {
+                    @Html.EditorFor(m => m.SelectedRule.Triggers, "ProductsInDiscountOrRewardRule",
+                        new
+                        {
+                            allInputsReadonly = false,
+                            countLabelText = "Triggers",
+                            labelText = "Triggers (optional)",
+                            inputNameForProducts = "SelectedRule.Triggers",
+                            multiProductSource = "Triggers",
+                            selectedRuleIndex = Model.SelectedRule.Index,
+                            stepType = StepType.Discount
+                        })
+                }
+                @if (Model.SelectedRule.HasSelectedProducts)
+                {
+                    @Html.EditorFor(m => m.SelectedRule.SelectedProducts, "ProductsInDiscountOrRewardRule",
+                        new
+                        {
+                            allInputsReadonly = false,
+                            countLabelText = "Products",
+                            labelText = "Products",
+                            inputNameForProducts = "SelectedRule.SelectedProducts",
+                            multiProductSource = "SelectedProducts",
+                            selectedRuleIndex = Model.SelectedRule.Index,
+                            stepType = StepType.Discount
+                        })
+                }
+                @if (Model.SelectedRule.HasTargetProducts)
+                {
+                    @Html.EditorFor(m => m.SelectedRule.TargetProducts, "ProductsInDiscountOrRewardRule",
+                        new
+                        {
+                            allInputsReadonly = false,
+                            countLabelText = "Products",
+                            labelText = "Target products",
+                            inputNameForProducts = "SelectedRule.TargetProducts",
+                            multiProductSource = "TargetProducts",
+                            selectedRuleIndex = Model.SelectedRule.Index,
+                            stepType = StepType.Discount
+                        })
+                }
+                <div class="form form-horizontal">
+                    @if (Model.SelectedRule.PayOutLoyaltyProgramId_IsDisplayed)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SelectedRule.PayOutLoyaltyProgramId, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.SelectedRule.PayOutLoyaltyProgramId, true, Model.SelectedRule.PayOutLoyaltyProgramId_SelectListItems,
+                                    htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.SelectedRule.PayOutLoyaltyProgramId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (!isSubsequentCombinedDiscount)
+                    {
+                        if (Model.SelectedRule.HasRewardSupplier)
+                        {
+                            @Html.HiddenFor(m => m.SelectedRule.HasRewardSupplier)
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.SelectedRule.ExternalRewardSupplierId, new { @class = "col-sm-4 control-label" })
+                                <div class="col-sm-8 @Html.Raw(!ViewData.ModelState.IsValidField("SelectedRule.ExternalRewardSupplierId") ? "has-error" : "")">
+                                    @Html.DropDownListFor(m => m.SelectedRule.ExternalRewardSupplierId, true, Model.SelectedRule.ExternalRewardSupplierId_SelectListItems,
+                                        htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.SelectedRule.ExternalRewardSupplierId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                        if (Model.SelectedRule.Type != DiscountRuleType.ExternalReward && Model.SelectedRule.Type != DiscountRuleType.VisualRedemption)
+                        {
+                            @Html.EditorFor(m => m.SelectedRule.MaxNumberOfRedemptions, "Numeric")
+                        }
+                    }
+                    @if (Model.SelectedRule.Type != DiscountRuleType.ExternalReward && Model.SelectedRule.Type != DiscountRuleType.VisualRedemption)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.RequiredNumberOfCoupons, "Numeric")
+                    }
+                    @if (Model.SelectedRule.MaxNumberOfCouponsPerTransaction_IsDisplayed)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.MaxNumberOfCouponsPerTransaction, "Numeric")
+                    }
+                    @if (Model.SelectedRule.MinTransactionValue_IsDisplayed)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.MinTransactionValue, "Numeric")
+                    }
+                    @if (Model.SelectedRule.Type == DiscountRuleType.CentsDiscountOnTransaction ||
+                         Model.SelectedRule.Type == DiscountRuleType.PercentsDiscountOnTransaction ||
+                         Model.SelectedRule.Type == DiscountRuleType.CentsDiscountAtYProducts ||
+                         Model.SelectedRule.Type == DiscountRuleType.PercentsDiscountAtYProducts ||
+                         Model.SelectedRule.Type == DiscountRuleType.FixedPriceOnProductSet ||
+                         Model.SelectedRule.Type == DiscountRuleType.CentsDiscountOnProductSet)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.RequiredAmount, "Numeric", new { labelText = Model.SelectedRule.RequiredAmountText })
+                        @Html.EditorFor(m => m.SelectedRule.Amount, "Numeric", new { labelText = Model.SelectedRule.AmountText })
+                    }
+                    else if (Model.SelectedRule.Type == DiscountRuleType.XPlusYFree ||
+                             Model.SelectedRule.Type == DiscountRuleType.BuyXGetYFree)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.RequiredAmount, "Numeric", new { labelText = Model.SelectedRule.RequiredAmountText })
+                        @Html.EditorFor(m => m.SelectedRule.ApplicableAmount, "Numeric", new { labelText = Model.SelectedRule.ApplicableAmountText })
+                    }
+                    else if (Model.SelectedRule.Type == DiscountRuleType.GrantLoyaltyPoints)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SelectedRule.GrantPointsLoyaltyProgramId, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.SelectedRule.GrantPointsLoyaltyProgramId, true, Model.SelectedRule.GrantPointsLoyaltyProgramId_SelectListItems,
+                                    htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.SelectedRule.GrantPointsLoyaltyProgramId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @Html.EditorFor(m => m.SelectedRule.NumberOfLoyaltyPoints, "Numeric")
+                    }
+                    else if (Model.SelectedRule.Type != DiscountRuleType.Message && Model.SelectedRule.Type != DiscountRuleType.ExternalReward
+                            && Model.SelectedRule.Type != DiscountRuleType.VisualRedemption)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.RequiredAmount, "Numeric", new { labelText = Model.SelectedRule.RequiredAmountText })
+                        if (Model.SelectedRule.HasMatchMoreUnits)
+                        {
+                            @Html.EditorFor(m => m.SelectedRule.MatchMoreUnits, "CustomBoolean", new { useValidation = false })
+                        }
+                        @Html.EditorFor(m => m.SelectedRule.ApplicableAmount, "Numeric",
+                        new
+                        {
+                            labelText = Model.SelectedRule.ApplicableAmountText,
+                            hasError = !ViewData.ModelState.IsValidField("SelectedRule.ApplicableAmount")
+                        })
+                        @Html.EditorFor(m => m.SelectedRule.Amount, "Numeric", new { labelText = Model.SelectedRule.AmountText, maxValue = Model.SelectedRule.Type == DiscountRuleType.PercentsDiscountOnProducts ? 100 : (int?)null })
+                    }
+                    else if (Model.SelectedRule.Type == DiscountRuleType.Message)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.MessageType, new { labelClass = "col-sm-4", inputContainerClass = "col-sm-8" })
+                    }
+                    @if (Model.SelectedRule.Type != DiscountRuleType.ExternalReward && Model.SelectedRule.Type != DiscountRuleType.VisualRedemption)
+                    {
+                        @Html.EditorFor(m => m.SelectedRule.Message, new { labelText = Model.SelectedRule.Type != DiscountRuleType.Message ? "Receipt text" : "" })
+                    }
+                </div>
+            </div>
+            if (Model.SelectedRule.HasRepeatableAmount && !isSubsequentCombinedDiscount)
+            {
+                <div class="form form-horizontal">
+                    @Html.EditorFor(m => m.SelectedRule.RepeatableAmount, "RepeatableTimes", new { labelText = Model.SelectedRule.RepeatableAmountText })
+                </div>
+            }
+        }
+        <button type="submit" class="btn btn-primary" data-action="saveandedit">@(Model.SelectedRule.Id == 0 ? "Add" : "Confirm")</button>
+        <button type="submit" class="btn btn-primary" data-action="edit" @cancelDisabled>Cancel</button>
+    </div>
+</section>

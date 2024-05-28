@@ -1,0 +1,127 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.Home.HomeModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+<aside class="collapse" id="help">
+    <div class="panel panel-help text-center">
+        <div class="panel-body">
+            <a href="#help" data-toggle="collapse" aria-expanded="false" aria-controls="help" class="icon-btn icon-cross pull-right"><span class="sr-only">Sluiten</span></a>
+            <p>Boxplosive allows you to create very flexible discount campaigns for your customers.</p>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <h3>Step 1.</h3>
+                <p>Create a new campaign for a location, period, customer group or product.</p>
+                <p>&darr;</p>
+            </div>
+            <div class="col-xs-4">
+                <h3>Step 2.</h3>
+                <p>Review and publish a campaign.</p>
+                <p>&darr;</p>
+            </div>
+            <div class="col-xs-4">
+                <h3>Step 3.</h3>
+                <p>See how your campaign is doing with detailed statistics.</p>
+                <p>&darr;</p>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<div role="tabpanel">
+    <ul class="row row-xs-4 row-md-3 panel-tabs" role="tablist">
+        <li class="col-xs-4">
+            <a class="panel processmodule panel-secondary" href="#create" aria-controls="create" role="tab" data-toggle="tab">
+                <div class="panel-heading">
+                    <span class="icon icon-pencil-alt"></span>
+                    <span class="h2 hidden-xs">Create</span>
+                </div>
+            </a>
+        </li>
+        <li class="col-xs-4">
+            <a class="panel processmodule panel-primary" href="#publish" aria-controls="publish" role="tab" data-toggle="tab">
+                <div class="panel-heading">
+                    <span class=" icon icon-campaign-alt"></span>
+                    <span class="h2 hidden-xs">Publish</span>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <span class="count">@(Model.Publish.ReadyToPublish != null ? Model.Publish.ReadyToPublish.Count : 0)</span><br />
+                        <span class="hidden-xs">ready campaigns</span><br />
+                        <span class="count-alt">@(Model.Publish.Drafts != null ? Model.Publish.Drafts.Count : 0)</span><span class="hidden-xs"> draft campaigns</span>
+                    </p>
+                </div>
+            </a>
+        </li>
+        <li class="col-xs-4">
+            <a class="panel processmodule panel-primary" href="#analyse" aria-controls="analyse" role="tab" data-toggle="tab">
+                <div class="panel-heading">
+                    <span class="icon icon-graph-alt"></span>
+                    <span class="h2 hidden-xs">Analyse</span>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <span class="count">@Model.Analyse.LiveCampaigns.RowCount</span><br />
+                        <span class="hidden-xs">live campaigns</span>
+                    </p>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane panel panel-secondary" id="create">
+            <div class="panel-body">
+                <h2 class="sr-only">Create</h2>
+                <div class="form-horizontal">
+                    @foreach (var action in Model.Create.CreateActions)
+                    {
+                        if (UserRolesPermissions.EnableDisable(action.ActionMetadata, User))
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-10 col-sm-4 form-control-static">
+                                    <a href="@action.ActionUrl"><span class="icon-btn icon-plus"></span> @action.Title</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <a href="" class="close" data-closealltabs><span class="sr-only">Sluiten</span></a>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane panel panel-primary" id="publish">
+            <div class="panel-body" id="PublishModule">
+                <h2 class="sr-only">Publish</h2>
+                <div class="row form">
+                    @Html.EditorFor(m => m.Publish.CampaignType)
+                </div>
+                <div class="row" id="PublishModuleContent">
+                    @Html.Partial(MVC.Home.Views.ViewNames.PublishModel, Model.Publish)
+                </div>
+                <a href="" class="close" data-closealltabs><span class="sr-only">Sluiten</span></a>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane panel panel-primary" id="analyse">
+            <div class="panel-body">
+                @Html.Partial(MVC.Home.Views.ViewNames.AnalyseModel, Model.Analyse)
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row row-xs-6 row-sm-3 row-md-2 2">
+        @for (var i = 0; i < Model.ClientModules.Count; i++)
+        {
+            @Html.DisplayFor(m => Model.ClientModules[i], "ClientModule")
+        }
+    </div>
+</div>

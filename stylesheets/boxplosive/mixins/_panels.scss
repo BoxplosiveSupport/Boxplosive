@@ -1,0 +1,105 @@
+﻿// Core variables and mixins
+@import "../variables";
+
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border, $force-branding:true) {
+  background-color: $heading-bg-color;
+  border-color: $border;
+  @include box-shadow(0 3px 0 $border);
+
+  & > .panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    + .panel-collapse > .panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+  }
+  & > .panel-footer {
+    + .panel-collapse > .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+  &.processmodule {
+      * {
+          color:$heading-text-color;
+      }
+      &:after {
+        @include gradient-vertical(rgba(255,255,255,0), $heading-bg-color, 0%, 75%);
+      }
+  }
+  .panel-color {
+    color:$heading-text-color;
+  }
+  .panel-body {
+    .nav {
+      > li {
+        > a {
+          &:hover,
+          &:focus {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+    .nav-pills {
+      > li {
+        &.active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: $nav-pills-active-link-hover-color;
+            background-color: $heading-text-color;
+          }
+        }
+      }
+    }
+  }
+  .tosticky {
+    background-color:$heading-bg-color;
+    color: $border;
+  }
+  @if $force-branding {
+    .panel-body {
+      /*.icon {
+          color:$heading-text-color;
+      }
+      .icon-btn:before {
+          background-color:$heading-text-color;
+      }*/
+      a, button {
+        &:not(.btn):not(.btn-group-primary) {
+            color:$heading-text-color;
+        }
+        &.icon {
+          &:before {
+            color:$heading-text-color;
+          }
+        }
+        &.icon-btn, .icon-btn, &.close, .close {
+          &:before {
+            background-color:$heading-text-color;
+          }
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          &.icon {
+            &:before {
+              color:darken($heading-text-color,10%);
+            }
+          }
+          &.icon-btn, .icon-btn {
+            &:before {
+              background-color:darken($heading-text-color,10%);
+            }
+          }
+        } 
+      }
+    }
+  }
+}

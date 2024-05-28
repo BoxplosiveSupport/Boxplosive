@@ -1,0 +1,46 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Areas.Admin.Models
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model AppConfigItemIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+
+    var padding = "2px";
+    var fontsize = "14px";
+}
+
+<p>Read-only list of all app config items currently residing in the database.</p>
+
+<div style="margin-left: calc(50% - 48vw); margin-right: calc(50% - 48vw); margin-top: 20px; font-size: @fontsize;">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width: 200px;">@Html.LabelFor(model => model.Items.First().ApplicationName)</th>
+                <th style="width: 450px">@Html.LabelFor(model => model.Items.First().Key)</th>
+                <th style="width: 700px;">@Html.LabelFor(model => model.Items.First().Value)</th>
+                <th>@Html.LabelFor(model => model.Items.First().Group)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td style="padding:@padding;">@Html.TextBoxFor(model => item.ApplicationName, new { size = "60", @readonly = true })</td>
+                    <td style="padding:@padding;">@Html.TextBoxFor(model => item.Key, new { size = "60", @readonly = true })</td>
+
+                    @if (item.Value.Contains(Environment.NewLine))
+                    {
+                        <td style="padding:@padding;">@Html.TextAreaFor(model => item.Value, new { @cols = "102", @rows = "6", @readonly = true })</td>
+                    }
+                    else
+                    {
+                        <td style="padding:@padding;">@Html.TextBoxFor(model => item.Value, new { size = "100", @readonly = true })</td>
+                    }
+                    <td style="padding:@padding;">@Html.TextBoxFor(model => item.Group, new { @readonly = true })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

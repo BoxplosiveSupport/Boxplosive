@@ -1,0 +1,62 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model DateTime?
+
+@{
+    var dateFormat = "yyyy-MM-dd";
+    var date = Model == null ? null : ((DateTime)Model).ToString(dateFormat);
+    var dataTo = ViewData["data_to"] != null;
+    var dataFrom = ViewData["data_from"] != null;
+    var noFormGroup = ViewData["noFormGroup"] != null;
+    var showLabel = ViewData["noLabel"] == null;
+    var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var labelClass = ViewData["labelClass"] != null ? ViewData["labelClass"] : "col-sm-3";
+    var textboxClass = ViewData["textboxClass"] != null ? ViewData["textboxClass"] : "col-sm-3";
+    var labelText = ViewData["labelText"] as String;
+    var onChangeSubmitForm = ViewData["onChangeSubmitForm"] as bool? ?? false;
+
+    var minDate = DateTime.Today;
+    if (ViewData["minDate"] != null)
+    {
+        OperatingDateTime.TryParse(ViewData["minDate"].ToString(), out minDate);
+    }
+
+    var maxDate = DateTime.MaxValue;
+    if (ViewData["maxDate"] != null)
+    {
+        OperatingDateTime.TryParse(ViewData["maxDate"].ToString(), out maxDate);
+    }
+
+    string fieldName = ViewData.TemplateInfo.GetFullHtmlFieldName(null);
+    bool hasError = !ViewData.ModelState.IsValidField(fieldName);
+    if (hasError)
+    {
+        textboxClass += " has-error";
+    }
+}
+
+@Html.Raw(!noFormGroup ? @"<div class=""form-group"">" : "")
+
+@if (showLabel)
+{
+    @Html.LabelForRequired(m => m, new { @class = labelClass + " control-label" }, labelText)
+}
+<div class="@textboxClass">
+
+    @Html.TextBoxFor(m => m, true, date,
+        new
+        {
+            @class = "form-control",
+            @type = "date",
+            placeholder = "yy-mm-dd",
+        }
+        .AddRouteValue("readonly", "readonly", readOnly)
+        .AddRouteValue("data-to", "", dataTo && !readOnly)
+        .AddRouteValue("data-from", "", dataFrom && !readOnly)
+        .AddRouteValue("min", minDate.ToString(dateFormat), !readOnly)
+        .AddRouteValue("max", maxDate.ToString(dateFormat), !readOnly)
+        .AddRouteValue("onblur", "this.form.submit();", onChangeSubmitForm)
+    )
+    @Html.ValidationMessageFor(m => m, null, new { @class = "text-danger" })
+</div>
+
+@Html.Raw(!noFormGroup ? @"</div>" : "")

@@ -1,0 +1,66 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.EditCouponModel
+
+@{
+    ViewBag.Title = "Edit coupon";
+
+    string endDateTimeError = ViewData["EndDateTimeError"] != null ? (string)ViewData["EndDateTimeError"] : string.Empty;
+    string endErrorClass = !string.IsNullOrEmpty(endDateTimeError) ? "has-error alert-danger" : string.Empty;
+}
+
+<h2>Edit coupon</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ReservationId)
+    @Html.HiddenFor(m => m.ExternalCustomerId)
+    @Html.HiddenFor(m => m.Status)
+    @Html.HiddenFor(m => m.SearchValueModel.SearchType)
+    @Html.HiddenFor(m => m.SearchValueModel.SearchTerm)
+    @Html.HiddenFor(m => m.SearchValueModel.CustomerId)
+    @Html.HiddenFor(m => m.SearchValueModel.SelectedTab)
+
+    <div class="form-group row">
+        @Html.EditorFor(m => m.ReservationId, "Numeric",
+            new { formGroupClass = "", @labelClass = "col-sm-2", @textboxClass = "col-sm-3", noInputGroup = "noInputGroup", readOnly = true })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.CampaignId, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(m => m.CampaignId, new { @class = "form-control" }.AddRouteValue("readonly", "readonly", true))
+        </div>
+        <div class="col-sm-5">
+            @Html.TextBoxFor(m => m.CampaignName, new { @class = "form-control" }.AddRouteValue("readonly", "readonly", true))
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.EditorFor(m => m.StatusString,
+            new { formGroupClass = "", @labelClass = "col-sm-2", @textboxClass = "col-sm-3", readOnly = true })
+    </div>
+    <div class="form-group row">
+        @Html.EditorFor(m => m.StartDate, "DatePicker",
+            new { @noFormGroup = "noFormGroup", @labelClass = "col-sm-2", @textboxClass = "col-sm-3", readOnly = true })
+        @Html.EditorFor(m => m.StartTime, "TimePicker",
+            new { @noFormGroup = "noFormGroup", @noLabel = "noLabel", @textboxClass = "col-sm-2", readOnly = true })
+    </div>
+    <div class="form-group row @endErrorClass">
+        @Html.EditorFor(m => m.EndDate, "DatePicker",
+            new { @noFormGroup = "noFormGroup", @labelClass = "col-sm-2", @textboxClass = "col-sm-3" })
+        @Html.EditorFor(m => m.EndTime, "TimePicker",
+            new { @noFormGroup = "noFormGroup", @noLabel = "noLabel", @textboxClass = "col-sm-2", hasError = !ViewData.ModelState.IsValidField("EndTime") })
+        <div class="col-sm-3 control-label">
+            @Html.Raw(endDateTimeError)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.EditorFor(m => m.RedemptionsLeft, "Numeric",
+            new { formGroupClass = "", @labelClass = "col-sm-2", @textboxClass = "col-sm-3" })
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Confirm" />
+        @Html.ActionLink("Cancel", MVC.Reclamation.ActionNames.ReturnToCurrentReclamation, MVC.Reclamation.Name,
+            new { customerId = Model.SearchValueModel.CustomerId, searchType = Model.SearchValueModel.SearchType, searchTerm = Model.SearchValueModel.SearchTerm, selectedTab = Model.SearchValueModel.SelectedTab },
+            new { @class = "btn btn-link" })
+    </div>
+}

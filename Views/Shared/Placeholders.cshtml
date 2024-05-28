@@ -1,0 +1,13 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Placeholder
+@model IList<PlaceholderModel>
+
+@{
+    string htmlFieldName = "Placeholders";
+    var htmlFieldNamePrefix = ViewData["HtmlFieldNamePrefix"] as string;
+    if (htmlFieldNamePrefix != null)
+    {
+        htmlFieldName = htmlFieldNamePrefix + htmlFieldName;
+    }
+}
+
+@Html.EditorForModel(templateName: null, htmlFieldName: htmlFieldName)

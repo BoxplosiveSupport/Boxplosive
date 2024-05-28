@@ -1,0 +1,131 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Management
+
+@model EdmBatchDetailsModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<p>
+    <div class="row">
+        @Html.LabelFor(m => m.Batch.Id, new { @class = "col-sm-2" })
+        @Html.DisplayFor(m => m.Batch.Id, new { @class = "col-sm-4" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Batch.CreatedAt, new { @class = "col-sm-2" })
+        @Html.DisplayFor(m => m.Batch.CreatedAt, new { @class = "col-sm-4" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Batch.FileName, new { @class = "col-sm-2" })
+        @Html.DisplayFor(m => m.Batch.FileName, new { @class = "col-sm-4" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Batch.PromotionCount, new { @class = "col-sm-2" })
+        @Html.DisplayFor(m => m.Batch.PromotionCount, new { @class = "col-sm-4" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Batch.LineCount, new { @class = "col-sm-2" })
+        @Html.DisplayFor(m => m.Batch.LineCount, new { @class = "col-sm-4" })
+    </div>
+</p>    
+
+@using (Html.BeginForm(MVC.Management.ActionNames.EdmBatch, MVC.Management.Name, FormMethod.Post, new { id = "edmbatchform" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Batch.Id)
+    <table class="table">
+        <thead>
+            <tr class="row">
+                <th class="col" style="padding-left:10px">@Html.CheckBox("SelectAll")</th>
+                <th class="col">Promotion</th>
+                <th class="col">Title</th>
+                <th class="col">Inactive reservations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.EditorFor(m => m.Promotions)
+        </tbody>
+    </table>
+    <p>
+        <input type="submit" value="Cancel reservations" id="btn-confirm" class="btn btn-default" />
+    </p>
+}
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true" id="confirm-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="myModalLabel">Cancel reservations</h4>
+            </div>
+            <div class="modal-body">
+                <p>You are about to cancel <span class="reservationcount">0</span> reservation<span class="reservationcount-plural">s</span> for <span class="promotioncount">0</span> promotion<span class="promotioncount-plural">s</span>.</p>
+                <p>Do you want to continue?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-ok">OK</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+$(function () {
+    var modalConfirm = function(callback){
+        $("#btn-confirm").on("click", function (event){
+            event.preventDefault();
+
+            var reservationCount = 0;
+            var checkedCheckboxes = $(":checkbox:checked:not(#SelectAll)");
+            $(checkedCheckboxes).each(function() {
+                var value = $(this).closest('tr').find(".promotion-inactivereservationcount").text();
+                reservationCount += parseInt(value);
+            });
+
+            var reservationCountPluralValue = "s";
+            if (reservationCount == 1) {
+                reservationCountPluralValue = "";
+            }
+
+            $(".reservationcount").text(reservationCount);
+            $(".reservationcount-plural").text(reservationCountPluralValue);
+
+            var promotionCount = $(checkedCheckboxes).length;
+
+            var promotionCountPluralValue = "s";
+            if (promotionCount == 1) {
+                promotionCountPluralValue = "";
+            }
+
+            $(".promotioncount").text(promotionCount);
+            $(".promotioncount-plural").text(promotionCountPluralValue);
+
+            $("#confirm-modal").modal('show');
+        });
+
+        $("#modal-btn-ok").on("click", function (event){
+            callback(true);
+            $("#confirm-modal").modal('hide');
+        });
+  
+        $("#modal-btn-cancel").on("click", function (event){
+            callback(false);
+            $("#confirm-modal").modal('hide');
+        });
+    };
+
+    modalConfirm(function(confirm){
+        if(confirm){
+            $("form#edmbatchform").submit();
+        }
+    });
+
+    $('#SelectAll').change(function() {
+        var checkboxes = $(this).closest('form').find(':checkbox');
+        checkboxes.prop('checked', $(this).is(':checked'));
+    });
+});
+</script>
+}

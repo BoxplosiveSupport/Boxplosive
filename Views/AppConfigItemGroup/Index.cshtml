@@ -1,0 +1,30 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.AppConfigItems
+
+@model nl.boxplosive.BackOffice.Mvc.Models.AppConfigItems.AppConfigItemGroupsModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.LabelFor(model => model.AppConfigItemGroups)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var group in Model.AppConfigItemGroups)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => group)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon("Edit", MVC.AppConfigItemGroup.ActionNames.Live,
+                        new { group },
+                        new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

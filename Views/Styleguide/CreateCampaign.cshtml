@@ -1,0 +1,136 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+<div class="row"
+     data-partialsteps
+     data-get="CreatePartialReturnHTML?file=~/Ajax-Stub/createcampaign"
+     data-post="CreatePartialReturnHTML?file=~/Ajax-Stub/createcampaign"
+     data-exitmessage="Unsaved changed will be lost.">
+  <div class="col-sm-3">
+    <nav class="sticky"
+         data-partial="status"
+         data-partialid="statuslist"
+         data-get="ReturnHTML?file=~/Ajax-Stub/createcampaign-StatusList.html">
+      <div class="panel panel-secondary">
+        <div class="panel-body">
+          <h2 class="panel-color">Campaign</h2>
+          <ol class="status-list">
+            <li><a href="#datapanel-basics">Basics <span class="icon icon-check pull-right"></span></a></li>
+            <li><a href="#datapanel-stores">Stores <span class="icon icon-check pull-right"></span></a></li>
+            <li><a href="#datapanel-timeframe">Timeframe <span class="icon icon-check pull-right"></span></a></li>
+            <li><a href="#datapanel-discount">Discount <span class="icon icon-check pull-right"></span></a></li>
+            <li><a href="#datapanel-promotion">Promotion <span class="icon icon-check pull-right"></span></a></li>
+          </ol>
+          <a href="" class="btn btn-success btn-block">Continue later</a>
+          <a href="" class="btn btn-success btn-block disabled">Ready to publish</a>
+          <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#saveastemplate">Save as template</button>
+        </div>
+        <a href="#primaryheader" type="button" class="tosticky text-center icon icon-actions"></a>
+      </div>
+    </nav>
+  </div>
+  <main class="col-sm-9">
+    <form id="datapanel-basics"
+          data-partial="step"
+          data-partialid="Basics"
+          data-mode="display">
+      <section class="datapanel" data-action="edit">
+        <div class="datapanel-heading">
+          <h2>1. Basics</h2>
+          <div class="actions">
+            <button type="button" class="icon-btn icon-edit" data-action="edit"><span class="sr-only">Edit</span></button>
+          </div>
+        </div>
+        <div class="datapanel-body">
+          <p class="text-muted">Click to enter data</p>
+        </div>
+      </section>
+    </form>
+    <form id="datapanel-stores"
+          data-partial="step"
+          data-partialid="Stores"
+          data-mode="display">
+      <section class="datapanel" data-action="edit">
+        <div class="datapanel-heading">
+          <h2>2. Stores</h2>
+          <div class="actions">
+            <button type="button" class="icon-btn icon-edit" data-action="edit"><span class="sr-only">Edit</span></button>
+          </div>
+        </div>
+        <div class="datapanel-body">
+          <p class="text-muted">Click to enter data</p>
+        </div>
+      </section>
+    </form>
+    <form id="datapanel-timeframe"
+          data-partial="step"
+          data-partialid="Timeframe"
+          data-mode="display">
+      <section class="datapanel" data-action="edit">
+        <div class="datapanel-heading">
+          <h2>3. Timeframe</h2>
+          <div class="actions">
+            <button type="button" class="icon-btn icon-edit" data-action="edit"><span class="sr-only">Edit</span></button>
+          </div>
+        </div>
+        <div class="datapanel-body">
+          <p class="text-muted">Click to enter data</p>
+        </div>
+      </section>
+    </form>
+    <form id="datapanel-discount"
+          data-partial="step"
+          data-partialid="Discount"
+          data-mode="display">
+      <section class="datapanel" data-action="edit">
+        <div class="datapanel-heading">
+          <h2>4. Discount</h2>
+          <div class="actions">
+            <button type="button" class="icon-btn icon-edit" data-action="edit"><span class="sr-only">Edit</span></button>
+          </div>
+        </div>
+        <div class="datapanel-body">
+          <p class="text-muted">Click to enter data</p>
+        </div>
+      </section>
+    </form>
+    <form id="datapanel-promotion"
+          data-partial="step"
+          data-partialid="Promotion"
+          data-mode="display">
+      <section class="datapanel" data-action="edit">
+        <div class="datapanel-heading">
+          <h2>5. Promotion</h2>
+          <div class="actions">
+            <button type="button" class="icon-btn icon-edit" data-action="edit"><span class="sr-only">Edit</span></button>
+          </div>
+        </div>
+        <div class="datapanel-body">
+          <p class="text-muted">Click to enter data</p>
+        </div>
+      </section>
+    </form>
+  </main>
+
+</div>
+
+<div class="modal fade" id="saveastemplate" tabindex="-1" role="dialog" aria-hidden="true" data-post="ReturnJSON?file=~/Ajax-Stub/test.json">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="saveastemplate">Save as template</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form" action="">
+          <div class="form-group">
+            <label>Please enter a unique name for this new template.</label>
+            <input type="text" name="templatename" class="form-control" data-rule-required="true" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Save now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

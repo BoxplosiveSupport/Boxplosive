@@ -1,0 +1,192 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>2. Savings</h2>
+  </div>
+  <div class="datapanel-body">
+    <h3>Points for product or product group</h3>
+    <div class="well"
+         data-repeatable
+         data-orderup="true"
+         data-max="3"
+         data-msg-max="Maximum of {0} items">
+      <div class="form">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="discount.search"
+                     data-boxautocomplete="newrepeatable"
+                     data-source="ReturnJSON?file=~/Ajax-Stub/products.json"
+                     data-minlength="3"
+                     data-scrollsteplength="10"
+                     data-itemtemplate="#productbrowseritemtemplate" />
+              <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <button type="button"
+                      class="btn btn-default btn-block"
+                      data-toggle="modal"
+                      data-target="#productbrowser"
+                      data-return>
+                Browse product...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-repeatablelist>
+        <div class="innerwell" data-repeatableitem>
+          <button type="button" class="close" data-action="remove"><span class="sr-only">Remove</span></button>
+          <input type="hidden" name="discountrule[0].product.remove" data-removetag />
+          <input type="hidden" name="discountrule[0].product.id" value="4321" />
+          <div class="form-inline">
+            <div class="form-group">
+              <div class="input-group inputw-xs" data-boxspinner>
+                <input type="number"
+                       id="discountrule[0]_product_number"
+                       name="discountrule[0].product.number"
+                       class="form-control"
+                       min="0"
+                       data-msg-integer="Integer required"
+                       data-rule-integer="true"
+                       data-msg-required="Required."
+                       required />
+              </div>
+              <span class="form-control-static">x</span>
+              <strong class="form-control-static">Test</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form form-horizontal">
+        <div class="form-group">
+          <label for="number" class="col-sm-7 col-md-5 col-lg-4 control-label">Loyalty pts. per product</label>
+          <div class="col-sm-5 col-md-4 col-lg-3">
+            <div class="input-group" data-boxspinner>
+              <input type="number"
+                     class="form-control"
+                     id="loyaltyptspp"
+                     name="loyaltyptspp"
+                     min="0"
+                     data-rule-required="true" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="number" class="col-sm-7 col-md-5 col-lg-4 control-label">Maximum no. of products</label>
+          <div class="col-sm-5 col-md-4 col-lg-3">
+            <div class="input-group" data-boxspinner>
+              <input type="number"
+                     class="form-control"
+                     id="maxnoofpdts"
+                     name="maxnoofpdts"
+                     min="0"
+                     data-rule-required="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/mustache" data-template>
+        <div class="innerwell" data-repeatableitem>
+          <button type="button" class="close" data-action="remove"><span class="sr-only">Remove</span></button>
+          <input type="hidden" name="discountrule[{{index}}].product.remove" data-removetag />
+          <input type="hidden" name="discountrule[{{index}}].product.id" value="{{id}}" />
+          <div class="form-inline">
+            <div class="form-group">
+              <div class="input-group inputw-xs" data-boxspinner>
+                <input type="number"
+                       id="discountrule[{{index}}]_product_number"
+                       name="discountrule[{{index}}].product.number"
+                       class="form-control"
+                       min="0"
+                       data-msg-integer="Integer required"
+                       data-rule-integer="true"
+                       data-msg-required="Required."
+                       required />
+              </div>
+            </div>
+            <span class="form-control-static">x</span>
+            <strong class="form-control-static">{{{label}}}</strong>
+          </div>
+        </div>
+      </script>
+    </div>
+    <button type="submit" class="btn btn-primary" data-action="saveandedit">Save</button>
+    <button type="submit" class="btn btn-primary" data-action="edit">Cancel</button>
+  </div>
+</section>
+
+<div class="modal fade browser"
+     id="productbrowser"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="productbrowser"
+     aria-hidden="true"
+     data-browsermodal="singleselect">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="saveastemplate">Browse products</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row form">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="productgroupfilter"
+                     id="productgroupfilter"
+                     placeholder="Find product group..."
+                     data-boxautocomplete
+                     data-source="ReturnJSON?file=~/Ajax-Stub/products.json"
+                     data-minlength="0"
+                     data-appendto="#productgroupresult"
+                     data-scrollsteplength="10"
+                     data-browserentry="true"
+                     data-sub="#productfilter"
+                     data-disableselect="true"
+                     data-itemtemplate="#productbrowseritemtemplate">
+              <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+            </div>
+            <div class="result" id="productgroupresult">
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="productfilter"
+                     id="productfilter"
+                     placeholder="Find product in product group"
+                     data-boxautocomplete
+                     data-source="ReturnJSON?file=~/Ajax-Stub/subproducts.json"
+                     data-minlength="0"
+                     data-appendto="#productresult"
+                     data-scrollsteplength="10"
+                     data-super="#productgroupfilter"
+                     data-itemtemplate="#productbrowseritemtemplate"
+                     disabled>
+              <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+            </div>
+            <div class="result" id="productresult">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/mustache" id="productbrowseritemtemplate">
+  <li>
+    {{#folder}}<span class="icon icon-folder"></span>{{/folder}}
+    {{#label}}<span class="labeltext">{{label}}</span>{{/label}}
+    {{#sublabel}}<small tabindex="0">{{sublabel}}</small>{{/sublabel}}
+  </li>
+</script>

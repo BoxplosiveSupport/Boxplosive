@@ -1,0 +1,52 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model HttpPostedFileBase
+
+@{
+    var fileTypes = ViewData["fileTypes"] != null ? ViewData["fileTypes"].ToString() : @"/(\.|\/)(jpe?g|png|gif)$/";
+    var fileUrlField = ViewData["fileUrlField"] != null ? ViewData["fileUrlField"].ToString() : "ImageUrl";
+    var hidePreview = ViewData["hidePreview"] != null;
+    var imageUrl = ViewData["imageUrl"] != null ? ViewData["imageUrl"].ToString() : "";
+    var labelText = ViewData["labelText"] as string;
+    var reloadPage = ViewData["reloadPage"] != null ? "true" : "false";
+    var uploadActionUrl = ViewData["uploadActionUrl"] != null ? ViewData["uploadActionUrl"].ToString() : "";
+}
+<div class="form-group @fileUrlField">
+    @Html.LabelForRequired(m => m, new { @class = "col-sm-4 control-label" }, labelText)
+    <div class="col-sm-8"
+         data-upload="single"
+         data-accept-file-types="@fileTypes"
+         data-url="@uploadActionUrl"
+         data-file-url-field="@fileUrlField"
+         data-reload-page="@reloadPage">
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="btn btn-default">
+                    Upload file...
+                    @Html.TextBoxFor(m => m, true, null, new { @class = "filebtn filebtn-default", @type = "file" })
+                </span>
+                @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger", style = "display: inline-block;" })
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" data-progress></div>
+                </div>
+                <p class="text-danger" data-status></p>
+            </div>
+            @if (!hidePreview)
+            {
+                <div class="col-sm-6">
+                    <div class="well">
+                        <div class="squarethumbnail" data-preview>
+                            <img src="@imageUrl">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var boxplosive = boxplosive || {};
+    if (typeof boxplosive.initUpload === "function") {
+        boxplosive.initUpload();
+    }
+</script>

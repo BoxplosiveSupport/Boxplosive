@@ -1,0 +1,85 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using System.Linq
+@model int
+
+@{
+	var labelText = ViewData["labelText"] != null ? ViewData["labelText"].ToString() : "";
+	var inputStyle = "";
+	var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+	if (Model == 1 || Model == int.MaxValue)
+	{
+		inputStyle = "display: none;";
+	}
+
+	var selectlist = new List<SelectListItem>();
+	selectlist.Add(new SelectListItem
+	{
+		Value = "1",
+		Text = "Don't repeat",
+		Selected = Model == 1
+	});
+	selectlist.Add(new SelectListItem
+	{
+		Value = int.MaxValue.ToString(),
+		Text = "Unlimited repeat",
+		Selected = Model == int.MaxValue
+	});
+	selectlist.Add(new SelectListItem
+	{
+		Value = "2",
+		Text = "Repeat X times",
+		Selected = Model != 1 && Model != int.MaxValue
+	});
+}
+
+<div class="form-group">
+	@Html.LabelForRequired(m => m, new { @class = "col-sm-4 control-label" }, labelText)
+	@Html.HiddenFor(m => m)
+	<div class="col-sm-4">
+		@if (!readOnly)
+		{
+			@Html.DropDownList("RepeatableSelection", selectlist, new { @class = "form-control" })
+		}
+		else
+		{
+			@Html.TextBox("RepeatableSelection", selectlist.FirstOrDefault(i => i.Selected).Text, new { @class = "form-control", @readonly = "" })
+		}
+	</div>
+	<div class="col-sm-4">
+		<div class="input-group" id="RepeatableInputContainer" style="@inputStyle">
+			@Html.TextBox("RepeatableInput", Model.ToString(), new { @class = "form-control", @type = "number", min = "1" }.AddRouteValue("readonly", "readonly", readOnly))
+		</div>
+	</div>
+</div>
+
+<script>
+	var timer, delay = 0;
+	$(document).on('change', "select[id*='RepeatableSelection']", function() {
+		$('#@Html.IdFor(m => m)').val($(this).val())
+			.trigger('change');
+	});
+
+	$(document).on('change input propertychange paste', "input[id*='RepeatableInput']", function() {
+		var _field = $('#@Html.IdFor(m => m)');
+		var _this = $(this);
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			_field.val(_this.val())
+				.trigger('change');
+		}, delay );
+	});
+
+	$(document).on('change', "#@Html.IdFor(m => m)", function() {
+		var val = $(this).val();
+		if ($.isNumeric(val)) {
+			val = val.replace('-', '');
+			if (val == 1 || val == (@int.MaxValue)) {
+				$("select[id*='RepeatableSelection']").val(val);
+				$("#RepeatableInputContainer").hide();
+			} else {
+				$("input[id*='RepeatableInput']").val(val);
+				$("#RepeatableInputContainer").show();
+			}
+		}
+	});
+</script>

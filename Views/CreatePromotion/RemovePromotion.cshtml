@@ -1,0 +1,17 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.CreatePromotion.CreatePromotionModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm(MVC.CreatePromotion.ActionNames.RemovePromotion, MVC.CreatePromotion.Name, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Promotion.Id)
+
+    <p>Do you want to delete promotion <strong>@String.Format("{0}", Model.Promotion.Basics.Title)</strong>?</p>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Confirm" />
+        @Html.ActionLink("Cancel", MVC.Home.ActionNames.Index, MVC.Home.Name, null, new { @class = "btn btn-link" })
+    </div>
+}

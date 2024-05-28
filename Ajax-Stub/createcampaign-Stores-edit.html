@@ -1,0 +1,137 @@
+﻿<section class="datapanel">
+  <div class="datapanel-heading">
+    <h2>2. Stores</h2>
+  </div>
+  <div class="datapanel-body">
+    <div class="well">
+      <div class="form">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="discount.search"
+                     data-boxautocomplete
+                     data-source="ReturnJSON?file=~/Ajax-Stub/stores.json"
+                     data-minlength="3"
+                     data-scrollsteplength="10"
+                     data-idto="#addid"
+                     data-itemtemplate="#storebrowseritemtemplate" />
+              <button type="button" class="form-control-cancel"><span class="icon-btn icon-cross"></span></button>
+              <input type="hidden" name="addid" id="addid" data-change="forcesave"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <button type="button"
+                      class="btn btn-default btn-block"
+                      data-toggle="modal"
+                      data-target="#storebrowser"
+                      data-return>
+                Browse stores...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="innerwell">
+        <h3>33 stores selected</h3>
+        <p>Lorem ipsum</p>
+        <p class="text-center">
+          <a href="#"
+              data-toggle="modal"
+              data-target="#storebrowser"
+              data-return>
+            <span class="icon-btn icon-forth"></span>
+            Change store selection
+          </a>
+        </p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+    <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+  </div>
+</section>
+
+<div class="modal fade browser"
+     id="storebrowser"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="storebrowser"
+     aria-hidden="true"
+     data-browsermodal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Browse stores</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row form">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="storegroupfilter"
+                     id="storegroupfilter"
+                     placeholder="Find store group..."
+                     data-boxautocomplete="checklist"
+                     data-source="ReturnJSON?file=~/Ajax-Stub/storegroups.json"
+                     data-checkurl="ReturnJSON?file=~/Ajax-Stub/checkstore.json"
+                     data-minlength="0"
+                     data-appendto="#storegroupresult"
+                     data-scrollsteplength="10"
+                     data-itemtemplate="#storebrowseritemtemplate"
+                     data-browserentry="true"
+                     data-sub="#storefilter">
+              <button type="button" class="form-control-cancel"><span class="icon-btn icon-cros"></span></button>
+            </div>
+            <div class="result" id="storegroupresult">
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="search"
+                     class="form-control"
+                     name="storefilter"
+                     id="storefilter"
+                     placeholder="Find store in store group"
+                     data-boxautocomplete="checklist"
+                     data-source="ReturnJSON?file=~/Ajax-Stub/substores.json"
+                     data-checkurl="ReturnJSON?file=~/Ajax-Stub/checkstore.json"
+                     data-minlength="0"
+                     data-appendto="#storeresult"
+                     data-scrollsteplength="10"
+                     data-super="#storegroupfilter"
+                     data-itemtemplate="#storebrowseritemtemplate"
+                     disabled>
+              <button type="button" class="form-control-cancel"><span class="icon-btn icon-cros"></span></button>
+            </div>
+            <div class="result" id="storeresult">
+
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" data-action="save">Save selection</button>
+        <button type="button" class="btn btn-default" data-boxautocompletecheckall="true" data-for="#storegroupfilter">Check all</button>
+        <button type="button" class="btn btn-default" data-boxautocompletecheckall="false" data-for="#storegroupfilter">Uncheck all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/mustache" id="storebrowseritemtemplate">
+  <li>
+    {{#isChecklist}}
+    <span>
+      {{#checked}}<span class="icon-box icon-check"></span>{{/checked}}
+      {{#subchecked}}<span class="icon-box icon-min"></span>{{/subchecked}}
+      {{^checked}}{{^subchecked}}<span class="icon-box"></span>{{/subchecked}}{{/checked}}
+    </span>
+    {{/isChecklist}}
+    {{^isChecklist}}{{#folder}}<span class="icon icon-folder"></span>{{/folder}}{{/isChecklist}}
+    {{#label}}<span class="labeltext">{{label}}</span>{{/label}}
+    {{#sublabel}}<small tabindex="0">{{sublabel}}</small>{{/sublabel}}
+  </li>
+</script>

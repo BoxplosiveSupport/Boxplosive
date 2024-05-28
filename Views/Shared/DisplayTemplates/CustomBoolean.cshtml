@@ -1,0 +1,15 @@
+﻿@model bool
+
+@{
+    var labelText = ViewData["labelText"] as string;
+}
+
+@Html.LabelFor(m => m, labelText)
+@if (Model)
+{
+    <span class="icon icon-check text-success"></span>
+}
+else
+{
+    <span class="icon icon-cross text-danger"></span>
+}

@@ -1,0 +1,44 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ManageProducts.ManageProductsModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>Product Item Overrides</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var productItemOverride in @Model.ProductItemOverrides)
+        {
+            <tr>
+                <td>@productItemOverride.Id</td>
+                <td>@productItemOverride.Description</td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <td colspan="2">
+            @using (Html.BeginForm(MVC.ManageProducts.ActionNames.Index, MVC.ManageProducts.Name, FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.EditorFor(m => m.CsvUpload, new {uploadActionUrl = Url.Action(MVC.ManageProducts.ActionNames.UploadCsv, MVC.ManageProducts.Name), imageUrl = Model.CsvUrl, fileUrlField = Html.IdFor(m => m.CsvUrl), fileTypes = @"/(\.|\/)(csv)$/", hidePreview = "true", reloadPage = "true"})
+            }
+        </td>
+        </tfoot>
+    </table>
+</div>
+<script>
+    //$(document).ready(function () {
+    //    $('#CsvUpload').fileUpload({
+    //        onCompleteAll: function (list) {
+    //            location.reload();
+    //            return false;
+    //        }
+    //});
+</script>

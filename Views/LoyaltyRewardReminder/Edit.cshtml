@@ -1,0 +1,56 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyRewardReminder.RewardReminderDetail
+@{
+    ViewBag.Title = Model.TypeText + " reminder";
+
+    string displayRewardMailFull = Model.IsEnabled ? "" : "display: none";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ReminderId);
+    @Html.HiddenFor(m => m.LoyaltyPointsRewardId);
+    @Html.HiddenFor(m => m.Type)
+
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form form-horizontal">
+        @Html.EditorFor(m => m.IsEnabled, "CustomBoolean", new { useValidation = false })
+
+        <div id="RewardMailForm" class="well" style="@displayRewardMailFull">
+            <div class="form-group">
+                @Html.EditorFor(m => m.NextRunAtDate, "DatePicker", new { labelText = Model.NextRunAtDate, data_from = "", noFormGroup = true })
+                @Html.EditorFor(m => m.NextRunAtTime, "TimePicker", new { labelText = Model.NextRunAtTime, data_from = "", noFormGroup = true, labelClass = "col-sm-offset-1 col-sm-2" })
+            </div>
+            @Html.EditorFor(m => m.Frequency, "Numeric", new { labelClass = "col-sm-3", textboxClass = "col-sm-2" })
+            @if (Model.Type == nl.boxplosive.Sdk.LoyaltyRewardReminderType.AlmostExpiredEmail || Model.Type == nl.boxplosive.Sdk.LoyaltyRewardReminderType.AlmostExpiredLoyaltyEvent)
+            {
+                @Html.EditorFor(m => m.DaysBeforeExpiry, "Numeric", new { labelClass = "col-sm-3", textboxClass = "col-sm-2" })
+            }
+            @Html.EditorFor(m => m.TargetGroup, new { labelClass = "col-sm-3", textboxClass = "col-sm-3" })
+            <div class="form-group">
+                @Html.EditorFor(m => m.PreviousRunAtDate, "DatePicker", new { labelText = Model.PreviousRunAtDate, data_from = "", noFormGroup = true, minDate = "2015-01-01" })
+                @Html.EditorFor(m => m.PreviousRunAtTime, "TimePicker", new { labelText = Model.PreviousRunAtTime, data_from = "", noFormGroup = true, labelClass = "col-sm-offset-1 col-sm-2" })
+            </div>
+            <div class="form-group">
+                @Html.EditorFor(m => m.FinalRunAt, "DatePicker", new { labelText = Model.FinalRunAt, data_from = "", noFormGroup = true })
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" />
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $('#IsEnabled').change(function () {
+                if ($('#IsEnabled').is(':checked')) {
+                    $('#RewardMailForm').show();
+                }
+                else {
+                    $('#RewardMailForm').hide();
+                }
+            });
+        });
+    </script>
+}

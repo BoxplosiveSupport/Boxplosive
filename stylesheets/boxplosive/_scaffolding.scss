@@ -1,0 +1,35 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+a {
+    &.icon-btn:before, .icon-btn:before {
+        background-color: $link-color;
+    }
+
+    &:hover,
+    &:focus {
+        .icon-btn:before {
+            background-color: $link-hover-color;
+        }
+    }
+}
+
+hr {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    clear: both;
+}
+
+img {
+    -ms-interpolation-mode: bicubic;
+}
+
+.sr-only {
+    left: -9999px;
+}
+
+.statistic-number {
+    font-size: 2.5em;
+}

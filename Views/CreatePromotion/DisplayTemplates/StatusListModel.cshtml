@@ -1,0 +1,34 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.CreatePromotion.StatusListModel
+
+<div class="panel panel-secondary">
+    <div class="panel-body">
+        <h2 class="panel-color">Promotion</h2>
+        <ol class="status-list">
+            <li class="@Model.BasicsStyle"><a href="#datapanel-basics">Basics <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.SegmentationStyle"><a href="#datapanel-segmentation">Segmentation <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.TimeframeStyle"><a href="#datapanel-timeframe">Timeframe <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.DiscountStyle"><a href="#datapanel-discount">Discount <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.PromotionStyle"><a href="#datapanel-promotion">Promotion <span class="icon icon-check pull-right"></span></a></li>
+        </ol>
+
+        @if (UserRolesPermissions.EnableDisable(MVC.CreatePromotion.ActionNames.ContinueLater, MVC.CreatePromotion.GetType().Namespace, MVC.CreatePromotion.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.CreatePromotion.ActionNames.ContinueLater, MVC.CreatePromotion.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.CreatePromotion.ActionNames.ContinueLater" class="btn btn-success btn-block">Continue later</button>
+            }
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.CreatePromotion.ActionNames.ReadyToPublish, MVC.CreatePromotion.GetType().Namespace, MVC.CreatePromotion.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.CreatePromotion.ActionNames.ReadyToPublish, MVC.CreatePromotion.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.CreatePromotion.ActionNames.ReadyToPublish" class="btn btn-success btn-block @Model.PublishStyle">Ready to publish</button>
+            }
+        }
+    </div>
+</div>

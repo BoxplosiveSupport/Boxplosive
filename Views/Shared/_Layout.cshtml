@@ -1,0 +1,144 @@
+﻿@using System.Web.Optimization
+@using Microsoft.AspNet.Identity
+@using nl.boxplosive.Configuration;
+@using nl.boxplosive.BackOffice.Mvc.Models
+@using nl.boxplosive.BackOffice.Mvc.Models.Home
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+<!DOCTYPE html>
+
+@{
+    bool modelIsViewModelBase = Model != null && (Model is ViewModelBase) && (Model is HandleErrorInfo == false);
+    string pageTitle = modelIsViewModelBase && Model.PageNavigationTitle != null ? Model.PageNavigationTitle : ViewBag.Title;
+
+    bool isHomePage = Model is HomeModel;
+}
+
+<html translate="no">
+<head>
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <meta name="description" content="The description of my page" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="~/favicons/manifest.json">
+    <link rel="shortcut icon" href="~/favicons/favicon.ico">
+    <link rel="mask-icon" href="~/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="~/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="~/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    @Styles.Render("~/Styles/Boxplosive")
+    <!--[if IE 8]>
+      @Scripts.Render("~/Script/IE8Polyfills")
+    <![endif]-->
+    @Scripts.Render("~/Script/Modernizr")
+</head>
+<body>
+    <header class="container primary" id="primaryheader">
+        <a href="~/" class="logo col-sm-3">
+            <img src="~/images/@AppConfig.Settings.Landing_ContentPath/logo.png" />
+            <span class="sr-only">Boxplosive</span>
+        </a>
+        <div class="col-sm-6">
+            <h1 class="page-title">@pageTitle</h1>
+            @if (modelIsViewModelBase && Model.PageNavigationUrl != null)
+            {
+                <a href="@Model.PageNavigationUrl" class="small"><span class="icon-btn icon-back"></span> @Model.PageNavigationUrlText</a>
+            }
+        </div>
+        <nav class="col-sm-3 personal">
+            @if (Request.IsAuthenticated)
+            {
+                <strong>@User.Identity.GetUserName()</strong>
+                <ul>
+                    @if (isHomePage)
+                    {
+                        <li><a href="#help" data-toggle="collapse" aria-expanded="false" aria-controls="help">help</a></li>
+                    }
+
+                    <li>@Html.ActionLink(MVC.Management.Name.ToLower(), MVC.Management.Index())</li>
+
+                    @if (UserRolesPermissions.EnableDisable(MVC.Admin.ActionNames.Index, MVC.Admin.GetType().Namespace, MVC.Admin.Name, User, true))
+                    {
+                        <li>@Html.ActionLink(MVC.Admin.Name.ToLower(), MVC.Admin.Index())</li>
+                    }
+
+                    <li>
+                        @using (Html.BeginForm(MVC.Account.ActionNames.LogOff, MVC.Account.Name, new { area = string.Empty }, FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <a href="javascript:document.getElementById('logoutForm').submit()">log off</a>
+                        }
+                    </li>
+                </ul>
+            }
+        </nav>
+    </header>
+    @RenderSection("featured", required: false)
+    <div class="container">
+        <div id="ErrorMessage" class="alert alert-danger" role="alert" style="display: none;">
+            <span class="icon icon-danger"></span> <strong>Looks like something went wrong, please try again later</strong>
+        </div>
+        @if (TempData["Success"] != null)
+        {
+            <div id="result-message" class="alert alert-success" role="alert">
+                <span class="icon icon-check"></span> <strong>@TempData["Success"]</strong>
+            </div>
+        }
+        @if (TempData["Info"] != null)
+        {
+            <div id="result-message" class="alert alert-info" role="alert">
+                <span class="icon icon-check"></span> <strong>@TempData["Info"]</strong>
+            </div>
+        }
+        @if (TempData["Warning"] != null)
+        {
+            <div id="result-message" class="alert alert-warning" role="alert">
+                <span class="icon icon-hourglass"></span> <strong>@TempData["Warning"]</strong>
+            </div>
+        }
+        @if (TempData["Danger"] != null)
+        {
+            <div id="result-message" class="alert alert-danger" role="alert">
+                <span class="icon icon-danger"></span> <strong>@TempData["Danger"]</strong>
+            </div>
+        }
+        @RenderBody()
+    </div>
+    <footer class="container primary">
+        <hr style="margin-bottom:6px" />
+        <ul style="width:100%">
+            <li style="float:left"><a href="http://www.boxplosive.nl/" target="_blank">&copy; Boxplosive @DateTime.Now.Year</a></li>
+            <li style="float:right">Version @HttpContext.Current.Application["BackOfficeVersion"]</li>
+        </ul>
+    </footer>
+
+    <script>
+        var boxplosive = boxplosive || {};
+        (function () {
+            boxplosive.config = boxplosive.config || {};
+
+        })();
+    </script>
+    @Scripts.Render("~/Script/jQuery")
+    @Scripts.Render("~/Script/Bootstrap")
+    @Scripts.Render("~/Script/Boxplosive")
+    <script src="@Url.Content("~/Scripts/ckeditor5/build/ckeditor.js")"></script>
+    @Html.Partial("CKEditorScript")
+    @RenderSection("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+@model nl.boxplosive.BackOffice.Mvc.Models.ManageRetailerStores.ManageRetailerStoresModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>Overview</h2>
+@using (Html.BeginForm(MVC.ManageRetailerStores.ActionNames.Index, MVC.ManageRetailerStores.Name, FormMethod.Get))
+{
+    <div class="well form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-5">
+                @Html.TextBoxFor(m => m.SearchText, new { @type = "search", @class = "form-control", placeholder = "Filter on Internal name, Name or Store number" })
+                <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+            </div>
+            <div class="col-sm-1">
+                <input type="submit" class="btn btn-default" value="Filter" />
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Internal name</th>
+            <th>Name</th>
+            <th>Store number</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var store in @Model.RetailerStores)
+        {
+            <tr class="retailer-store">
+                <td class="store-name">@store.Name</td>
+                <td class="storeinfo-storename">@store.StoreInfo.StoreName</td>
+                <td class="store-number">@store.Number</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon("Edit", "Edit", new { id = @store.Id }, new { @class = "edit-retailer-store icon-btn icon-edit" }, new { @class = "sr-only" })
+                    @Html.ActionLinkIcon("Delete", "Delete", new { id = @store.Id }, new { @class = "delete-retailer-store icon-btn icon-remove" }, new { @class = "sr-only" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    <td colspan="3">
+        @Html.PagedListPager(Model.RetailerStores, page => Url.Action("Index", new { page, searchText = Model.SearchText }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </td>
+    <td class="actions">
+        @Html.ActionLinkIcon("Add", "Edit", null, new { id = "add-retailer-store", @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+    </td>
+    </tfoot>
+</table>

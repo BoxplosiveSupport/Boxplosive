@@ -1,0 +1,39 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.status-list {
+    list-style-position:inside;
+    font-weight:bold;
+    padding-left:0;
+    li + li {
+        margin-top:$line-height-computed/2;
+    }
+    a {
+        color:inherit !important;
+    }
+    .icon {
+        display:none;
+    }
+    .text-success .icon {
+        display:block;
+    }
+    ~ form + form {
+      margin-top:15px;
+    }
+}
+
+.validation-summary-errors ul,
+.action-list {
+    list-style-position:inside;
+    padding-left:0;
+    line-height:1.625em;
+    list-style:none;
+    li {
+      margin-bottom:$line-height-computed / 2;
+    }
+    a.icon-btn:before {
+      margin-right:0.75em;
+    }
+}

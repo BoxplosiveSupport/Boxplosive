@@ -1,0 +1,68 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Areas.Admin.Models
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Utils
+@using PagedList.Mvc
+
+@model IssuerIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+
+    int colspan = !Globals.B2C_Enabled ? 3 : 2;
+}
+
+@using (Html.BeginForm(Model.GetSearchRouteValues()))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="well form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-3">
+                @Html.DropDownListFor(m => m.SearchColumn, true, Model.SearchColumns, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.SearchValue, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="pull-right">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink(Model.Column_Email, MVC.AdminArea.Issuer.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Email))</th>
+            @if (!Globals.B2C_Enabled)
+            {
+                <th>@Html.ActionLink("Login name", MVC.AdminArea.Issuer.ActionNames.Index, Model.GetSortRouteValues(Model.Column_LoginName))</th>
+            }
+            <th>@Html.ActionLink(Model.Column_Name, MVC.AdminArea.Issuer.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Name))</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedList)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                @if (!Globals.B2C_Enabled)
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Username)</td>
+                }
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon(MVC.AdminArea.Issuer.ActionNames.Edit, MVC.AdminArea.Issuer.Edit(item.Id), new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                    @Html.ActionLinkIcon(MVC.AdminArea.Issuer.ActionNames.Delete, MVC.AdminArea.Issuer.Delete(item.Id), new { @class = "icon-btn icon-remove", title = "Delete" }, new { @class = "sr-only" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="@colspan">@Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.AdminArea.Issuer.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)</td>
+            <td class="actions">@Html.ActionLinkIcon(MVC.AdminArea.Issuer.ActionNames.Create, MVC.AdminArea.Issuer.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>

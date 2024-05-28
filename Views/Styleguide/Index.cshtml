@@ -1,0 +1,787 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<div class="row">
+  <div class="col-sm-3">
+    <nav class="sticky panel panel-secondary">
+      <div class="panel-body">
+        <ol class="status-list">
+          <li><a href="#navs">Navs</a></li>
+          <li><a href="#buttons">Buttons</a></li>
+          <li><a href="#buttongroups">Button groups</a></li>
+          <li><a href="#icons">Icons</a></li>
+          <li><a href="#panels">Panels</a></li>
+          <li><a href="#datapanels">Datapanels</a></li>
+          <li><a href="#paneltabs">Paneltabs</a></li>
+          <li><a href="#alerts">Alerts</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#editor">Editor</a></li>
+          <li><a href="#lists">Lists</a></li>
+          <li><a href="#pagination">Pagination</a></li>
+          <li><a href="#tables">Tables</a></li>
+          <li><a href="#charts">Charts</a></li>
+        </ol>
+      </div>
+      <a href="#primaryheader" type="button" class="tosticky text-center icon icon-actions"></a>
+    </nav>
+  </div>
+  <main class="col-sm-9">
+    <h2 id="navs">Navs</h2>
+    <h3>Pills in panel</h3>
+    <nav class="panel panel-primary">
+      <div class="panel-body">
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="#">Campaigns</a></li>
+          <li role="presentation"><a href="#">Loyalty programmes</a></li>
+          <li role="presentation"><a href="#">Publications</a></li>
+          <li role="presentation" class="active"><a href="#">Products</a></li>
+          <li role="presentation"><a href="#">Product groups</a></li>
+          <li role="presentation"><a href="#">Retailers</a></li>
+          <li role="presentation"><a href="#">Retailer stores</a></li>
+          <li role="presentation"><a href="#">Customers</a></li>
+          <li role="presentation"><a href="#">Notifications <span class="badge">3</span></a></li>
+        </ul>
+      </div>
+    </nav>
+    <hr />
+    <h2 id="buttons">Buttons</h2>
+    <button type="button" class="btn btn-default">Default</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-link">Link</button>
+    <br />
+    <br />
+    <h3>Disabled</h3>
+    <button type="button" class="btn btn-default" disabled>Default</button>
+    <button type="button" class="btn btn-primary" disabled>Primary</button>
+    <button type="button" class="btn btn-secondary" disabled>Secondary</button>
+    <button type="button" class="btn btn-success" disabled>Success</button>
+    <button type="button" class="btn btn-info" disabled>Info</button>
+    <button type="button" class="btn btn-warning" disabled>Warning</button>
+    <button type="button" class="btn btn-danger" disabled>Danger</button>
+    <button type="button" class="btn btn-link" disabled>Link</button>
+    <br />
+    <br />
+    <h3>Loading</h3>
+    <button type="button" class="btn btn-default loading">Default</button>
+    <button type="button" class="btn btn-primary loading">Primary</button>
+    <button type="button" class="btn btn-secondary loading">Secondary</button>
+    <button type="button" class="btn btn-success loading">Success</button>
+    <button type="button" class="btn btn-info loading">Info</button>
+    <button type="button" class="btn btn-warning loading">Warning</button>
+    <button type="button" class="btn btn-danger loading">Danger</button>
+    <button type="button" class="btn btn-link loading">Link</button>
+    <br />
+    <br />
+    <hr />
+    <h2 id="buttongroups">Buttongroups</h2>
+    <h3>Buttongroup block</h3>
+    <ul class="list-unstyled">
+      <li>
+        <form class="btn-group btn-group-block">
+          <button type="submit" class="btn"><span class="icon-btn icon-plus"></span></button>
+          <span class="btn-group-body">
+            <select class="form-control" name="newcampaign">
+              <option>New loyalty program</option>
+            </select>
+          </span>
+        </form>
+      </li>
+      <li class="btn-group btn-group-block">
+        <a class="btn" href=""><span class="icon-btn icon-plus"></span></a>
+        <a class="btn btn-group-body" href="">Lorem ipsum</a>
+      </li>
+      <li class="btn-group btn-group-block">
+        <a class="btn" href=""><span class="icon-btn icon-plus"></span></a>
+        <a class="btn btn-group-body" href="">Saved campaign</a>
+        <a class="btn icon icon-remove" href=""><span class="sr-only">Remove</span></a>
+      </li>
+    </ul>
+    <br />
+    <hr />
+    <h2 id="icons">Icons</h2>
+    <h3>Lines (basesize of 56px)</h3>
+    <div class="table-responsive" style="text-align:center;">
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>icon-stepcounter-alt</th>
+            <th>icon-cooupon-alt</th>
+            <th>icon-graph-alt</th>
+            <th>icon-campaign-alt</th>
+            <th>icon-module-alt</th>
+            <th>icon-pencil-alt</th>
+            <th>icon-loyalty-alt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="font-size:56px;">
+            <td><span class="icon icon-stepcounter-alt"></span></td>
+            <td><span class="icon icon-coupon-alt"></span></td>
+            <td><span class="icon icon-graph-alt"></span></td>
+            <td><span class="icon icon-campaign-alt"></span></td>
+            <td><span class="icon icon-module-alt"></span></td>
+            <td><span class="icon icon-pencil-alt"></span></td>
+            <td><span class="icon icon-loyalty-alt"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Silhouette (basesize of 16px)</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed" style="text-align:center;">
+        <thead style="font-size:10px;">
+          <tr>
+            <th>icon-retract</th>
+            <th>icon-publish</th>
+            <th>icon-coupon</th>
+            <th>icon-copy</th>
+            <th>icon-rules</th>
+            <th>icon-folder</th>
+            <th>icon-actions</th>
+            <th>icon-hourglass</th>
+            <th>icon-danger</th>
+            <th>icon-edit</th>
+            <th>icon-check</th>
+            <th>icon-back</th>
+            <th>icon-forth</th>
+            <th>icon-remove</th>
+            <th>icon-cross</th>
+            <th>icon-plus</th>
+            <th>icon-min</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="icon icon-retract"></span></td>
+            <td><span class="icon icon-publish"></span></td>
+            <td><span class="icon icon-coupon"></span></td>
+            <td><span class="icon icon-copy"></span></td>
+            <td><span class="icon icon-rules"></span></td>
+            <td><span class="icon icon-folder"></span></td>
+            <td><span class="icon icon-actions"></span></td>
+            <td><span class="icon icon-hourglass"></span></td>
+            <td><span class="icon icon-danger"></span></td>
+            <td><span class="icon icon-edit"></span></td>
+            <td><span class="icon icon-check"></span></td>
+            <td><span class="icon icon-back"></span></td>
+            <td><span class="icon icon-forth"></span></td>
+            <td><span class="icon icon-remove"></span></td>
+            <td><span class="icon icon-cross"></span></td>
+            <td><span class="icon icon-plus"></span></td>
+            <td><span class="icon icon-min"></span></td>
+          </tr>
+          <tr>
+            <td><span class="icon icon-btn icon-retract"></span></td>
+            <td><span class="icon icon-btn icon-publish"></span></td>
+            <td><span class="icon icon-btn icon-coupon"></span></td>
+            <td><span class="icon icon-btn icon-copy"></span></td>
+            <td><span class="icon icon-btn icon-rules"></span></td>
+            <td><span class="icon icon-btn icon-folder"></span></td>
+            <td><span class="icon icon-btn icon-actions"></span></td>
+            <td><span class="icon icon-btn icon-hourglass"></span></td>
+            <td><span class="icon icon-btn icon-danger"></span></td>
+            <td><span class="icon icon-btn icon-edit"></span></td>
+            <td><span class="icon icon-btn icon-check"></span></td>
+            <td><span class="icon icon-btn icon-back"></span></td>
+            <td><span class="icon icon-btn icon-forth"></span></td>
+            <td><span class="icon icon-btn icon-remove"></span></td>
+            <td><span class="icon icon-btn icon-cross"></span></td>
+            <td><span class="icon icon-btn icon-plus"></span></td>
+            <td><span class="icon icon-btn icon-min"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2 id="panels">Panels</h2>
+    <ul class="row">
+      <li class="col-sm-3"><div class="panel panel-default"><div class="panel-body"><h3>panel-default</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-primary"><div class="panel-body"><h3>panel-primary</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-secondary"><div class="panel-body"><h3>panel-secondary</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-help"><div class="panel-body"><h3>panel-help</h3></div></div></li>
+    </ul>
+    <ul class="row">
+      <li class="col-sm-3"><div class="panel panel-success"><div class="panel-body"><h3>panel-success</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-info"><div class="panel-body"><h3>panel-info</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-warning"><div class="panel-body"><h3>panel-warning</h3></div></div></li>
+      <li class="col-sm-3"><div class="panel panel-danger"><div class="panel-body"><h3>panel-danger</h3></div></div></li>
+    </ul>
+    <hr />
+    <h2 id="datapanels">Datapanels</h2>
+    <div class="row">
+      <div class="col-sm-6">
+        <section class="datapanel">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+        <section class="datapanel datapanel-default">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-default</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+        <section class="datapanel datapanel-primary">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-primary</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+        <section class="datapanel datapanel-success">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-success</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+      </div>
+      <div class="col-sm-6">
+        <section class="datapanel datapanel-info">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-info</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+        <section class="datapanel datapanel-warning">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-warning</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+        <section class="datapanel datapanel-danger">
+          <div class="datapanel-heading">
+            <h2 class="pull-left">datapanel-danger</h2>
+            <a href="" class="icon-btn icon-edit pull-right"><span class="sr-only">Edit</span></a>
+          </div>
+          <div class="datapanel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <hr />
+    <h2 id="paneltabs">Paneltabs</h2>
+    <div role="tabpanel">
+      <ul class="row row-xs-4 row-lg-3 panel-tabs" role="tablist">
+        <li class="col-xs-4">
+          <a class="panel processmodule panel-default" href="#paneltabs-tab1" aria-controls="paneltabs-tab1" role="tab" data-toggle="tab">
+            <div class="panel-heading">
+              <span class="icon icon-pencil-alt"></span>
+              <span class="h4 hidden-xs">Tab 1</span>
+            </div>
+          </a>
+        </li>
+        <li class="col-xs-4">
+          <a class="panel processmodule panel-primary" href="#paneltabs-tab2" aria-controls="paneltabs-tab2" role="tab" data-toggle="tab">
+            <div class="panel-heading">
+              <span class=" icon icon-campaign-alt"></span>
+              <span class="h4 hidden-xs">Tab 2</span>
+            </div>
+            <div class="panel-body">
+              <p>
+                <span class="count">7</span><br />
+                <span class="hidden-xs">Lorem ipsum</span><br />
+                <span class="count-alt">4</span><span class="hidden-xs"> lorem ipsum</span>
+              </p>
+            </div>
+          </a>
+        </li>
+        <li class="col-xs-4">
+          <a class="panel processmodule panel-secondary" href="#paneltabs-tab3" aria-controls="paneltabs-tab3" role="tab" data-toggle="tab">
+            <div class="panel-heading">
+              <span class="icon icon-graph-alt"></span>
+              <span class="h4 hidden-xs">Tab 3</span>
+            </div>
+            <div class="panel-body">
+              <p>
+                <span class="count">3</span><br />
+                <span class="hidden-xs">lorem ipsum</span>
+              </p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane panel panel-default" id="paneltabs-tab1">
+          <div class="panel-body">
+            <p>Tab 1</p>
+            <button type="button" class="close" data-closealltabs aria-label="Close"><span class="sr-only">Close</span></button>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane panel panel-primary" id="paneltabs-tab2">
+          <div class="panel-body">
+            <p>Tab 2</p>
+            <button type="button" class="close" data-closealltabs aria-label="Close"><span class="sr-only">Close</span></button>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane panel panel-secondary" id="paneltabs-tab3">
+          <div class="panel-body">
+            <p>Tab 3</p>
+            <button type="button" class="close" data-closealltabs aria-label="Close"><span class="sr-only">Close</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h2 id="alerts">Alerts</h2>
+    <div class="alert alert-success" role="alert"><span class="icon icon-check"></span> <strong>Your template 'Basic template for KPN' was saved.</strong></div>
+    <div class="alert alert-info" role="alert"><span class="icon icon-check"></span> <strong>Lorem ipsum dolor sit amet</strong></div>
+    <div class="alert alert-warning" role="alert"><span class="icon icon-hourglass"></span> <strong>Still processing customers-20150224.csv for publication</strong></div>
+    <div class="alert alert-danger" role="alert"><span class="icon icon-danger"></span> <strong>Sorry, but there was already a template names 'test'. Please try again.</strong></div>
+    <hr />
+    <h2 id="forms">Forms</h2>
+
+    <form class="form-horizontal" id="form">
+      <div class="form-group">
+        <label for="search" class="col-sm-3 control-label">Search query</label>
+        <div class="col-sm-9">
+          <input type="search" id="search" name="search" class="form-control" data-rule-required="true" /><button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="number" class="col-sm-3 control-label">Number <small>(Lorem ipsum)</small></label>
+        <div class="col-sm-3">
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   class="form-control"
+                   id="number"
+                   name="number"
+                   min="-2"
+                   max="1000.50"
+                   step="0.1"
+                   data-msg-required="Number is required."
+                   data-rule-required="true" />
+            <!--<span class="input-group-btn">
+              <button class="btn btn-default icon icon-min" type="button" data-stepdown></button>
+              <button class="btn btn-default icon icon-plus" type="button" data-stepup></button>
+            </span>-->
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="PromotionImage" class="col-sm-3 control-label required">File</label>
+        <div class="col-sm-9">
+          <input type="file"
+                 id="PromotionImage"
+                 name="promotionimage"
+                 class="filebtn filebtn-default"
+                 data-msg-required="File is required."
+                 data-rule-required="true" />
+        </div>
+      </div>
+      <hr />
+      <div class="form-group">
+        <label for="publishdate" class="col-sm-3 control-label">Publish date</label>
+        <div class="col-sm-3">
+          <input type="date"
+                 id="publishdate"
+                 name="publishdate"
+                 class="form-control"
+                 placeholder="yy-mm-dd"
+                 min="2015-03-17"
+                 max="2016-11-10"
+                 data-msg-required="Publish date is required."
+                 data-rule-required="true" />
+        </div>
+        <label for="publishtime" class="col-sm-3 control-label">Publish time</label>
+        <div class="col-sm-3">
+          <input type="time"
+                 id="publistime"
+                 name="publishtime"
+                 class="form-control"
+                 placeholder="hh:mm"
+                 data-msg-required="Publish time is required."
+                 data-rule-required="true" />
+        </div>
+      </div>
+      <hr />
+      <div class="form-group" data-range>
+        <label for="publishdate" class="col-sm-3 control-label">Time from</label>
+        <div class="col-sm-3">
+          <input type="time"
+                 id="timefrom"
+                 name="timefrom"
+                 class="form-control"
+                 placeholder="hh:mm"
+                 value="00:00"
+                 data-from
+                 data-rule-required="true" />
+        </div>
+        <label for="publishtime" class="col-sm-3 control-label">Time to</label>
+        <div class="col-sm-3">
+          <input type="time"
+                 id="timeto"
+                 name="timeto"
+                 class="form-control"
+                 placeholder="hh:mm"
+                 value="00:00"
+                 data-to
+                 data-rule-required="true" />
+        </div>
+      </div>
+      <hr />
+      <div class="form-group" data-range>
+        <label for="publishdate" class="col-sm-3 control-label">Time from</label>
+        <div class="col-sm-3">
+          <input type="time"
+                 id="timefrom"
+                 name="timefrom"
+                 class="form-control"
+                 placeholder="hh:mm"
+                 value="00:00"
+                 data-from
+                 data-rule-required="true" />
+        </div>
+        <label for="publishtime" class="col-sm-3 control-label">Time to</label>
+        <div class="col-sm-3">
+          <input type="time"
+                 id="timeto"
+                 name="timeto"
+                 class="form-control"
+                 placeholder="hh:mm"
+                 value="00:00"
+                 data-to
+                 data-rule-required="true" />
+        </div>
+      </div>
+      <hr />
+      <div class="form-group">
+        <label for="maximumcoupons" class="col-sm-3 control-label">Maximum coupons <small>(use 0 for unlimited)</small></label>
+        <div class="col-sm-3">
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   id="maximumcoupons"
+                   name="maximumcoupons"
+                   class="form-control"
+                   min="0"
+                   data-msg-required="Maximum coupons is required."
+                   data-rule-required="true" />
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label" id="maxperclient">Max. per client</label>
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   name="maxperclient"
+                   class="form-control"
+                   id="maxperclient"
+                   min="0"
+                   max="10"
+                   data-msg-required="Max. per client is required."
+                   data-rule-required="true" />
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label" for="maxpertransaction" min="0">Max. per transaction</label>
+          <div class="input-group" data-boxspinner>
+            <input type="number"
+                   name="maxpertransactions"
+                   class="form-control"
+                   id="maxpertransaction"
+                   min="0"
+                   max="100"
+                   data-msg-required="Max. per transaction is required."
+                   data-rule-required="true" />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <fieldset class="form-group">
+        <legend class="col-sm-3 control-label">Publish to</legend>
+        <div class="col-sm-9">
+          <ul class="row list-unstyled">
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="website" />Website</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="email" />E-mail</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="app" />App</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="banner" />Banner</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="printen" />Printen</label></li>
+            <li class="col-sm-4 checkbox"><label><input type="checkbox" name="developers" />Developers</label></li>
+          </ul>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Send</button>
+      <br />
+      <br />
+    </form>
+    <hr />
+    <h2 id="editor">Editor</h2>
+    <form class="form-horizontal" id="form" novalidate="novalidate">
+      <div class="form-group">
+        <label for="wymeditor" class="col-sm-3 control-label">Default options</label>
+        <div class="col-sm-9" data-wymeditor>
+          <textarea id="wymeditor" name="wymeditor" class="form-control" data-rule-required="true" aria-required="true">
+            &lt;p&gt;Lorem ipsum&lt;/p&gt;
+          </textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="wymeditor2" class="col-sm-3 control-label">Custom options</label>
+        <div class="col-sm-9" data-wymeditor>
+          <textarea id="wymeditor2" name="wymeditor2" class="form-control" data-rule-required="true" aria-required="true">
+            &lt;p&gt;Lorem ipsum&lt;/p&gt;
+          </textarea>
+          <script type="application/json" data-options>
+              {
+              "allowedContent": "p h1 h2 h3 b i ul ol",
+              "forcePasteAsPlainText": true,
+              "removePlugins": "a11yhelp,about,image,link,magicline,pastefromword,scayt,specialchar,table,tableselection,tabletools,wsc,sourcearea,stylescombo",
+              "toolbarGroups": [
+              { "name": "tools" },
+              { "name": "undo" },
+              { "name": "basicstyles", "groups": ["basicstyles", "cleanup"] },
+              { "name": "styles" }
+              ]
+              }
+          </script>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary wymupdate">Send</button>
+    </form>
+    <hr />
+    <h2 id="lists">Lists</h2>
+    <h3>Status list</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <ol class="status-list">
+          <li class="text-success"><a href="">Basics <span class="icon icon-check pull-right"></span></a></li>
+          <li class="text-danger"><a href="">Stores</a></li>
+          <li><a href="">Timeframe</a></li>
+          <li><a href="">Discount</a></li>
+          <li><a href="">Promotion</a></li>
+        </ol>
+      </div>
+    </div>
+    <hr />
+    <h2 id="pagination">Pagination</h2>
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous" class="icon-btn icon-back">
+          <span class="sr-only" aria-hidden="true">Previous</span>
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li class="active"><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li>...</li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next" class="icon-btn icon-forth">
+          <span class="sr-only" aria-hidden="true">Next</span>
+        </a>
+      </li>
+    </ul>
+    <hr />
+    <h2 id="tables">Tables</h2>
+    <h3>Actions table</h3>
+    <div class="well">
+      <form class="form row">
+        <div class="form-group col-sm-6">
+          <select class="form-control">
+            <option>Search in all columns</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-6">
+          <input type="search" class="form-control" />
+          <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+        </div>
+      </form>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><a href="" class="descending">Name</a></th>
+            <th><a href="" class="ascending">Description</a></th>
+            <th>Brand</th>
+            <th>Value</th>
+            <th>GTIN</th>
+            <th><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>PLU1</th>
+            <td>Snee brood wit</td>
+            <td>Lorem ipsum</td>
+            <td>90</td>
+            <td>PLU1</td>
+            <td class="actions">
+              <a href="" class="icon-btn icon-edit"><span class="sr-only">Edit</span></a>
+              <a href="" class="icon-btn icon-remove"><span class="sr-only">Remove</span></a>
+              <a href="" class="icon-btn icon-actions" data-toggle="modal"><span class="sr-only">Actions</span></a>
+              <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title">Actions PLU1</h4>
+                    </div>
+                    <div class="modal-body">
+                      <ul class="action-list">
+                        <li><a href="" class="icon-btn icon-edit">Edit</a></li>
+                        <li><a href="" class="icon-btn icon-rules">Discount rules</a></li>
+                        <li><a href="" class="icon-btn icon-publish">Publications (0)</a></li>
+                        <li><a href="" class="icon-btn icon-copy">Copy</a></li>
+                        <li><a href="" class="icon-btn icon-remove">Delete</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>PLU2</th>
+            <td>Snee brood wit</td>
+            <td>Lorem ipsum</td>
+            <td>90</td>
+            <td>PLU2</td>
+            <td class="actions">
+              <button type="button" class="icon-btn icon-edit"><span class="sr-only">Edit</span></button>
+              <button type="button" class="icon-btn icon-remove"><span class="sr-only">Remove</span></button>
+              <button type="button" class="icon-btn icon-actions" data-toggle="modal"><span class="sr-only">Actions</span></button>
+              <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title">Actions PLU2</h4>
+                    </div>
+                    <div class="modal-body">
+                      <ul class="action-list">
+                        <li><a href="" class="icon-btn icon-edit">Edit</a></li>
+                        <li><a href="" class="icon-btn icon-rules">Discount rules</a></li>
+                        <li><a href="" class="icon-btn icon-publish">Publications (0)</a></li>
+                        <li><a href="" class="icon-btn icon-copy">Copy</a></li>
+                        <li><a href="" class="icon-btn icon-remove">Delete</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>PLU3</th>
+            <td>Snee brood wit</td>
+            <td>Lorem ipsum</td>
+            <td>90</td>
+            <td>PLU3</td>
+            <td class="actions">
+              <a href="" class="icon-btn icon-edit"><span class="sr-only">Edit</span></a>
+              <a href="" class="icon-btn icon-remove"><span class="sr-only">Remove</span></a>
+              <a href="" class="icon-btn icon-actions" data-toggle="modal"><span class="sr-only">Actions</span></a>
+              <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title">Actions PLU3</h4>
+                    </div>
+                    <div class="modal-body">
+                      <ul class="action-list">
+                        <li><a href="" class="icon-btn icon-edit">Edit</a></li>
+                        <li><a href="" class="icon-btn icon-copy">Copy</a></li>
+                        <li><a href="" class="icon-btn icon-remove">Delete</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous" class="icon-btn icon-back">
+          <span class="sr-only" aria-hidden="true">Previous</span>
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li class="active"><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li>...</li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next" class="icon-btn icon-forth">
+          <span class="sr-only" aria-hidden="true">Next</span>
+        </a>
+      </li>
+    </ul>
+    <h2 id="charts">Charts</h2>
+    <div data-chart="Bar">
+      <canvas id="myChart" width="400" height="200"></canvas>
+      <script type="application/json" data-data>
+        {
+          "labels": ["January", "February", "March", "April", "May", "June", "July"],
+          "datasets": [
+            {
+              "label": "My First dataset",
+              "fillColor": "rgba(220,220,220,0.5)",
+              "strokeColor": "rgba(220,220,220,0.8)",
+              "highlightFill": "rgba(220,220,220,0.75)",
+              "highlightStroke": "rgba(220,220,220,1)",
+              "data": [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+              "label": "My Second dataset",
+              "fillColor": "rgba(151,187,205,0.5)",
+              "strokeColor": "rgba(151,187,205,0.8)",
+              "highlightFill": "rgba(151,187,205,0.75)",
+              "highlightStroke": "rgba(151,187,205,1)",
+              "data": [28, 48, 40, 19, 86, 27, 90]
+            }
+          ]
+        }
+      </script>
+      <script type="application/json" data-options>
+        {
+          "scaleBeginAtZero": true,
+          "scaleShowGridLines": true,
+          "scaleGridLineColor": "rgba(0,0,0,.05)",
+          "scaleGridLineWidth": 1,
+          "scaleShowHorizontalLines": true,
+          "scaleShowVerticalLines": true,
+          "barShowStroke": true,
+          "barStrokeWidth": 2,
+          "barValueSpacing": 5,
+          "barDatasetSpacing": 1,
+          "legendTemplate": "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+        }
+      </script> 
+    </div>
+  </main>
+</div>

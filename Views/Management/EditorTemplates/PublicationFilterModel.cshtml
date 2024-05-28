@@ -1,0 +1,20 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Management.PublicationFilterModel
+
+<div class="well form-horizontal">
+    <div class="form-group">
+        @Html.EditorFor(m => m.Title, "SearchQuery")
+        @Html.EditorFor(m => m.CampaignId, "SearchQuery")
+    </div>
+    <div class="form-group" data-range>
+        @Html.EditorFor(m => m.VisibleFrom, "DatePicker", new { data_from = "" })
+        @Html.EditorFor(m => m.DateFrom, "DatePicker", new { data_from = "" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(m => m.DateTill, "DatePicker", new { data_to = "" })
+        @Html.LabelFor(m => m.Status, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-4">
+            @Html.EnumDropDownListFor(m => m.Status, "Choose a status", new { @class = "form-control" })
+        </div>
+    </div>
+    <input type="submit" class="btn btn-default" value="Filter" />
+</div>

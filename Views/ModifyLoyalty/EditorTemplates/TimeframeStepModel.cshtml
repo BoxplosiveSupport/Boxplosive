@@ -1,0 +1,26 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.TimeframeStepModel
+@{
+    DateTime minDate = OperatingDateTime.TodayLocal < Model.StartDate ? OperatingDateTime.TodayLocal : Model.StartDate;
+}
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>2. Timeframe</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            <div class="form-group" data-range>
+                @Html.EditorFor(m => m.StartDate, "DatePicker", new { noFormGroup = true, minDate = minDate })
+                @Html.EditorFor(m => m.StartTime, "TimePicker", new { noFormGroup = true, noLabel = true })
+            </div>
+            <div class="form-group" data-range>
+                @Html.EditorFor(m => m.EndDate, "DatePicker", new { noFormGroup = true, minDate = minDate })
+                @Html.EditorFor(m => m.EndTime, "TimePicker", new { noFormGroup = true, noLabel = true })
+            </div>
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+            <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+        </div>
+    </div>
+</section>

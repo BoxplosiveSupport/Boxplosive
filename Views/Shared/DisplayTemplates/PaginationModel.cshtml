@@ -1,0 +1,73 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.PaginationModel
+
+@{
+    TagBuilder li;
+    TagBuilder a;
+    TagBuilder span;
+}
+
+<ul class="pagination">
+    @{
+        if (Model.PageNumber > 1)
+        {
+            // Previous button
+            li = new TagBuilder("li");
+            a = new TagBuilder("a");
+            a.MergeAttribute("href", String.Format("?page={0}", Model.PageNumber - 1));
+            a.MergeAttribute("aria-label", "Previous");
+            a.AddCssClass("icon-btn icon-back");
+
+
+            span = new TagBuilder("span");
+            span.AddCssClass("sr-only");
+            span.MergeAttribute("aria-hidden", "true");
+            span.SetInnerText("Previous");
+
+            a.InnerHtml = span.ToString();
+            li.InnerHtml = a.ToString();
+
+    @Html.Raw(li.ToString())
+        }
+    }
+
+    @for (var i = Model.PaginationStart; i <= Model.PaginationEnd; i++)
+    {
+        // Pages
+        li = new TagBuilder("li");
+        if (i == Model.PageNumber)
+        {
+            li.AddCssClass("active");
+        }
+        a = new TagBuilder("a");
+        a.MergeAttribute("href", String.Format("?page={0}", i));
+        a.SetInnerText(i.ToString());
+
+        li.InnerHtml = a.ToString();
+
+    @Html.Raw(li.ToString())
+
+    }
+
+    @{
+        if (Model.PageNumber < Model.PageCount)
+        {
+            // Previous button
+            li = new TagBuilder("li");
+            a = new TagBuilder("a");
+            a.MergeAttribute("href", String.Format("?page={0}", Model.PageNumber + 1));
+            a.MergeAttribute("aria-label", "Next");
+            a.AddCssClass("icon-btn icon-forth");
+
+
+            span = new TagBuilder("span");
+            span.AddCssClass("sr-only");
+            span.MergeAttribute("aria-hidden", "true");
+            span.SetInnerText("Next");
+
+            a.InnerHtml = span.ToString();
+            li.InnerHtml = a.ToString();
+
+    @Html.Raw(li.ToString())
+        }
+    }
+</ul>

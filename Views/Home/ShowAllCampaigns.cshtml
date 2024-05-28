@@ -1,0 +1,46 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Home.CampaignsModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h3 class="h2">@Model.PageTitle (@Model.RowCount)</h3>
+
+@if (Model.Campaigns != null && Model.Campaigns.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var publication in @Model.Campaigns)
+            {
+                <tr>
+                    <td>@publication.Title</td>
+                    <td>@publication.StartDate.Value.ToString("dd-MM-yyyy")</td>
+                    <td>@publication.ExpiryDate.Value.ToString("dd-MM-yyyy")</td>
+                    <td class="actions">
+                        @if (!publication.Finished)
+                        {
+                            <a href="@publication.ModifyUrl" class="icon-btn icon-edit" title="Edit"><span class="sr-only">Edit</span></a>
+                        }
+                        else
+                        {
+                            <a href="@publication.CopyUrl" class="icon-btn icon-copy" title="Copy"><span class="sr-only">Copy</span></a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+
+        @Html.DisplayFor(m => m.Pagination)
+    </div>
+}

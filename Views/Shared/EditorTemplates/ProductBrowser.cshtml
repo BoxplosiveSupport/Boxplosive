@@ -1,0 +1,162 @@
+﻿@using nl.boxplosive.Configuration
+@using nl.boxplosive.BackOffice.Mvc.Enums;
+
+@{
+    TempData["ProductBrowserIndex"] = TempData["ProductBrowserIndex"] == null ? 0 : (int)TempData["ProductBrowserIndex"] + 1;
+    var productBrowserIndex = TempData["ProductBrowserIndex"];
+
+    var rawDownloadFileNamePrefix = ViewData["DownloadFileNamePrefix"] as string;
+    var downloadFileNamePrefix = rawDownloadFileNamePrefix.Replace(" (optional)", "");
+
+    var source = ViewData["MultiProductSource"] as string;
+    var multiProductBrowserActionUrl = Url.Action(MVC.Platform.ActionNames.ValidateAndSetMultiProducts, MVC.Platform.Name, new { source = source });
+    var productBrowserId = "productbrowser-" + productBrowserIndex;
+    var productGroupFilterId = "productgroupfilter-" + productBrowserIndex;
+    var productGroupResultId = "productgroupresult-" + productBrowserIndex;
+    var productFilterId = "productfilter-" + productBrowserIndex;
+    var productResultId = "productresult-" + productBrowserIndex;
+    var multiProductBrowserId = "multiproductbrowser-" + productBrowserIndex;
+    int selectedRuleIndex = ViewData["selectedRuleIndex"] != null ? (int)ViewData["selectedRuleIndex"] : int.MinValue;
+    StepType stepType = ViewData["stepType"] != null ? (StepType)ViewData["stepType"] : StepType.None;
+}
+
+<div class="col-sm-6">
+    <div class="form-group">
+        <input type="search"
+               id="productsearch-input"
+               class="form-control"
+               name="discount.search"
+               data-boxautocomplete="newrepeatable"
+               data-source="@Url.Action(MVC.Platform.ActionNames.GetProducts, MVC.Platform.Name)"
+               data-minlength="3"
+               data-scrollsteplength="10"
+               data-itemtemplate="#productbrowseritemtemplate" />
+        <button type="button" class="form-control-cancel icon-btn icon-cross" title="Cancel"></button>
+        @if (AppConfig.Settings.Feature_CreateProduct)
+        {
+            <button type="button"
+                    id="addproduct-button"
+                    class="btn btn-default"
+                    data-post="@Url.Action(MVC.Platform.ActionNames.AddProduct, MVC.Platform.Name)"
+                    data-products="products" style="margin-top: 10px" title="CreateProduct">
+                Create product
+            </button>
+        }
+    </div>
+</div>
+<div class="col-sm-2">
+    <div class="form-group">
+        <button type="button"
+                class="btn btn-default btn-block"
+                data-toggle="modal"
+                data-target="#@productBrowserId"
+                data-return>
+            Add...
+        </button>
+    </div>
+</div>
+<div class="col-sm-2">
+    <div class="form-group">
+        <button type="button"
+                class="btn btn-default btn-block"
+                data-toggle="modal"
+                data-target="#@multiProductBrowserId"
+                data-return>
+            Upload...
+        </button>
+    </div>
+</div>
+<div class="col-sm-2">
+    <div class="form-group">
+        @Html.ActionLink("Download", "DownloadProducts",
+            new
+            {
+                selectedRuleIndex = selectedRuleIndex,
+                stepType = stepType,
+                productsType = source,
+                fileNamePrefix = downloadFileNamePrefix
+            },
+            new { @class = "btn btn-default btn-block" })
+    </div>
+</div>
+
+<div class="modal fade browser"
+     id="@productBrowserId"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="@productBrowserId"
+     aria-hidden="true"
+     data-browsermodal="singleselect">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="saveastemplate">Browse products</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-error alert alert-danger" role="alert" style="display: none;">
+                    <span class="icon icon-danger"></span> <strong>Looks like something went wrong, please try again later</strong>
+                </div>
+                <div class="row form">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="search"
+                                   class="form-control"
+                                   name="productgroupfilter"
+                                   id="@productGroupFilterId"
+                                   placeholder="Find product group..."
+                                   data-boxautocomplete
+                                   data-source="@Url.Action(MVC.Platform.ActionNames.GetGroups, MVC.Platform.Name)"
+                                   data-minlength="0"
+                                   data-appendto="#@productGroupResultId"
+                                   data-scrollsteplength="10"
+                                   data-browserentry="true"
+                                   data-sub="#@productFilterId"
+                                   data-disableselect="true"
+                                   data-itemtemplate="#productbrowseritemtemplate">
+                            <button type="button" class="form-control-cancel icon-btn icon-cross" title="Cancel"></button>
+                        </div>
+                        <div class="result" id="@productGroupResultId">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="search"
+                                   class="form-control"
+                                   name="productfilter"
+                                   id="@productFilterId"
+                                   placeholder="Find product in product group"
+                                   data-boxautocomplete
+                                   data-source="@Url.Action(MVC.Platform.ActionNames.GetProducts, MVC.Platform.Name)"
+                                   data-minlength="0"
+                                   data-appendto="#@productResultId"
+                                   data-scrollsteplength="10"
+                                   data-super="#@productGroupFilterId"
+                                   data-itemtemplate="#productbrowseritemtemplate"
+                                   disabled>
+                            <button type="button" class="form-control-cancel icon-btn icon-cross" title="Cancel"></button>
+                        </div>
+                        <div class="result" id="@productResultId">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial(MVC.Shared.Views.EditorTemplates.MultiItemBrowser, new ViewDataDictionary {
+    { "Id", multiProductBrowserId },
+    { "Title", "Select multiple products" },
+    { "ActionUrl", @multiProductBrowserActionUrl },
+    { "OnSaveActionUrl", @Url.Action(MVC.Platform.ActionNames.ConfirmProductUpload, MVC.Platform.Name, new { source = ViewData["MultiProductSource"] }) },
+    { "UploadResultRecordsLabelText", "Items:" }
+})
+
+<script type="text/mustache" id="productbrowseritemtemplate">
+    <li>
+        {{#folder}}<span class="icon icon-folder"></span>{{/folder}}
+        {{#label}}<span class="labeltext">{{label}}</span>{{/label}}
+        {{#sublabel}}<small tabindex="0">{{sublabel}}</small>{{/sublabel}}
+    </li>
+</script>

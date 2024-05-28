@@ -1,0 +1,189 @@
+﻿[  
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores",
+    "checked": true
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {
+    "id": "uu",
+    "label": "Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores",
+    "subchecked": true
+  },
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores",
+    "checked": true
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {
+    "id": "uu",
+    "label": "Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores"
+  },
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores"
+
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {  
+    "id":"uu",
+    "label":"Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores"
+  },
+  {  
+    "id":"brauni",
+    "label":"Brasserie Unicum",
+    "value":"Brasserie Unicum"
+  },
+  {  
+    "id":"cafeuniek",
+    "label":"Café Uniek",
+    "value":"Café Uniek"
+  },
+  {  
+    "id":"deunie",
+    "label":"De Unie",
+    "value":"De Unie"
+  },
+  {
+    "id": "Universiteitscafe",
+    "label": "Universteiteitscafé",
+    "value": "Universteiteitscafé"
+  },
+  {  
+    "id":"universiteitskantine 1",
+    "label":"Universteiteitskantine 1",
+    "value":"Universteiteitskantine1"
+  },
+  {  
+    "id":"universiteitskantine2",
+    "label":"Universteiteitskantine2",
+    "value":"Universteiteitskantine2"
+  },
+  {  
+    "id":"universiteitskantine3",
+    "label":"Universteiteitskantine3",
+    "value":"Universteiteitskantine3;"
+  },
+  {  
+    "id":"universiteitskantine4",
+    "label":"Universteiteitskantine4",
+    "value":"Universteiteitskantine4"
+  },
+  {  
+    "id":"universiteitskantine5",
+    "label":"Universteiteitskantine5",
+    "value":"Universteiteitskantine5"
+  },
+  {  
+    "id":"universiteitskantine6",
+    "label":"Universteiteitskantine6",
+    "value":"Universteiteitskantine6"
+  },
+  {  
+    "id":"universiteitskantine7",
+    "label":"Universteiteitskantine7",
+    "value":"Universteiteitskantine7"
+  },
+  {  
+    "id":"universiteitskantine8",
+    "label":"Universteiteitskantine8",
+    "value":"Universteiteitskantine8"
+  },
+  {  
+    "id":"universiteitskantine9",
+    "label":"Universteiteitskantine9",
+    "value":"Universteiteitskantine9"
+  },
+  {  
+    "id":"universiteitskantine10",
+    "label":"Universteiteitskantine10",
+    "value":"Universteiteitskantine10"
+  },
+  {  
+    "id":"universiteitskantine 11",
+    "label":"Universteiteitskantine 11",
+    "value":"Universteiteitskantine11"
+  },
+  {  
+    "id":"universiteitskantine12",
+    "label":"Universteiteitskantine12",
+    "value":"Universteiteitskantine12"
+  },
+  {  
+    "id":"universiteitskantine13",
+    "label":"Universteiteitskantine13",
+    "value":"Universteiteitskantine13;"
+  },
+  {  
+    "id":"universiteitskantine14",
+    "label":"Universteiteitskantine14",
+    "value":"Universteiteitskantine14"
+  },
+  {  
+    "id":"universiteitskantine15",
+    "label":"Universteiteitskantine15",
+    "value":"Universteiteitskantine15"
+  },
+  {  
+    "id":"universiteitskantine16",
+    "label":"Universteiteitskantine16",
+    "value":"Universteiteitskantine16"
+  },
+  {  
+    "id":"universiteitskantine17",
+    "label":"Universteiteitskantine17",
+    "value":"Universteiteitskantine17"
+  },
+  {  
+    "id":"universiteitskantine18",
+    "label":"Universteiteitskantine18",
+    "value":"Universteiteitskantine18"
+  },
+  {  
+    "id":"universiteitskantine19",
+    "label":"Universteiteitskantine19",
+    "value":"Universteiteitskantine19"
+  },
+  {  
+    "id":"universiteitskantine20",
+    "label":"Universteiteitskantine20",
+    "value":"Universteiteitskantine20"
+  }
+]

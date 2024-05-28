@@ -1,0 +1,39 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+//
+// Wells
+// --------------------------------------------------
+
+
+// Base class
+.well {
+  min-height: 20px;
+  padding: $grid-gutter-width;
+  margin-bottom: 20px;
+  background-color: $well-bg;
+  border-top: 3px solid $well-border;
+  blockquote {
+    border-color: #ddd;
+    border-color: rgba(0,0,0,.15);
+  }
+  & + .table, & + .table-responsive {
+    margin-top:-20px;
+  }
+}
+
+// Sizes
+.well-lg {
+  padding: 24px;
+}
+.well-sm {
+  padding: 9px;
+}
+
+.innerwell {
+  background:$body-bg;
+  padding: $grid-gutter-width/2;
+  margin-bottom: 20px;
+}

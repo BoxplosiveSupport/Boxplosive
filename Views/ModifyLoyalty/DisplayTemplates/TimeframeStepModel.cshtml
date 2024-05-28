@@ -1,0 +1,61 @@
+﻿﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.TimeframeStepModel
+
+@{
+    var errorMessage = "";
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+
+        ModelState endDateModelState;
+        if (ViewData.ModelState.TryGetValue("EndDate", out endDateModelState))
+        {
+            ModelError endDateModelError = endDateModelState.Errors.FirstOrDefault();
+            if (endDateModelError != null)
+            {
+                errorMessage = endDateModelError.ErrorMessage;
+            }
+        }
+    }
+}
+
+<section class="datapanel @styling">
+    <div class="datapanel-heading">
+        <h2>2. Timeframe</h2>
+        <div class="actions">
+            <button id="timeframe-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    @if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        <br />
+        <div class="alert alert-danger" role="alert">
+            <span class="icon icon-danger"></span> <strong>@errorMessage</strong>
+        </div>
+    }
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            var startDateTime = Model.StartDate.ToShortDateString() + " " + Model.StartTime.ToString(@"hh\:mm");
+            var endDateTime = Model.EndDate.ToShortDateString() + " " + @Model.EndTime.ToString(@"hh\:mm");
+
+            <p class="row">
+                @Html.LabelFor(m => m.StartDate, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => startDateTime, "span", new { @class = "col-sm-6" })
+            </p>
+            <p class="row">
+                @Html.LabelFor(m => m.EndDate, new { @class = "col-sm-3" })
+                @Html.DisplayForWithError(m => endDateTime, "span", new { @class = "col-sm-6" })
+            </p>
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

@@ -1,0 +1,61 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.CreatePromotion.CreatePromotionModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<div class="row"
+     data-partialsteps
+     data-get="@Url.Action(MVC.CreatePromotion.ActionNames.GetStepPartial, MVC.CreatePromotion.Name)">
+    <div class="col-sm-3">
+        <nav class="sticky"
+             data-partial="status"
+             data-partialid="statuslist"
+             data-get="@Url.Action(MVC.CreatePromotion.ActionNames.GetStatusList, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.StatusList)
+            <a href="#primaryheader" type="button" class="tosticky text-center icon icon-actions"></a>
+        </nav>
+    </div>
+    <main class="col-sm-9">
+        <form id="datapanel-basics"
+              data-partial="step"
+              data-partialid="BasicStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.CreatePromotion.ActionNames.SetStepBasics, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.Promotion.Basics)
+        </form>
+        <form id="datapanel-segmentation"
+              data-partial="step"
+              data-partialid="SegmentationStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.CreatePromotion.ActionNames.SetStepSegmentation, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.Promotion.Segmentation)
+        </form>
+        <form id="datapanel-timeframe"
+              data-partial="step"
+              data-partialid="TimeframeStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.CreatePromotion.ActionNames.SetStepTimeframe, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.Promotion.Timeframe)
+        </form>
+        <form id="datapanel-discount"
+              data-partial="step"
+              data-partialid="DiscountStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.CreatePromotion.ActionNames.SetStepDiscount, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.Promotion.Discount, "DiscountStep")
+        </form>
+        <form id="datapanel-promotion"
+              data-partial="step"
+              data-partialid="PromotionStep"
+              data-mode="display"
+              data-post="@Url.Action(MVC.CreatePromotion.ActionNames.SetStepPromotion, MVC.CreatePromotion.Name)">
+            @Html.DisplayFor(m => m.Promotion.Promotion)
+        </form>
+    </main>
+</div>

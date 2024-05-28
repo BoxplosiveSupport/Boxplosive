@@ -1,0 +1,40 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.PublishLoyalty.PublishLoyaltyModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Loyalty.Id)
+
+    <div class="row">
+        <div class="col-sm-3">
+            <nav class="sticky">
+                <div class="panel panel-secondary">
+                    <div class="panel-body">
+                        <h2 class="panel-color">Loyalty</h2>
+                        <button type="submit" class="btn btn-primary btn-block" value="Edit" name="action:Edit">Edit</button>
+                        <button type="submit" class="btn btn-success btn-block" value="Publish" name="action:Publish">Publish</button>
+                    </div>
+                </div>
+                <a href="#primaryheader" type="button" class="tosticky text-center icon icon-actions"></a>
+            </nav>
+        </div>
+        <main class="col-sm-9">
+            <div id="basics">
+                @Html.DisplayFor(m => m.Loyalty.Basics)
+            </div>
+            <div id="timeframe">
+                @Html.DisplayFor(m => m.Loyalty.Timeframe)
+            </div>
+            <div id="rewards">
+                @Html.DisplayFor(m => m.Loyalty.Rewards, "RewardsStep", new { editEnabled = false, isContinuousSaving = Model.Loyalty.Basics.IsContinuousSaving, panelTitle = "3. Rewards" })
+            </div>
+            <div id="savings">
+                @Html.DisplayFor(m => m.Loyalty.Savings, "SavingsStep", new { editEnabled = false })
+            </div>
+        </main>
+    </div>
+}

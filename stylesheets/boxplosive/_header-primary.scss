@@ -1,0 +1,55 @@
+// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+header.primary {
+  padding-top:$grid-gutter-width/2;
+  text-align:right;
+  .logo {
+    float:left;
+    img {
+      display:inline-block;
+      height:80px;
+      max-width:50vw;
+      max-height:50vw;
+    }
+  }
+  h1 {
+    margin:0;
+    color:$brand-primary;
+  }
+  nav.personal {
+    > ul {
+      list-style:none;
+      padding:0;
+      margin:0;
+      > li {
+        display:inline-block;
+        + li {
+          padding-left:0.5em;
+        }
+      }
+    }
+  }
+  > * {
+    padding:0 0 10px 0;
+  }
+  @media (min-width: $screen-sm-min) {
+    display:table;
+    margin-bottom:20px;
+    > * {
+      display:table-cell;
+      float:none;
+      vertical-align:middle;
+      text-align:center;
+      padding:0;
+    }
+    .logo {
+      text-align:left;
+    }
+    nav {
+      text-align:right;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Placeholder
+@model PlaceholderRichTextEditorModel
+
+@{
+    string modelId_Value = Html.IdFor(m => m.Value).ToString();
+
+    string htmlFieldPrefix = ViewData.TemplateInfo.HtmlFieldPrefix;
+    bool modelStateIsValid = ViewData.ModelState.IsValidField(htmlFieldPrefix + ".Value");
+    string errorClass = !modelStateIsValid ? " has-error" : string.Empty;
+}
+
+<div class="form-group">
+    @Html.Partial("PlaceholderBase", Model)
+    @Html.LabelFor(m => m.Value, Model.Placeholder.Label, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-8 @errorClass" data-wymeditor>
+        @Html.TextAreaFor(m => m.Value, true, 2, 20, new { @class = "form-control wymtextarea" })
+        @Html.ValidationMessageFor(m => m.Value, null, new { @class = "text-danger" })
+    </div>
+</div>
+@Html.Partial("CKEditorScript", new ViewDataDictionary { { "modelId", modelId_Value } })

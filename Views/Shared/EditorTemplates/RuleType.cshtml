@@ -1,0 +1,9 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model Enum
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-8">
+        @Html.EnumDropDownListFor(m => m, "Choose a type", new { @class = "form-control", data_change = "forcesave" })
+    </div>
+</div>

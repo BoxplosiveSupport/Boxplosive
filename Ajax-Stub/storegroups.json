@@ -1,0 +1,69 @@
+﻿[  
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores",
+    "checked": true
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {
+    "id": "uu",
+    "label": "Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores",
+    "subchecked": true
+  },
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores",
+    "checked": true
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {
+    "id": "uu",
+    "label": "Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores"
+  },
+  {  
+    "id":"uva",
+    "label":"Universiteit Van Amsterdam",
+    "value": "Universiteit Van Amsterdam",
+    "folder": true,
+    "sublabel": "3 stores"
+
+  },
+  {  
+    "id":"ut",
+    "label":"Universiteit Tilburg",
+    "value": "Universiteit Tilburg",
+    "folder": true,
+    "sublabel": "7 stores"
+  },
+  {  
+    "id":"uu",
+    "label":"Universiteit Utrecht",
+    "value": "Universiteit Utrecht",
+    "folder": true,
+    "sublabel": "12 stores"
+  }
+]

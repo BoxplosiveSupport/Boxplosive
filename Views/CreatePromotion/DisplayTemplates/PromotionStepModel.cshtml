@@ -1,0 +1,32 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.PromotionStepModel
+
+@{
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+    }
+}
+
+<section class="datapanel @styling" data-action="edit">
+    <div class="datapanel-heading">
+        <h2>5. Promotion</h2>
+        <div class="actions">
+            <button id="promotion-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            @Html.DisplayFor(m => m.ImageUrl, "Image")
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

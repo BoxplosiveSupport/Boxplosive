@@ -1,0 +1,27 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.media-list {
+  position:relative;
+}
+
+.media {
+  .thumbnail {
+    margin-bottom:3px;
+  }
+  a.media-body {
+    color:inherit!important;
+  }
+}
+
+.media-btns {
+  white-space:nowrap;
+  > * {
+    display:inline-block;
+  }
+  > :last-child {
+    padding-right:0;
+  }
+}

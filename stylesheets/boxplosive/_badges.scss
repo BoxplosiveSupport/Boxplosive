@@ -1,0 +1,26 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.badge {
+  font-size:inherit;
+  padding:0.25em 0.5em;
+  min-width:1.5em;
+  margin:0 0 0 0.25em;
+  &.success {
+    background-color:$brand-success;
+  }
+  &.info {
+    background-color:$brand-info;
+  }
+  &.warning {
+    background-color:$brand-warning;
+  }
+  &.danger {
+    background-color:$brand-danger;
+  }
+  .text-muted & {
+    background-color:$text-muted;
+  }
+}

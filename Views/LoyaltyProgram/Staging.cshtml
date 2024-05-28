@@ -1,0 +1,24 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.LoyaltyPointsProgram
+
+@model LoyaltyProgramModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@Html.Partial("ShareLoyaltyPoints", Model)
+
+@section scripts {
+    <script>
+        $(function () {
+            $('#Draft_SharePointsEnabled').change(function () {
+                if ($('#Draft_SharePointsEnabled').is(':checked')) {
+                    $('#full-form').show();
+                }
+                else {
+                    $('#full-form').hide();
+                }
+            });
+        });
+    </script>
+}

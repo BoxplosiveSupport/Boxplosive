@@ -1,0 +1,44 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Management
+@using PagedList.Mvc
+
+@model EdmBatchOverviewModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Batch</th>
+            <th>Date</th>
+            <th>Filename</th>
+            <th>Promotions</th>
+            <th>Lines</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var batch in @Model.Batches)
+        {
+        <tr class="batch">
+            <td class="batch-id">@Html.DisplayFor(m => batch.Id)</td>
+            <td class="batch-createdat">@Html.DisplayFor(m => batch.CreatedAt)</td>
+            <td class="batch-filename">@Html.DisplayFor(m => @batch.FileName)</td>
+            <td class="batch-promotioncount">@Html.DisplayFor(m => @batch.PromotionCount)</td>
+            <td class="batch-linecount">@Html.DisplayFor(m => @batch.LineCount)</td>
+            <td class="batch-actions">
+            @if (batch.HasCancelReservationsAction)
+            {
+                <a href="@Url.Action(MVC.Management.ActionNames.EdmBatch, MVC.Management.Name, new {id = batch.Id})" class="icon-btn icon-retract" title="Cancel batch"><span class="sr-only">Cancel batch</span></a>
+            }
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <td colspan="6">
+            @Html.PagedListPager(Model.Batches, page => Url.Action(MVC.Management.ActionNames.EdmBatches, new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </td>
+    </tfoot>
+</table>

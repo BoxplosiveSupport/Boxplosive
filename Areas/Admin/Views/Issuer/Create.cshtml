@@ -1,0 +1,57 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Areas.Admin.Models
+@using nl.boxplosive.BackOffice.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Utils
+
+@model IssuerCreateModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { autocomplete = "nope" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="well">
+            @Html.EditorFor(model => model.Email, "String", new { labelClass = "col-sm-3", textboxClass = "col-sm-5", htmlAttributes = new { autocomplete = "nope" } })
+            @Html.EditorFor(model => model.Name, new { labelClass = "col-sm-3", textboxClass = "col-sm-5", htmlAttributes = new { autocomplete = "nope" } })
+            @if (Model.LoginName_DisplayField)
+            {
+                @Html.EditorFor(model => model.LoginName, new { labelClass = "col-sm-3", textboxClass = "col-sm-5", htmlAttributes = new { autocomplete = "nope" } })
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.LoginName)
+            }
+            @if (Model.Password_DisplayField)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-5">
+                        @Html.PasswordFor(m => m.Password, true, new { autocomplete = "new-password", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.Password)
+            }
+            <div class="form-group">
+                @Html.LabelFor(m => m.PermissionGroups, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-5">
+                    @Html.CheckBoxListFor(m => m.PermissionGroups, new { style = "padding-top: 7px; padding-bottom: 7px;" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.AdminArea.Issuer.ActionNames.Index, MVC.AdminArea.Issuer.Name, null, new { @class = "btn btn-link" })
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,48 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.BasicStepModel
+
+@{
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+    }
+}
+
+<section class="datapanel @styling" data-action="edit">
+    <div class="datapanel-heading">
+        <h2>1. Basics</h2>
+        <div class="actions">
+            <button id="basic-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            <h3>@Html.DisplayFor(m => m.Title)</h3>
+            <p>@Html.DisplayFor(m => m.CampaignExternalId)</p>
+            if (Model.AppCardStackDefinitionsEnabled)
+            {
+                <p>@Html.Raw(Model.AppCardStackDefinitionDisplayName)</p>
+            }
+            <p>@Html.DisplayFor(m => m.AppCardOrder)</p>
+            if (Model.AppCardTemplateIdIsDisplayed)
+            {
+                <p>@Html.DisplayFor(m => m.AppCardTemplateId_Name)</p>
+                @Html.DisplayFor(m => m.Placeholders)
+            }
+            <p>@Html.Raw(Model.Description == null ? null : Model.Description.Html)</p>
+            if (Model.PromotionActivationRequired_IsEditable(User))
+            {
+                <p>@Html.DisplayFor(m => m.PromotionActivationRequired, "CustomBoolean")</p>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

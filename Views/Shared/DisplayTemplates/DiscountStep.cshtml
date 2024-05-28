@@ -1,0 +1,295 @@
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.DiscountStepModel
+
+@{
+    var editEnabled = ViewData["editEnabled"] as bool? ?? true;
+    var panelTitle = ViewData["panelTitle"] as string ?? "4. Discount";
+
+    string sectionDataActionValue = "";
+    var styling = "";
+    if (editEnabled)
+    {
+        sectionDataActionValue = "data-action=edit";
+        if (Model.IsValid.HasValue && Model.IsValid.Value)
+        {
+            styling = " datapanel-success";
+        }
+        else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+        {
+            styling = " datapanel-danger";
+        }
+    }
+
+    int ruleIndex = 1;
+}
+
+<section class="datapanel @styling" @sectionDataActionValue>
+    <div class="datapanel-heading">
+        <h2>@panelTitle</h2>
+        @if (editEnabled)
+        {
+            <div class="actions">
+                <button id="discount-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+            </div>
+        }
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            <div>
+                @if (Model.DiscountRules.Count > 0)
+                {
+                    <span>Number of discounts: @Model.DiscountRules.Count</span>
+                }
+                <div class="table table-condensed">
+                    @foreach (var rule in Model.DiscountRules)
+                    {
+                        <div class="row">
+                            <div class="col-sm-2 border-top">
+                                Discount @ruleIndex
+                            </div>
+                            <div class="col-sm-4 border-top">
+                                @Html.DisplayFor(m => rule.Type)
+                                @Html.DisplayFor(m => rule.SelectedProducts, "ProductsInDiscountOrRewardStep", new { countLabelText = "Selected products" })
+                                @Html.DisplayFor(m => rule.TargetProducts, "ProductsInDiscountOrRewardStep", new { countLabelText = "Target products" })
+                            </div>
+                            <div class="col-sm-6 border-top">
+                                @if (rule.PayOutLoyaltyProgramId_IsDisplayed)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            @Html.DisplayNameFor(m => rule.PayOutLoyaltyProgramId)
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="pull-right">
+                                                @Html.DisplayFor(m => rule.PayOutLoyaltyProgramId_Name)
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                                @if (rule.Type != DiscountRuleType.ExternalReward && rule.Type != DiscountRuleType.VisualRedemption)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            @Html.DisplayNameFor(m => rule.RequiredNumberOfCoupons)
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="pull-right">
+                                                @Html.DisplayFor(m => rule.RequiredNumberOfCoupons)
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                                @if (rule.MaxNumberOfCouponsPerTransaction_IsDisplayed)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            @Html.DisplayNameFor(m => rule.MaxNumberOfCouponsPerTransaction)
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="pull-right">
+                                                @Html.DisplayFor(m => rule.MaxNumberOfCouponsPerTransaction_DisplayText)
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                                @if (rule.MinTransactionValue_IsDisplayed)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            @Html.DisplayNameFor(m => rule.MinTransactionValueDisplayText)
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="pull-right">
+                                                @Html.DisplayFor(m => rule.MinTransactionValueDisplayText)
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                                @if (rule.Type == DiscountRuleType.CentsDiscountOnTransaction ||
+                                             rule.Type == DiscountRuleType.PercentsDiscountOnTransaction ||
+                                             rule.Type == DiscountRuleType.CentsDiscountAtYProducts ||
+                                             rule.Type == DiscountRuleType.PercentsDiscountAtYProducts ||
+                                             rule.Type == DiscountRuleType.FixedPriceOnProductSet ||
+                                             rule.Type == DiscountRuleType.CentsDiscountOnProductSet)
+                                {
+                                    if (rule.Type != DiscountRuleType.CentsDiscountOnTransaction && rule.Type != DiscountRuleType.PercentsDiscountOnTransaction)
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                @Html.DisplayFor(m => rule.RequiredAmountText)
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <span class="pull-right">
+                                                    @Html.DisplayFor(m => rule.RequiredAmount)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @Html.DisplayFor(m => rule.AmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.Amount)
+                                    </span>
+                                }
+                                else if (rule.Type == DiscountRuleType.XPlusYFree ||
+                                         rule.Type == DiscountRuleType.BuyXGetYFree)
+                                {
+                                    @Html.DisplayFor(m => rule.RequiredAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.RequiredAmount)
+                                    </span><br />
+                                    @Html.DisplayFor(m => rule.ApplicableAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.ApplicableAmount)
+                                    </span>
+                                }
+                                else if (rule.Type == DiscountRuleType.GrantLoyaltyPoints)
+                                {
+                                    @Html.LabelFor(m => rule.GrantPointsLoyaltyProgramId)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.GrantPointsLoyaltyProgramId_Name)
+                                    </span><br />
+                                    @Html.LabelFor(m => rule.NumberOfLoyaltyPoints)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.NumberOfLoyaltyPoints)
+                                    </span><br />
+                                }
+                                else if (rule.Type != DiscountRuleType.Message && rule.Type != DiscountRuleType.ExternalReward
+                                        && rule.Type != DiscountRuleType.VisualRedemption)
+                                {
+                                    @Html.DisplayFor(m => rule.AmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.Amount)
+                                    </span><br />
+                                    @Html.DisplayFor(m => rule.RequiredAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.RequiredAmount)
+                                    </span><br />
+                                    @Html.DisplayFor(m => rule.ApplicableAmountText)
+                                    <span class="pull-right">
+                                        @Html.DisplayFor(m => rule.ApplicableAmount)
+                                    </span>
+                                    if (rule.MatchMoreUnits)
+                                    {
+                                        <br />
+                                        @Html.DisplayNameFor(m => rule.MatchMoreUnits)
+                                        <span class="pull-right">
+                                            @Html.Raw("Yes")
+                                        </span>
+                                    }
+                                }
+                                else if (rule.Type == DiscountRuleType.Message)
+                                {
+                                    @Html.DisplayFor(m => rule.MessageType)
+                                }
+                            </div>
+                        </div>
+                        if (rule.Type != DiscountRuleType.ExternalReward && rule.Type != DiscountRuleType.VisualRedemption)
+                        {
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4 border-top">
+                                    <strong>@(rule.Type == DiscountRuleType.Message ? "Message" : "Receipt text")</strong>
+                                </div>
+                                <div class="col-sm-6 border-top">
+                                    @Html.DisplayFor(m => rule.Message)
+                                </div>
+                            </div>
+                        }
+                        if (!Model.IsSubsequentCombinedDiscount(rule))
+                        {
+                            if (rule.HasRepeatableAmount)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 border-top">
+                                        <strong>@Html.DisplayFor(m => rule.RepeatableAmountText)</strong>
+                                    </div>
+                                    <div class="col-sm-6 border-top">
+                                        @switch (rule.RepeatableAmount)
+                                        {
+                                            case 1:
+                                                @("Don't repeat")
+                                                break;
+                                            case int.MaxValue:
+                                                @("Unlimited repeat")
+                                                break;
+                                            default:
+                                                @String.Format("Repeat {0} times", rule.RepeatableAmount)
+                                                break;
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            if (rule.HasRewardSupplier)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 border-top">
+                                        <strong>@Html.DisplayNameFor(m => rule.ExternalRewardSupplierId)</strong>
+                                    </div>
+                                    <div class="col-sm-6 border-top">
+                                        @Html.DisplayFor(m => rule.ExternalRewardSupplierId_Name)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 border-top">
+                                        <strong>@Html.DisplayNameFor(m => rule.StockStatus)</strong>
+                                    </div>
+                                    <div class="col-sm-6 border-top">
+                                        @Html.DisplayFor(m => rule.StockStatus)
+                                    </div>
+                                </div>
+                            }
+                            if (rule.Type != DiscountRuleType.ExternalReward && rule.Type != DiscountRuleType.VisualRedemption)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 border-top">
+                                        <strong>@Html.DisplayNameFor(m => rule.MaxNumberOfRedemptions)</strong>
+                                    </div>
+                                    <div class="col-sm-6 border-top">
+                                        @Html.DisplayFor(m => rule.MaxNumberOfRedemptions)
+                                    </div>
+                                </div>
+                            }
+                        }
+                        if (rule.Triggers.Count > 0)
+                        {
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4 border-top">
+                                    @Html.DisplayFor(m => rule.Triggers, "ProductsInDiscountOrRewardStep", new { countLabelText = "Triggers", labelText = "Triggers" })
+                                </div>
+                                <div class="col-sm-6 border-top"></div>
+                            </div>
+                        }
+                        else if (rule.Type != DiscountRuleType.ExternalReward && rule.Type != DiscountRuleType.VisualRedemption)
+                        {
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4 border-top">
+                                    <strong>Triggers</strong>
+                                </div>
+                                <div class="col-sm-6 border-top">
+                                    No triggers
+                                </div>
+                            </div>
+                        }
+
+                        ruleIndex++;
+                    }
+                    @if (Model.DiscountRules.Count > 0)
+                    {
+                        <div class="row border-top"></div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

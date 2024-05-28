@@ -1,0 +1,65 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.LanguageMessageTemplate
+
+@model LanguageMessageTemplateCreateModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Version)
+    @Html.HiddenFor(model => model.Page)
+    <div class="form-horizontal">
+        <div id="LoyaltyEventDefinitionForm" class="well">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(model => model.Name, true, Model.Names, "Select name", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DeliveryProviderId, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(model => model.DeliveryProviderId, true, Model.DeliveryProviderNames, "Select delivery provider name", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeliveryProviderId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.MessageGroupId, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(model => model.MessageGroupId, true, Model.MessageGroupNames, "Select message group name", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MessageGroupId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="message-group-partial">
+                @Html.Partial(Model.MessageGroupPartialViewName, Model)
+            </div>
+            @Html.EditorFor(m => m.Default, "CustomBoolean")
+            @Html.EditorFor(m => m.Active, "CustomBoolean")
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.LanguageMessageTemplate.ActionNames.Index, MVC.LanguageMessageTemplate.Name, null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            var typePartialViewUrl = '@Url.Action(MVC.LanguageMessageTemplate.ActionNames.GetMessageGroupPartialView, MVC.LanguageMessageTemplate.Name)';
+            $('#MessageGroupId').change(function () {
+                $.get(typePartialViewUrl, { selected: $(this).find(':selected').text() }, function (data) {
+                    $('#message-group-partial').html(data);
+                });
+            });
+        });
+    </script>
+}

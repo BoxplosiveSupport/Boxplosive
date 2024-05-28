@@ -1,0 +1,8 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Controllers
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.RewardsStepModel
+
+@{
+    bool isContinuousSaving = ((PublishLoyaltyController)ViewContext.Controller).IsContinuousSaving();
+}
+
+@Html.DisplayFor(m => Model, "RewardsStep", new { editEnabled = false, isContinuousSaving = isContinuousSaving, panelTitle = "3. Rewards" })

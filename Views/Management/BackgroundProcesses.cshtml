@@ -1,0 +1,36 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Management.BackgroundProcessesModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<div class="table-responsive">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Background process</th>
+                <th>Last run</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        @if (Model.BackgroundProcesses.Any())
+        {
+            foreach (var process in Model.BackgroundProcesses)
+            {
+                <tr>
+                    <td>@process.Name</td>
+                    <td>@process.LastRun</td>
+                    <td>@process.Status</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No processes found</td>
+            </tr>
+        }
+    </table>
+</div>

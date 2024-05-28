@@ -1,0 +1,25 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model bool
+
+@{
+    bool readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var labelText = ViewData["labelText"] as string;
+    bool useValidation = ViewData["useValidation"] != null && (bool)ViewData["useValidation"];
+
+    object htmlAttributes = new { @class = "form-control", style = "width:38px" };
+    if (readOnly)
+    {
+        htmlAttributes = new { @class = "form-control", style = "width:38px", disabled = "disabled" };
+    }
+}
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = "col-sm-4 control-label" }, labelText)
+    <div class="col-sm-8">
+        @Html.CheckBoxFor(m => m, useValidation, htmlAttributes)
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+        @Html.ValidationMessageFor(m => m, null, new { @class = "text-danger" })
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.BasicStepModel
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>1. Basics</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            @Html.EditorFor(m => m.Title)
+            @Html.EditorFor(m => m.CampaignExternalId)
+            @Html.HiddenFor(m => m.AppCardStackDefinitionsEnabled)
+            @if (Model.AppCardStackDefinitionsEnabled)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AppCardStackDefinitionId, new { @class = "col-sm-4 control-label" })
+                    <div class="col-sm-8 @Html.Raw(!ViewData.ModelState.IsValidField("AppCardStackDefinitionId") ? "has-error" : "")">
+                        @Html.DropDownListFor(m => m.AppCardStackDefinitionId, true, Model.AppCardStackDefinitions, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AppCardStackDefinitionId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.AppCardStackDefinitionId)
+            }
+            @Html.EditorFor(m => m.AppCardOrder, "Numeric")
+            @Html.HiddenFor(m => m.AppCardTemplateIdIsDisplayed)
+            @if (Model.AppCardTemplateIdIsDisplayed)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AppCardTemplateId, new { @class = "col-sm-4 control-label" })
+                    <div class="col-sm-8 @Html.Raw(!ViewData.ModelState.IsValidField("AppCardTemplateId") ? "has-error" : "")">
+                        @Html.DropDownListFor(m => m.AppCardTemplateId, true, Model.AppCardTemplateId_SelectListItems,
+                            htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AppCardTemplateId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div id="placeholders-group">
+                    @Html.EditorFor(m => m.Placeholders)
+                </div>
+            }
+            @Html.EditorFor(m => m.Description, "HtmlEditor")
+            @if (Model.PromotionActivationRequired_IsEditable(User))
+            {
+                @Html.EditorFor(m => m.PromotionActivationRequired, "CustomBoolean", new { useValidation = false })
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.PromotionActivationRequired)
+            }
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+            <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () { // Shorthand for $(document).ready()
+        $("#AppCardTemplateId").change(function() {
+            var urlGetPlaceholders = '@Url.Action(MVC.CreatePromotion.GetPlaceholders())';
+            var paramTemplateId = '@MVC.CreatePromotion.GetPlaceholdersParams.templateId';
+            $("#placeholders-group").load(urlGetPlaceholders + '?' + paramTemplateId + '=' + $(this).val());
+        });
+    });
+</script>

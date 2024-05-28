@@ -1,0 +1,60 @@
+﻿@using System.Reflection
+@using nl.boxplosive.Configuration
+@using nl.boxplosive.BackOffice.Mvc.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Management
+
+@model ManagementModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<nav class="panel panel-primary">
+    <div class="panel-body">
+        <ul class="nav nav-pills">
+            @if (User.IsAllowed(((ManagementController.PublicationsDelegate)MVC.Management.Publications).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Publications", MVC.Management.ActionNames.Publications)
+                </li>
+            }
+            @if (User.IsAllowed(((ManagementController.BackgroundProcessesDelegate)MVC.Management.BackgroundProcesses).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Background processes", MVC.Management.ActionNames.BackgroundProcesses)
+                </li>
+            }
+            @if (User.IsAllowed(((ReclamationController.IndexDelegate)MVC.Reclamation.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Reclamation", MVC.Reclamation.ActionNames.Index, MVC.Reclamation.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((ManagementController.EdmBatchesDelegate)MVC.Management.EdmBatches).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("EDM batches", MVC.Management.ActionNames.EdmBatches)
+                </li>
+            }
+            @if (User.IsAllowed(((WebhookEventController.IndexDelegate)MVC.WebhookEvent.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Webhook events", MVC.WebhookEvent.ActionNames.Index, MVC.WebhookEvent.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((SegmentationController.IndexDelegate)MVC.Segmentation.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Segments", MVC.Segmentation.ActionNames.Index, MVC.Segmentation.Name)
+                </li>
+            }
+            @if (User.IsAllowed(((LanguageNavController.IndexDelegate)MVC.LanguageNav.Index).GetMethodInfo()))
+            {
+                <li>
+                    @Html.ActionLink("Languages", MVC.LanguageNav.ActionNames.Index, MVC.LanguageNav.Name)
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

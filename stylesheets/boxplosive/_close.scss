@@ -1,0 +1,19 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.close {
+  float:right;
+  border:none;
+  padding:0;
+  background:none;
+  height:1.625em;
+  outline:none;
+  @extend %icon-btn;
+  @extend .icon-cross;
+  &:before {
+    float:left;
+    background-color:$close-color;
+  }
+}

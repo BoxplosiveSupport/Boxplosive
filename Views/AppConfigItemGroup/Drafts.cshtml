@@ -1,0 +1,15 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models
+
+@model AppConfigItemGroupModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@if (Model.Drafts.Any())
+{
+    @Html.EditorFor(m => m.Drafts, new { Model.UserHasEditPermission })
+}
+else
+{
+    @Html.Partial("NoRecords")
+}

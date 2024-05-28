@@ -1,0 +1,60 @@
+﻿@using nl.boxplosive.Configuration
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.BasicStepModel
+
+@{
+    var styling = "";
+    if (Model.IsValid.HasValue && Model.IsValid.Value)
+    {
+        styling = " datapanel-success";
+    }
+    else if (Model.IsValid.HasValue && !Model.IsValid.Value)
+    {
+        styling = " datapanel-danger";
+    }
+}
+
+<section class="datapanel @styling" data-action="edit">
+    <div class="datapanel-heading">
+        <h2>1. Basics</h2>
+        <div class="actions">
+            <button id="basic-edit-icon" type="button" class="icon-btn icon-edit" data-action="edit" title="Edit"><span class="sr-only">Edit</span></button>
+        </div>
+    </div>
+    <div class="datapanel-body">
+        @if (Model.IsValid.HasValue)
+        {
+            <h3>@Html.DisplayFor(m => m.Title)</h3>
+            <p>@Html.DisplayFor(m => m.ProgramExternalId)</p>
+            if (Model.StampTypeEnabled)
+            {
+                <p>@Html.DisplayFor(m => m.StampTypeText)</p>
+            }
+            if (Model.AppCardStackDefinitionsEnabled)
+            {
+                <p>@Html.DisplayFor(m => m.AppCardStackDefinitionDisplayName)</p>
+            }
+            <p>@Html.DisplayFor(m => m.AppCardOrder)</p>
+            if (Model.AppCardTemplateIdIsDisplayed)
+            {
+                <p>@Html.DisplayFor(m => m.AppCardTemplateId_Name)</p>
+                @Html.DisplayFor(m => m.Placeholders)
+            }
+            <p>@Html.Raw(Model.Description == null ? null : Model.Description.Html)</p>
+            <p>@Html.Raw(Model.TermsConditions == null ? null : Model.TermsConditions.Html)</p>
+            <p>@Html.DisplayFor(m => m.FontColor)</p>
+            @Html.DisplayFor(m => m.ImageUrl, "Image")
+            if (AppConfig.Settings.Feature_ContinuousSaving)
+            {
+                <p>@Html.DisplayFor(m => m.IsContinuousSaving, "CustomBoolean")</p>
+            }
+            if (AppConfig.Settings.Feature_BalanceMessages)
+            {
+                @Html.Raw("<pre>" + Html.Encode(Model.BalanceMessages) + "</pre>");
+            }
+        }
+        else
+        {
+            <p class="text-muted">Click to enter data</p>
+        }
+    </div>
+</section>

@@ -1,0 +1,74 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Factories
+@using nl.boxplosive.BackOffice.Mvc.Models.LoyaltyEventDefinition
+@using PagedList.Mvc
+@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyEventDefinition.LoyaltyEventDefinitionsModel
+
+@{
+    ViewBag.Title = "Loyalty events";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_Name)</th>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_StartsAt)</th>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_EndsAt)</th>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_Type)</th>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_Action)</th>
+            <th>@Html.DisplayName(LoyaltyEventDefinitionModel.Label_Details)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LoyaltyEventDefinitions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.StartsAt.FormattedEndOfDayOmitTime("dd-MM-yyyy", "dd-MM-yyyy HH:mm", DateTimeFieldType.StartDate)
+                </td>
+                <td>
+                    @item.EndsAt.FormattedEndOfDayOmitTime("dd-MM-yyyy", "dd-MM-yyyy HH:mm", DateTimeFieldType.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeDisplayText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActionDisplayText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DetailsDisplayText)
+                </td>
+                <td class="actions">
+                    @Html.ActionLinkIcon("Edit", "Edit",
+                        new { id = item.Id, page = Model.PagedList.PageNumber },
+                        new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+
+                    @Html.ModalButton(Model.ConfirmDeleteModal.Id,
+                        string.Empty,
+                        MVC.LoyaltyEventDefinition.ActionNames.Delete,
+                        MVC.LoyaltyEventDefinition.Name,
+                        item.Name,
+                        LoyaltyEventDefinitionFactory.PageTitle,
+                        new { id = item.Id, version = item.VersionText, page = Model.PagedList.PageNumber },
+                        new { @class = "icon-btn icon-remove", title = "Delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="6">
+                @Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            </td>
+            <td class="actions">
+                @Html.ActionLinkIcon("Create New", "Create", null, new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

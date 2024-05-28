@@ -1,0 +1,10 @@
+﻿@using nl.boxplosive.Business.Sdk.AppConfigItem
+
+@model AppConfigItemBso
+
+<div class="form-group">
+    @Html.LabelFor(r => r.Key, Model.Key, new { @class = "control-label col-sm-4" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(r => r.Value, new { @class = "form-control", disabled = "disabled" })
+    </div>
+</div>

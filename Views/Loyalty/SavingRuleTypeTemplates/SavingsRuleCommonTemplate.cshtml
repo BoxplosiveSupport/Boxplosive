@@ -1,0 +1,32 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var startDateReadonly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.StartDateTodayOrInThePast;
+    var allInputsReadonly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+
+    var localDate = OperatingDateTime.TodayLocal;
+
+    var minDate = Model.SelectedRule.StartDate <= localDate ? localDate : Model.SelectedRule.StartDate;
+}
+
+<div class="form form-horizontal">
+    @Html.EditorFor(m => m.SelectedRule.Name, "String", new { labelClass = "col-sm-4", textboxClass = "col-sm-8", readOnly = allInputsReadonly })
+    <div class="form-group" data-range>
+        @Html.LabelFor(m => m.SelectedRule.StartDate, new { @class = "col-sm-4" })
+        @Html.EditorFor(m =>
+            m.SelectedRule.StartDate,
+            "DatePicker",
+            new { textBoxClass = "col-sm-4", readOnly = startDateReadonly || allInputsReadonly, noFormGroup = true, nolabel = true }
+        )
+        @Html.EditorFor(m => m.SelectedRule.From, "TimePicker", new { textBoxClass = "col-sm-4", readOnly = allInputsReadonly, noFormGroup = true, noLabel = true })
+    </div>
+    <div class="form-group" data-range>
+        @Html.LabelFor(m => m.SelectedRule.EndDate, new { @class = "col-sm-4" })
+        @Html.EditorFor(m =>
+            m.SelectedRule.EndDate,
+            "DatePicker",
+            new { textBoxClass = "col-sm-4", minDate = minDate, readOnly = allInputsReadonly, noFormGroup = true, nolabel = true }
+        )
+        @Html.EditorFor(m => m.SelectedRule.To, "TimePicker", new { textBoxClass = "col-sm-4", readOnly = allInputsReadonly, noFormGroup = true, noLabel = true })
+    </div>
+</div>

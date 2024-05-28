@@ -1,0 +1,24 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@using nl.boxplosive.Sdk
+
+@model IDraftListProperties
+
+@{
+    var currentTab = (DraftableTab)ViewData["currentTab"];
+    var formId = (string)ViewData["formid"];
+    var modalId = (string)ViewData["modalId"];
+    var routeValues = ViewData["routevalues"];
+}
+
+@Html.Partial("BottomBarBegin")
+
+@Html.Display(" ", "Button", new { title = @DraftActions.Edit, state = Model.EditButtonState(currentTab), isPrimary = true })
+@Html.Display(" ", "Button", new { title = @DraftActions.Ready, state = Model.ReadyButtonState(currentTab), isPrimary = true })
+@Html.Display(" ", "Button", new { title = @DraftActions.SaveDraft, state = Model.SaveDraftButtonState(currentTab), isPrimary = true })
+@Html.Display(" ", "Button", new { title = @DraftActions.Approve, state = Model.ApproveButtonState(currentTab), isPrimary = true })
+@Html.Display(" ", "Button", new { title = @DraftActions.Decline, state = Model.DeclineButtonState(currentTab), isPrimary = true })
+@Html.Display(" ", "Button", new { title = @DraftActions.DeleteDraft, state = Model.DeleteDraftButtonState(currentTab), isPrimary = true, modal = true, formId, modalId, routeValues })
+@Html.Display(" ", "Button", new { title = @DraftActions.Cancel, state = Model.CancelButtonState(currentTab), isDefault = true })
+
+@Html.Partial("BottomBarEnd")

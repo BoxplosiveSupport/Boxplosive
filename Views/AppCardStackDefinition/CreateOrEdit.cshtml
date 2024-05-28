@@ -1,0 +1,33 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Factories
+@model nl.boxplosive.BackOffice.Mvc.Models.AppCardStackDefinition.AppCardStackDefinitionModel
+
+@{
+    string action = Model.IsNew ? MVC.AppCardStackDefinition.ActionNames.Create : MVC.AppCardStackDefinition.ActionNames.Edit;
+    ViewBag.Title = string.Format("{0} {1}", action, AppCardStackDefinitionFactory.ItemPageTitle.ToLower());
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm(action, MVC.AppCardStackDefinition.Name))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Version)
+    @Html.HiddenFor(model => model.Page)
+    @Html.HiddenFor(model => model.Name)
+    <div class="form-horizontal">
+        <div id="LoyaltyEventDefinitionForm" class="well">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.EditorFor(model => model.DisplayName, new { labelClass = "col-sm-3", textboxClass = "col-sm-5" })
+            @Html.EditorFor(m => m.Order, "Numeric", new { labelClass = "col-sm-3", textboxClass = "col-sm-5" })
+            @Html.EditorFor(m => m.CardSize, new { optionLabel = "Select card size", labelClass = "col-sm-3", inputContainerClass = "col-sm-5" })
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.AppCardStackDefinition.ActionNames.Index, MVC.AppCardStackDefinition.Name,
+                    new { page = Model.Page }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

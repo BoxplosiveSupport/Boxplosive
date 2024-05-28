@@ -1,0 +1,29 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.PromotionStepModel
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>5. Promotion</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            @Html.HiddenFor(m => m.ImageUrl)
+            @Html.EditorFor(m => m.Image, new { uploadActionUrl = Url.Action(MVC.Platform.UploadImage(Html.NameFor(m => m.Image).ToString(), Html.NameFor(m => m.ImageUrl).ToString(), Html.IdFor(m => m.ImageUrl).ToString())), imageUrl = Model.ImageUrl, fileUrlField = Html.IdFor(m => m.ImageUrl) })
+
+            @Html.EditorFor(m => m.ImageEmailEnabled, "CustomBoolean", new { useValidation = false })
+
+            @Html.HiddenFor(m => m.ImageEmail)
+            @Html.EditorFor(m => m.ImageEmailPostedFile, new { uploadActionUrl = Url.Action(MVC.Platform.UploadImage(Html.NameFor(m => m.ImageEmailPostedFile).ToString(), Html.NameFor(m => m.ImageEmail).ToString(), Html.IdFor(m => m.ImageEmail).ToString())), imageUrl = Model.ImageEmail, fileUrlField = Html.IdFor(m => m.ImageEmail) })
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () { // Shorthand for $(document).ready()
+        $('.form-group.ImageEmail').toggle($('#ImageEmailEnabled').prop('checked'));
+        $('#ImageEmailEnabled').change(function () {
+            $('.ImageEmail').toggle($('#ImageEmailEnabled').prop('checked'));
+        });
+    });
+</script>

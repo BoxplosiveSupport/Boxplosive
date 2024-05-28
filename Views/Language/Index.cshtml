@@ -1,0 +1,43 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.Language
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+
+@model LanguageIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink(Model.Column_Culture, MVC.Language.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Culture))</th>
+            <th>@Html.ActionLink(Model.Column_Default, MVC.Language.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Default))</th>
+            <th>@Html.ActionLink(Model.Column_Active, MVC.Language.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Active))</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedList)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Culture)</td>
+                <td>@Html.DisplayFor(modelItem => item.Default)</td>
+                <td>@Html.DisplayFor(modelItem => item.Active)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon(MVC.Language.ActionNames.Edit, MVC.Language.Edit(item.Id), new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                    @Html.ModalButton(Model.ConfirmDeleteModal.Id, string.Empty, MVC.Language.ActionNames.Delete, MVC.Language.Name, item.Culture, "Language",
+                        new { id = item.Id, culture = item.Culture, version = item.VersionText, page = Model.PagedList.PageNumber }, new { @class = "icon-btn icon-remove", title = "Delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="3">@Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.Language.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)</td>
+            <td class="actions">@Html.ActionLinkIcon(MVC.Language.ActionNames.Create, MVC.Language.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

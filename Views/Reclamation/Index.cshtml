@@ -1,0 +1,167 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Reclamation
+@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.ReclamationModel
+
+@{
+    ViewBag.Title = Model.PageTitle;
+
+    var searchTypeValue = (int)Model.SearchType;
+}
+
+@using (Html.BeginForm(MVC.Reclamation.ActionNames.Index, MVC.Reclamation.Name, FormMethod.Post, new { @class = "well form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.CustomerId)
+    @Html.HiddenFor(m => m.SelectedTab)
+    <div class="row" data-range>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(m => m.SearchType, Model.SearchTypes, new { @class = "form-control", @id = "search-type-elm" })
+        </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(m => m.SearchTerm, true, null, new { @class = "form-control", placeholder = "search value" })
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-default btn-block">Select customer</button>
+        </div>
+    </div>
+}
+
+@if (Model.ShowData)
+{
+    <div class="well customer-details" style="margin-left:0;margin-right:0;">
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.CustomerId, new { style = "font-weight:bold;" })<text>: </text><span class="customer-id">@Html.DisplayFor(m => m.CustomerId)</span>
+            </div>
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.LoyaltyCardNumber_Decrypted_MainNonOptional, new { style = "font-weight:bold;" })<text>: </text><span class="loyalty-card-number">@Html.DisplayFor(m => m.LoyaltyCardNumber_Decrypted_MainNonOptional)</span>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.SearchTypes_Contains_CustomerExternalId())
+            {
+                <div class="col-sm-6">
+                    @Html.LabelFor(m => m.CustomerExternalId, new { style = "font-weight:bold;" })<text>: </text><span class="customer-ext-id">@Html.DisplayFor(m => m.CustomerExternalId)</span>
+                </div>
+            }
+            else
+            {
+                if (Model.SearchTypes_Contains_Username())
+                {
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.Username_Decrypted, new { style = "font-weight:bold;" })<text>: </text><span class="email">@Html.DisplayFor(m => m.Username_Decrypted)</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-6"></div>
+                }
+            }
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.LoyaltyCardNumber_Decrypted_MainOptional, new { style = "font-weight:bold;" })<text>: </text><span class="loyalty-card-number">@Html.DisplayFor(m => m.LoyaltyCardNumber_Decrypted_MainOptional)</span>
+                @if (!string.IsNullOrWhiteSpace(Model.LoyaltyCardNumber_Decrypted_MainOptional))
+                {
+                    @Html.ModalButton(
+                        Model.ConfirmDeleteLoyaltyCardMainOptionalModal.Id,
+                        string.Empty,
+                        MVC.Reclamation.ActionNames.DeleteMainOptionalLoyaltyCard,
+                        MVC.Reclamation.Name,
+                        "\"" + Model.LoyaltyCardNumber_Decrypted_MainOptional + "\".",
+                        "physical loyalty card with number:",
+                        new { customerId = Model.CustomerId, searchType = Model.SearchType.ToString(), searchTerm = Model.SearchTerm },
+                        new { @class = "icon-btn icon-remove", title = "Delete" }
+                    )
+                }
+            </div>
+        </div>
+        @if (Model.SearchTypes_Contains_CustomerExternalId() && Model.SearchTypes_Contains_Username())
+        {
+            <div class="row">
+                @if (Model.SearchTypes_Contains_Username())
+                {
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.Username_Decrypted, new { style = "font-weight:bold;" })<text>: </text><span class="email">@Html.DisplayFor(m => m.Username_Decrypted)</span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div role="tabpanel">
+        <ul class="row row-xs-4 row-lg-3 panel-tabs" role="tablist">
+            <li class="col-xs-4">
+                <a class="panel processmodule panel-primary" href="#paneltabs-coupons" aria-controls="paneltabs-coupons" role="tab" data-toggle="tab">
+                    <div class="panel-heading">
+                        <span class="icon icon-coupon-alt"></span>
+                        <span class="h4 hidden-xs">Coupons</span>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <span class="count">@Model.CouponTab.Pagination.ItemCount</span><br />
+                        </p>
+                    </div>
+                </a>
+            </li>
+            <li class="col-xs-4">
+                <a class="panel processmodule panel-primary" href="#paneltabs-loyaltyprograms" aria-controls="paneltabs-loyaltyprograms" role="tab" data-toggle="tab">
+                    <div class="panel-heading">
+                        <span class=" icon icon-loyalty-alt"></span>
+                        <span class="h4 hidden-xs">Loyalty programs</span>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <span class="count">@Model.LoyaltyTab.LoyaltyPrograms.Count</span><br />
+                        </p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <form role="tabpanel"
+                  class="tab-pane panel panel-primary"
+                  id="paneltabs-coupons"
+                  data-partial="independent"
+                  data-partialid="reclamation-coupons"
+                  data-get="@Url.Action(MVC.Reclamation.ActionNames.CouponsTab, MVC.Reclamation.Name)"
+                  data-post="@Url.Action(MVC.Reclamation.ActionNames.CouponsTabAddReservation, MVC.Reclamation.Name)">
+                @Html.DisplayFor(m => m.CouponTab, additionalViewData: new { SearchValueModel = new ReclamationSearchValueModel(Model.CustomerId, Model.SearchType, Model.SearchTerm, Model.SelectedTab) })
+            </form>
+            <form role="tabpanel"
+                  class="tab-pane panel panel-primary"
+                  id="paneltabs-loyaltyprograms"
+                  data-partial="independent"
+                  data-partialid="reclamation-loyaltyprograms"
+                  data-get="@Url.Action(MVC.Reclamation.ActionNames.LoyaltyTab, MVC.Reclamation.Name)"
+                  data-post="@Url.Action(MVC.Reclamation.ActionNames.LoyaltyTab, MVC.Reclamation.Name)">
+                @Html.DisplayFor(m => m.LoyaltyTab)
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    if (!string.IsNullOrEmpty(Model.SearchTerm))
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="icon icon-danger" style="margin-right:10px;"></span><strong>@Html.DisplayFor(m => m.SearchType) '@Model.SearchTerm' could not be found.</strong>
+        </div>
+    }
+}
+
+@Html.Partial("_Modal", Model.ConfirmDeleteLoyaltyCardMainOptionalModal)
+
+@section scripts {
+    <script>
+        $(function () {
+            // Workarround for broken Html.EnumDropDownListFor() when Enum fields are decorated with DisplayAttribute
+            //   If this is the case then the selected attribute for the drop-down list is not set
+            $("#search-type-elm").val('@searchTypeValue')
+
+            // Select the tab that was open
+            //   - improve this there is a nicer solution, e.g. maybe using the data-* attributes
+            //   - compare string: ignore case
+            if ('@Model.SelectedTab'.toLowerCase() === 'Coupon'.toLowerCase()) {
+                $('a.panel[href="#paneltabs-coupons"]').click()
+            }
+        });
+    </script>
+}

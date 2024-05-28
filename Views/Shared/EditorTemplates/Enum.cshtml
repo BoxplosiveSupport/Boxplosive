@@ -1,0 +1,18 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model Enum
+
+@{
+    var readOnly = ViewData["readOnly"] != null && (bool)ViewData["readOnly"];
+    var labelClass = ViewData["labelClass"] != null ? ViewData["labelClass"] : "col-sm-3";
+    var labelStyle = !string.IsNullOrWhiteSpace(ViewData["labelStyle"] as string) ? ViewData["labelStyle"] : string.Empty;
+    var inputContainerClass = ViewData["inputContainerClass"] != null ? ViewData["inputContainerClass"] : "col-sm-3";
+    var optionLabel = ViewData.GetValueOrDefault("optionLabel") as string;
+}
+
+<div class="form-group">
+    @Html.LabelForRequired(m => m, new { @class = labelClass + " control-label", style = labelStyle })
+    <div class="@inputContainerClass">
+        @Html.EnumDropDownListFor(m => m, optionLabel, new { @class = "form-control" }.AddRouteValue("disabled", "disabled", readOnly))
+        @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+    </div>
+</div>

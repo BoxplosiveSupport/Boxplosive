@@ -1,0 +1,30 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.Language
+
+@model LanguageEditModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Version)
+    @Html.HiddenFor(model => model.Page)
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <div id="LoyaltyEventDefinitionForm" class="well">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.Culture, new { readOnly = true })
+            @Html.EditorFor(m => m.Default, "CustomBoolean")
+            @Html.EditorFor(m => m.Active, "CustomBoolean")
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.Language.ActionNames.Index, MVC.Language.Name, null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

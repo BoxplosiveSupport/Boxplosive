@@ -1,0 +1,12 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ManageNewsArticle.NewsArticleType
+@{
+    var required = ViewBag.Required ?? false;
+    var requiredStyle = required ? " required" : "";
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m, new { @class = "col-sm-4 control-label" + requiredStyle })
+    <div class="col-sm-8">
+        @Html.EnumDropDownListFor(m => m, new { @class = "form-control" })
+    </div>
+</div>

@@ -1,0 +1,140 @@
+﻿@{
+  ViewBag.Title = @Model.PageTitle;
+}
+
+@section featured
+{
+
+}
+
+<div class="well">
+  <form class="form row" novalidate="novalidate">
+    <div class="form-group col-sm-5">
+      <select class="form-control" aria-invalid="false">
+        <option>Show all</option>
+        <option>Show in use only</option>
+        <option>Show retracted only</option>
+        <option>Show expired only</option>
+      </select>
+    </div>
+    <div class="form-group col-sm-5">
+        <input type="search" class="form-control" placeholder="Enter batch ID">
+        <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+    </div>
+    <div class="form-group col-sm-2">
+      <button type="submit" class="btn btn-block btn-default">Filter</button>
+    </div>
+  </form>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>EDM ID</th>
+        <th>Date</th>
+        <th>Promotions</th>
+        <th>Customers</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-rowclick="Batch" class="danger">
+        <td>1234</td>
+        <td>2015-05-04</td>
+        <td title="23 imported">
+          23 <span class="sr-only">imported</span>
+          <span class="badge danger icon icon-danger" title="22 failures"> 22 <span class="sr-only">failures</span></span>
+          <span class="badge info icon icon-retract" title="1 retracted"> 1 <span class="sr-only">retracted</span></span>
+        </td>
+        <td>
+          1234 <span class="sr-only">imported</span>
+          <span class="badge danger icon icon-danger" title="15 failures"> 15 <span class="sr-only">failures</span></span>
+        </td>
+        <td class="actions">
+          <a href="BatchRetract" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+        </td>
+      </tr>
+      <tr data-rowclick="Batch" class="warning">
+        <td>1229</td>
+        <td>2015-04-01</td>
+        <td title="23 imported">
+          23 <span class="sr-only">imported</span>
+          <span class="badge danger icon icon-danger" title="10 failures"> 10 <span class="sr-only">failures</span></span>
+        </td>
+        <td>
+          1234 <span class="sr-only">imported</span>
+          <span class="badge danger icon icon-danger" title="14 failures"> 14 <span class="sr-only">failures</span></span>
+        </td>
+        <td class="actions">
+          <a href="BatchRetract" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+        </td>
+      </tr>
+      <tr data-rowclick="Batch">
+        <td>1233</td>
+        <td>2015-05-03</td>
+        <td title="34 imported">
+          34 <span class="sr-only">imported</span>
+          <span class="badge danger icon icon-danger" title="2 failures"> 2 <span class="sr-only">failures</span></span>
+        </td>
+        <td>
+          1210 <span class="sr-only">imported</span>
+        </td>
+        <td class="actions">
+          <a href="BatchRetract" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+        </td>
+      </tr>
+      <tr data-rowclick="Batch">
+        <td>1232</td>
+        <td>2015-05-01</td>
+        <td title="40 imported">
+          40 <span class="sr-only">imported</span>
+        </td>
+        <td>
+          103367 <span class="sr-only">imported</span>
+        </td>
+        <td class="actions">
+          <a href="BatchRetract" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+        </td>
+      </tr>
+      <tr data-rowclick="Batch">
+        <td>1231</td>
+        <td>2015-04-28</td>
+        <td title="10 imported">
+          10 <span class="sr-only">imported</span>
+        </td>
+        <td>
+          103367 <span class="sr-only">imported</span>
+        </td>
+        <td class="actions">
+          <a href="BatchRetract" class="icon-btn icon-retract" title="Retract"><span class="sr-only">Retract</span></a>
+        </td>
+      </tr>
+      <tr data-rowclick="Batch" class="text-muted">
+        <td>1231</td>
+        <td>2015-04-28</td>
+        <td title="10 imported">
+          10 <span class="sr-only">imported</span>
+        </td>
+        <td>
+          103367 <span class="sr-only">imported</span>
+        </td>
+        <td class="actions">
+          Retracted
+        </td>
+      </tr>
+      <tr data-rowclick="Batch" class="text-muted">
+        <td>1231</td>
+        <td>2015-04-28</td>
+        <td title="10 imported">
+          10 <span class="sr-only">imported</span>
+        </td>
+        <td>
+          103367 <span class="sr-only">imported</span>
+        </td>
+        <td class="actions">
+          Expired
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

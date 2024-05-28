@@ -1,0 +1,76 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using nl.boxplosive.BackOffice.Mvc.Models.Reclamation
+@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.CouponTabModel
+
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "";
+
+    if (Model.SearchValueModel == null)
+    {
+        Model.SearchValueModel = (ReclamationSearchValueModel)ViewData["SearchValueModel"];
+    }
+}
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.SearchValueModel.CustomerId)
+@Html.HiddenFor(m => m.SearchValueModel.SearchType)
+@Html.HiddenFor(m => m.SearchValueModel.SearchTerm)
+@Html.HiddenFor(m => m.SearchValueModel.SelectedTab)
+<div class="form-horizontal panel-body" style="padding-top:50px;">
+    <h3 class="sr-only">Coupons</h3>
+    <div class="form-group">
+        <div class="col-sm-4">
+            @Html.EnumDropDownListFor(m => m.Status, "Show all", new { @class = "form-control", data_change = "saveget" })
+        </div>
+        @if (UserRolesPermissions.EnableDisable(MVC.Reclamation.ActionNames.CouponsTabAddReservation, MVC.Reclamation.GetType().Namespace, MVC.Reclamation.Name, User, false,
+            new Type[] { typeof(CouponTabModel), typeof(string) }))
+        {
+            <div class="col-sm-4">
+                <label for="Analyse_From" class="sr-only">Choose promotion</label>
+                <input type="search"
+                       class="form-control ui-autocomplete-input"
+                       name="choosepromotion"
+                       data-boxautocomplete=""
+                       data-source="@Url.Action(MVC.Platform.ActionNames.GetPromotions, MVC.Platform.Name)"
+                       data-minlength="3"
+                       data-scrollsteplength="10"
+                       data-idto="#@Html.IdFor(m => m.SelectedCampaignId)"
+                       autocomplete="nope"
+                       placeholder="Choose promotion">
+                <button type="button" class="form-control-cancel icon-btn icon-cross"></button>
+                @Html.HiddenFor(m => m.SelectedCampaignId)
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-default btn-block" data-action="save">Add reservation</button>
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <div class="table-responsive" style="padding-left:10px;padding-right:10px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><strong>Date modified</strong></th>
+                        <th><strong>ID</strong></th>
+                        <th><strong>Promotion</strong></th>
+                        <th><strong>Status</strong></th>
+                        <th><strong>Start date</strong></th>
+                        <th><strong>End date</strong></th>
+                        <th><strong>RedemptionsLeft</strong></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var coupon in Model.Coupons)
+                    {
+                        @Html.DisplayFor(m => coupon, additionalViewData: new { SearchValueModel = Model.SearchValueModel })
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.DisplayFor(m => m.Pagination)
+    <a href="" class="close" data-closealltabs>
+        <span class="sr-only">Close</span>
+    </a>
+</div>

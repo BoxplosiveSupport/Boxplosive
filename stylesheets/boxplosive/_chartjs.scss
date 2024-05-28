@@ -1,0 +1,12 @@
+﻿.line-legend {
+  list-style:none;
+  padding-left:0;
+  span {
+    display:inline-block;
+    width:1em;
+    height:1em;
+    border-radius:0.5em;
+    vertical-align:baseline;
+    margin:0 0.5em -0.1em 0;
+  }
+}

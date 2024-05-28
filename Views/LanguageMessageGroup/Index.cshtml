@@ -1,0 +1,41 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.LanguageMessageGroup
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+
+@model LanguageMessageGroupIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink(Model.Column_Name, MVC.LanguageMessageGroup.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Name))</th>
+            <th>@Html.ActionLink(Model.Column_Active, MVC.LanguageMessageGroup.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Active))</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedList)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Active)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon(MVC.LanguageMessageGroup.ActionNames.Edit, MVC.LanguageMessageGroup.Edit(item.Id), new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                    @Html.ModalButton(Model.ConfirmDeleteModal.Id, string.Empty, MVC.LanguageMessageGroup.ActionNames.Delete, MVC.LanguageMessageGroup.Name, item.Name, "Language message group",
+                        new { id = item.Id, name = item.Name, version = item.VersionText, page = Model.PagedList.PageNumber }, new { @class = "icon-btn icon-remove", title = "Delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="2">@Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.LanguageMessageGroup.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)</td>
+            <td class="actions">@Html.ActionLinkIcon(MVC.LanguageMessageGroup.ActionNames.Create, MVC.LanguageMessageGroup.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

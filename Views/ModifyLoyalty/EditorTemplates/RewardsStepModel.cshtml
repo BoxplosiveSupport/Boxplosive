@@ -1,0 +1,84 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Controllers
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.RewardsStepModel
+
+@{
+    bool isContinuousSaving = ((ModifyLoyaltyController)ViewContext.Controller).IsContinuousSaving();
+}
+
+<section class="datapanel">
+    @Html.AntiForgeryToken()
+    <div class="datapanel-heading">
+        <h2>3. Rewards</h2>
+    </div>
+    <div class="datapanel-body">
+        <div class="form-horizontal">
+            @Html.HiddenFor(m => m.CombineRewards)
+            @Html.DisplayFor(m => m.CombineRewards, "CustomBoolean")
+            @Html.EditorFor(m => m.RewardActivation, "CustomBoolean", new { labelText = Model.GetRewardActivationLabelText(isContinuousSaving) })
+            @Html.EditorFor(m => m.RuleType, "RuleType")
+            @if (Model.RewardRules.Count > 0)
+            {
+                <hr />
+            }
+            @for (var i = 0; i < Model.RewardRules.Count; i++)
+            {
+                var rowClass = Model.RewardRules[i].ErrorMessages.Count == 0 ? "" : "text-danger";
+
+                <div class="form-group" data-repeatableitem>
+                    @Html.HiddenFor(m => Model.RewardRules[i].Id)
+                    @Html.HiddenFor(m => Model.RewardRules[i].Message)
+                    @Html.HiddenFor(m => Model.RewardRules[i].ImageUrl)
+                    @Html.HiddenFor(m => Model.RewardRules[i].Description, new { @Value = Model.RewardRules[i].Description == null ? null : Model.RewardRules[i].Description.Html })
+                    @Html.HiddenFor(m => Model.RewardRules[i].Disable, new { data_removetag = "" })
+                    <span class="col-xs-6 @rowClass">@Html.DisplayFor(m => Model.RewardRules[i].Name)</span>
+                    @switch (Model.RewardRules[i].Type)
+                    {
+                        case DiscountRuleType.CentsDiscountAtYProducts:
+                        case DiscountRuleType.CentsDiscountOnProducts:
+                        case DiscountRuleType.CentsDiscountOnTransaction:
+                        case DiscountRuleType.FixedPriceOnProductSet:
+                        case DiscountRuleType.FixedPriceOnProducts:
+                        case DiscountRuleType.PercentsDiscountAtYProducts:
+                        case DiscountRuleType.PercentsDiscountOnProducts:
+                        case DiscountRuleType.PercentsDiscountOnTransaction:
+                            <span class="col-xs-3 @rowClass">
+                                @Html.DisplayFor(m => Model.RewardRules[i].AmountText) @Html.DisplayFor(m => Model.RewardRules[i].Amount)
+                            </span>
+                            break;
+                        case DiscountRuleType.BuyXGetYFree:
+                        case DiscountRuleType.XPlusYFree:
+                            <span class="col-xs-3 @rowClass">@Html.DisplayFor(m => Model.RewardRules[i].RequiredAmount) + @Html.DisplayFor(m => Model.RewardRules[i].ApplicableAmount) Free</span>
+                            break;
+                        case DiscountRuleType.GrantLoyaltyPoints:
+                            <span class="col-xs-3 @rowClass">
+                                @Html.LabelFor(m => Model.RewardRules[i].NumberOfLoyaltyPoints) @Html.DisplayFor(m => Model.RewardRules[i].NumberOfLoyaltyPoints)
+                            </span>
+                            break;
+                        case DiscountRuleType.Message:
+                            <span class="col-xs-3 @rowClass">@Html.DisplayFor(m => Model.RewardRules[i].MessageType)</span>
+                            break;
+                        default:
+                            <span class="col-xs-3 @rowClass">
+                                @if (!Model.IsSubsequentCombinedReward(Model.RewardRules[i]))
+                                {
+                                    <span>@Html.LabelFor(m => Model.RewardRules[i].LoyaltyPointTreshold) @Html.DisplayFor(m => Model.RewardRules[i].LoyaltyPointTreshold)</span>
+                                }
+                            </span>
+                            break;
+                    }
+                    <span class="col-xs-3 text-right">
+                        <button type="submit" class="icon-btn icon-edit" data-action="edit" name="ruleIndex" value="@i"><span class="sr-only">Edit</span></button>
+                        <button type="button" class="icon-btn icon-remove" data-action="delete" name="ruleIndex" value="@i"><span class="sr-only">Remove</span></button>
+                    </span>
+                </div>
+            }
+            @if (Model.RewardRules.Count > 0)
+            {
+                <hr />
+            }
+            <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+            <button type="submit" class="btn btn-primary" data-action="saveandeditnext">Save and next</button>
+        </div>
+    </div>
+</section>

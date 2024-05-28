@@ -1,0 +1,104 @@
+﻿@using nl.boxplosive.Configuration;
+@using nl.boxplosive.BackOffice.Mvc.Enums
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty
+@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Loyalty.SavingsStepModel
+
+@{
+    var readOnly = Model.IsPublished && Model.SelectedRule.IsPublished && Model.SelectedRule.EndDateInThePast;
+    string productBrowserLabelText = "Products";
+}
+
+<div id="AddProductErrorMessage" class="alert alert-danger" role="alert" style="display: none"></div>
+
+<div class="well"
+     data-repeatable
+     data-orderup="true">
+
+    @Html.Partial(MVC.Loyalty.Views.SavingRuleTypeTemplates.SavingsRuleCommonTemplate, Model)
+
+    @if (Model.SelectedRule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts
+        || Model.SelectedRule.Type == SavingsRuleTypeModel.LoyaltyPointsOnProductsByValue)
+    {
+        if (!readOnly)
+        {
+            <div class="form">
+                <div class="row">
+                    @Html.Label(productBrowserLabelText, new { @class = "col-sm-4 control-label" })
+                </div>
+                <div class="row">
+                    @Html.Partial(MVC.Shared.Views.EditorTemplates.ProductBrowser,
+                        new ViewDataDictionary
+                        {
+                            { "MultiProductSource", "SelectedProducts" },
+                            { "DownloadFileNamePrefix", productBrowserLabelText },
+                            { "SelectedRuleIndex", Model.SelectedRule.Index },
+                            { "StepType", StepType.Saving }
+                        })
+                </div>
+            </div>
+        }
+        <div data-repeatablelist>
+            @if (Model.SelectedRule.SelectedProducts != null && Model.SelectedRule.SelectedProducts.Count > 0)
+            {
+                if (Model.SelectedRule.SelectedProducts.Count < AppConfig.Settings.ProductListThreshold)
+                {
+                    for (var i = Model.SelectedRule.SelectedProducts.Count - 1; i >= 0; i--)
+                    {
+                        <div class="innerwell" data-repeatableitem>
+                            <button type="button" class="close" data-action="remove"><span class="sr-only">Remove</span></button>
+                            @Html.HiddenFor(m => Model.SelectedRule.SelectedProducts[i].Remove, new { data_removetag = "" })
+                            @Html.HiddenFor(m => Model.SelectedRule.SelectedProducts[i].Id)
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    @Html.HiddenFor(m => Model.SelectedRule.SelectedProducts[i].Name)
+                                    <strong class="form-control-static">@Html.DisplayFor(m => Model.SelectedRule.SelectedProducts[i].Name)</strong>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="innerwell">
+                        <div class="form-inline">
+                            <strong class="form-control-static">@Model.SelectedRule.SelectedProducts.Count Products</strong>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+    <div class="form form-horizontal">
+        @Html.EditorFor(m => m.SelectedRule.Amount, "Numeric", new { labelText = Model.SelectedRule.AmountText, readOnly = readOnly })
+        @if (AppConfig.Settings.Feature_SuppressPointsForRewards && Model.SelectedRule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts)
+        {
+            @Html.EditorFor(m => m.SelectedRule.SuppressPointsForRewards, "CustomBoolean", new { useValidation = false })
+        }
+        @Html.EditorFor(m => m.SelectedRule.RequiredAmount, "Numeric", new { labelText = Model.SelectedRule.RequiredAmountText, readOnly = readOnly })
+        @if (Model.SelectedRule.Type == SavingsRuleTypeModel.FixedLoyaltyPointsOnProducts
+            || Model.SelectedRule.Type == SavingsRuleTypeModel.LoyaltyPointsOnProductsByValue)
+        {
+            @Html.EditorFor(m => m.SelectedRule.ApplicableAmount, "Numeric", new { labelText = Model.SelectedRule.ApplicableAmountText, readOnly = readOnly })
+        }
+    </div>
+
+    <script type="text/mustache" data-template-multiitemscount>
+        <div class="innerwell">
+            <div class="form-inline">
+                <strong class="form-control-static">{{{count}}}</strong>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/mustache" data-template>
+        <div class="innerwell" data-repeatableitem>
+            <button type="button" class="close" data-action="remove"><span class="sr-only">Remove</span></button>
+            <input type="hidden" name="SelectedRule.SelectedProducts[{{index}}].Remove" value="False" data-removetag />
+            <input type="hidden" name="SelectedRule.SelectedProducts[{{index}}].Id" value="{{id}}" />
+            <div class="form-inline">
+                <input type="hidden" name="SelectedRule.SelectedProducts[{{index}}].Name" value="{{{label}}}" />
+                <strong class="form-control-static">{{{label}}}</strong>
+            </div>
+        </div>
+    </script>
+</div>

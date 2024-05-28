@@ -1,0 +1,121 @@
+﻿<div class="panel-body">
+  <h3 class="sr-only">Loyalty programs</h3>
+  <div class="row form">
+    <div class="form-group col-sm-5 col-md-3">
+      <select class="form-control" id="loyaltyprograms" name="loyaltyprograms" data-change="saveget">
+        <option value="1">Lotalty program 1</option>
+        <option value="2">Lotalty program 2</option>
+        <option value="3">Lotalty program 3</option>
+      </select>
+    </div>
+    <div class="form-group col-sm-5 col-md-2">
+      <select class="form-control" id="loyaltyprogramsources" name="loyaltyprogramsources" data-change="saveget">
+        <option selected="selected" value="0">Show all sources</option>
+        <option value="1">Show points only</option>
+        <option value="2">Show rewards only</option>
+        <option value="3">Show admin mutations only</option>
+      </select>
+    </div>
+    <div class="col-sm-12 visible-xs-block visible-sm-block">
+      <hr />
+    </div>
+    <div class="col-md-2">
+      <p class="form-control-static text-right"><strong>3901</strong> points total</p>
+    </div>
+    <div class="col-sm-7 col-md-3 col-lg-2 form-group">
+      <label for="Analyse_From" class="sr-only">Choose mutation amount</label>
+      <div class="input-group" data-boxspinner>
+        <input type="number"
+               id="mutationamount"
+               name="mutationamount"
+               class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-5 col-md-2 form-group">
+      <button type="submit" class="btn btn-default btn-block" data-action="save">Add mutation</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date issued</th>
+          <th>Source</th>
+          <th><span class="sr-only">Transaction direction</span></th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><time datetime="2015-07-09">9 Jul 2015</time></td>
+          <td>Points</td>
+          <td class="text-right">
+            <small class="icon icon-plus text-success"><span class="sr-only">+</span></small>
+          </td>
+          <td>
+            <strong>10</strong>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-09">9 Jul 2015</time></td>
+          <td>Admin mutation</td>
+          <td class="text-right">
+            <small class="icon icon-min text-danger"><span class="sr-only">-</span></small>
+          </td>
+          <td>
+            <strong>5</strong>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-08">8 Jul 2015</time></td>
+          <td>Reward</td>
+          <td class="text-right">
+            <small class="icon icon-min text-danger"><span class="sr-only">-</span></small>
+          </td>
+          <td>
+            <strong>300</strong>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-06">6 Jul 2015</time></td>
+          <td>Points</td>
+          <td class="text-right">
+            <small class="icon icon-plus text-success"><span class="sr-only">+</span></small>
+          </td>
+          <td>
+            <strong>56</strong>
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2015-07-03">3 Jul 2015</time></td>
+          <td>Points</td>
+          <td class="text-right">
+            <small class="icon icon-plus text-success"><span class="sr-only">+</span></small>
+          </td>
+          <td>
+            <strong>20</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous" class="icon-btn icon-back" data-action="saveget" data-vars='[{"name":"page","value":1}]'>
+        <span class="sr-only" aria-hidden="true">Previous</span>
+      </a>
+    </li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":1}]'>1</a></li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":2}]'>2</a></li>
+    <li class="active"><a href="#" data-action="saveget" data-vars='[{"name":"page","value":3}]'>3</a></li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":4}]'>4</a></li>
+    <li>...</li>
+    <li><a href="#" data-action="saveget" data-vars='[{"name":"page","value":5}]'>5</a></li>
+    <li>
+      <a href="#" aria-label="Next" class="icon-btn icon-forth" data-action="saveget" data-vars='[{"name":"page","value":3}]'>
+        <span class="sr-only" aria-hidden="true">Next</span>
+      </a>
+    </li>
+  </ul>
+  <a href="" class="close" data-closealltabs><span class="sr-only">Sluiten</span></a>
+</div>

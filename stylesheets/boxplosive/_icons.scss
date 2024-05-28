@@ -1,0 +1,200 @@
+// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+@font-face {
+  font-family: 'boxplosive';
+  src:url('../fonts/boxplosive/boxplosive.eot?4');
+  src:url('../fonts/boxplosive/boxplosive.eot?#iefix4') format('embedded-opentype'),
+    url('../fonts/boxplosive/boxplosive.woff?4') format('woff'),
+    url('../fonts/boxplosive/boxplosive.ttf?4') format('truetype'),
+    url('../fonts/boxplosive/boxplosive.svg?4#boxplosive') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.icon, .icon-btn, .icon-box, %icon, %icon-btn, %icon-box {
+    &:before {
+      display:inline-block;
+      font-family: 'boxplosive';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: inherit;
+
+      /* Better Font Rendering =========== */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    &.btn:before {
+        margin-top:-0.125em;
+        margin-bottom:-0.125em;
+    }
+    &, &:hover, &:focus {
+        text-decoration:none;
+    }
+}
+
+.icon-btn, %icon-btn {
+    outline:none;
+    position:relative;
+    display:inline-block;
+    &:before {
+        display:inline-block;
+        border-radius:50%;
+        line-height:1.625em;
+        height:1.625em;
+        width:1.625em;
+        margin:-0.3125em 0;
+        text-align:center;
+    }
+    &, &:hover, &:active, &:focus {
+        &:before {
+            color:$body-bg;
+            text-decoration:none;
+        }
+    }
+    &.loading {
+      &:before {
+        content:' ';
+        color:transparent;
+        .no-cssanimations & {
+            background-image:url(../images/loader.gif)!important;
+            background-position:center center;
+            background-repeat:no-repeat;
+        }
+      }
+      @extend %loading;
+    }
+}
+
+.icon-btn:before {
+  background-color:$link-color;
+}
+
+button.icon-btn {
+  background:none;
+  border:none;
+  padding:0;
+  height: 1.625em;
+  &.disabled,
+  &[disabled]{
+    &:not(.loading):before {
+      background-color:$btn-default-border!important;
+    }
+  }
+  &:before {
+    margin:0;
+  }
+}
+
+.icon-box, %icon-box {
+  position:relative;
+  display:inline-block;
+  line-height:1.5em;
+  height:1.5em;
+  width:1.5em;
+  margin:-0.25em 0;
+  &:before {
+    position:absolute;
+    top:0;
+    height:100%;
+    width:100%;
+    text-align:center;
+    color:$link-color;
+    position:relative;
+    z-index:1;
+  }
+  &:after {
+    position:absolute;
+    width:1em;
+    height:1em;
+    content:'';
+    border:1px solid $input-border;
+    border-radius:2px;
+    left:50%;
+    top:0.75em;
+    margin:-0.5em 0 0 -0.5em;
+  }
+  &.icon-check:before {
+    top:-0.2em;
+    right:-0.1em;
+  }
+}
+
+.icon-stepcounter-alt:before {
+	content: "\e616";
+}
+.icon-coupon-alt:before {
+	content: "\e617";
+}
+.icon-retract:before {
+	content: "\e615";
+}
+.icon-coupon:before {
+	content: "\e60c";
+}
+.icon-copy:before {
+	content: "\e60e";
+}
+.icon-rules:before {
+	content: "\e60f";
+}
+.icon-folder:before {
+	content: "\e610";
+}
+.icon-actions:before {
+	content: "\e611";
+}
+.icon-publish:before {
+	content: "\e612";
+}
+.icon-hourglass:before {
+	content: "\e60d";
+}
+.icon-danger:before {
+	content: "\e60b";
+}
+.icon-edit:before {
+	content: "\e60a";
+}
+.icon-check:before {
+	content: "\e609";
+}
+.icon-back:before {
+	content: "\e607";
+}
+.icon-forth:before {
+	content: "\e608";
+}
+.icon-remove:before {
+	content: "\e602";
+}
+.icon-cross:before {
+	content: "\e600";
+}
+.icon-plus:before {
+	content: "\e601";
+}
+.icon-min:before {
+	content: "\e613";
+}
+.icon-loyalty-alt:before {
+	content: "\e614";
+}
+.icon-graph-alt:before {
+	content: "\e604";
+}
+.icon-campaign-alt:before {
+	content: "\e605";
+}
+.icon-module-alt:before {
+	content: "\e606";
+}
+.icon-pencil-alt:before {
+	content: "\e603";
+}

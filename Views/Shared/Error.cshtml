@@ -1,0 +1,27 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error"; 
+}
+
+<h1 class="text-danger">An error occured in @Model.ControllerName/@Model.ActionName.</h1>
+<h3 class="text-danger" id="utc-date-field"></h3>
+<br/>
+@{
+    var e = Model.Exception;
+    while (e != null)
+    {
+        <div class="alert alert-danger">
+            <h2 class="text-danger">@e.Message</h2>
+            <h3 class="text-danger">@e.GetType()</h3>
+            <h3 class="text-danger">@e.Source</h3>
+        </div>
+        e = e.InnerException;
+    }
+}
+
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function () {
+    $("h3#utc-date-field").text(new Date().toJSON());
+});
+</script>

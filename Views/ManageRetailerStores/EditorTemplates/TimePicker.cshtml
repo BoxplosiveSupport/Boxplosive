@@ -1,0 +1,28 @@
+﻿@using System.Dynamic
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model TimeSpan?
+
+@{
+    var time = "";
+    if (Model.HasValue)
+    {
+        time = Model.Value.ToString(@"hh\:mm");
+    }
+    var dataFrom = ViewData["data_from"] != null;
+    var dataTo = ViewData["data_to"] != null;
+}
+
+<div class="col-sm-4">
+    @if (dataFrom)
+    {
+        @Html.TextBoxFor(m => m, true, time, new { @class = "form-control", @onclick = "addTimePicker(this)", @type = "time24h", placeholder = "hh:mm", data_from = "" })
+    }
+    else if (dataTo)
+    {
+        @Html.TextBoxFor(m => m, true, time, new { @class = "form-control", @onclick = "addTimePicker(this)", @type = "time24h", placeholder = "hh:mm", data_to = "" })
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m, true, time, new { @class = "form-control", @onclick = "addTimePicker(this)", @type = "time24h", placeholder = "hh:mm" })
+    }
+</div>

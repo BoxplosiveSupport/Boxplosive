@@ -1,0 +1,32 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.LoyaltyPointsProgram
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+
+@model LoyaltyProgramModel
+
+@{
+    const string formId = "draft-form";
+}
+
+@using (Html.BeginForm(null, null, new { loyaltyProgram = Model.LoyaltyProgramId }, FormMethod.Post, new { id = formId, @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Tab)
+    @Html.HiddenFor(m => m.LoyaltyProgramId)
+    @Html.DisplayFor(m => m, "DraftableTabs", new { currentTab = Model.Tab, routeValues = new { loyaltyProgram = Model.LoyaltyProgramId } })
+
+    switch (Model.Tab)
+    {
+        case DraftableTab.Live:
+            @Html.EditorFor(m => m.LiveObject)
+            break;
+        case DraftableTab.Staging:
+            @Html.EditorFor(m => m.Draft, new { Model.UserHasEditPermission })
+            break;
+        default:
+            throw new Exception("Unhandled Model.Tab=" + Model.Tab);
+    }
+
+    @Html.DisplayFor(m => m, "DraftableButtons",
+        new { currentTab = Model.Tab, formId, modalId = Model.ConfirmDeleteModal.Id, routeValues = new { loyaltyProgram = Model.LoyaltyProgramId } })
+
+    @Html.Partial("_Modal", Model.ConfirmDeleteModal)
+}

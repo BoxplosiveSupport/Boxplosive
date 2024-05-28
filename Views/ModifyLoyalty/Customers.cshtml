@@ -1,0 +1,64 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.ModifyLoyalty.ModifyLoyaltyCustomersModel
+
+@{
+    ViewBag.Title = "Configure customers";
+}
+
+<h2>@Model.Name (@Model.Id)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.IsPublic, new { @class = "col-sm-3" })
+        @Html.CheckBoxFor(m => m.IsPublic)
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.IsAutomaticallySubscribed, new { @class = "col-sm-3" })
+        @Html.CheckBoxFor(m => m.IsAutomaticallySubscribed)
+    </div>
+    <div class="form-group customer row">
+        @Html.LabelFor(m => m.EnabledBalancesCount, new { @class = "col-sm-3" })
+        <span id="EnabledBalancesCount" class="col-sm-1" style="margin:0;padding:0">@Html.DisplayFor(m => m.EnabledBalancesCount)</span>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#multiItemBrowser" data-return>Upload...</button>
+        @Html.ValidationMessage("SelectedCustomers", new { @class = "text-danger" })
+        @Html.ActionLink("Download...", MVC.ModifyLoyalty.CustomerDownload(Model.Id), new { @class="btn btn-default" })
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Confirm" />
+        @Html.ActionLink("Cancel", MVC.Home.ActionNames.Index, MVC.Home.Name, null, new { @class = "btn btn-link" })
+    </div>
+}
+
+@Html.Partial(MVC.Shared.Views.EditorTemplates.MultiItemBrowser, new ViewDataDictionary {
+    { "Id", "multiItemBrowser" },
+    { "Title", "Upload customers" },
+    { "ActionUrl", @Url.Action(MVC.ModifyLoyalty.ActionNames.CustomerUpload, MVC.ModifyLoyalty.Name, new { id = Model.Id }) },
+    { "OnSaveActionUrl", @Url.Action(MVC.ModifyLoyalty.ActionNames.ConfirmCustomerUpload, MVC.ModifyLoyalty.Name, new { id = Model.Id }) },
+    { "OnSaveCallbackFunctionName", "multiItemBrowserOnSaveCallback" },
+    { "UploadResultRecordsLabelText", "Customers:" }
+} )
+
+@section Scripts {
+<script type="text/javascript">
+    var boxplosive = boxplosive || {};
+    boxplosive.multiItemBrowserOnSaveCallback = function(modal, data) {
+        $('#EnabledBalancesCount').text(data);
+        $('span[data-valmsg-for="SelectedCustomers"]:first').text('');
+    }
+
+    $(function () { // Shorthand for $( document ).ready()
+        boxplosive.setupMultiItemBrowser();
+
+        $('.form-group.customer').toggle(!$('#IsPublic').prop('checked'));
+
+        $('#IsPublic').change(function () {
+            $('.form-group.customer').toggle(!$(this).prop('checked'));
+
+            $('#ErrorMessage').hide();
+        });
+    });
+</script>
+}

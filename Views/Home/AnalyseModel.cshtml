@@ -1,0 +1,45 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Home.AnalyseModel
+
+<h2 class="sr-only">Analyse campaign</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="h2">Live campaigns (@Model.LiveCampaigns.RowCount)</h3>
+
+        @if (Model.LiveCampaigns.Campaigns != null && Model.LiveCampaigns.Campaigns.Count > 0)
+        {
+            <ul class="media-list">
+                @for (int i = 0; i < Model.LiveCampaigns.Campaigns.Count; i++)
+                {
+                    @Html.DisplayFor(m => Model.LiveCampaigns.Campaigns[i])
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No live campaigns found</p>
+        }
+
+        <a href="@Model.AllLivePublicationUrl"><span class="icon-btn icon-forth"></span> See all live campaigns</a>
+        <hr class="visible-xs" />
+    </div>
+    <div class="col-sm-6">
+        <h3 class="h2">Recently finished campaigns (@Model.FinishedCampaigns.RowCount)</h3>
+        @if (Model.FinishedCampaigns.Campaigns != null && Model.FinishedCampaigns.Campaigns.Count > 0)
+        {
+            <ul class="media-list">
+                @for (int i = 0; i < Model.FinishedCampaigns.Campaigns.Count; i++)
+                {
+                    @Html.DisplayFor(m => Model.FinishedCampaigns.Campaigns[i])
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No recently finished campaigns found</p>
+        }
+
+        <a href="@Model.AllFinishedPublicationUrl"><span class="icon-btn icon-forth"></span> See all finished campaigns</a>
+    </div>
+</div>
+<br />
+<a href="" class="close" data-closealltabs><span class="sr-only">Close</span></a>

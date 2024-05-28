@@ -1,0 +1,30 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Shared.Promotion.PromotionTimeframeStepModel
+
+<section class="datapanel">
+    <div class="datapanel-heading">
+        <h2>3. Timeframe</h2>
+    </div>
+    <div class="datapanel-body">
+        @{
+            var visibleFromDateTime = Model.VisibleFromDate.ToShortDateString() + " " + @Model.VisibleFromTime.ToString(@"hh\:mm");
+        }
+        <p class="row">
+            @Html.LabelFor(m => m.VisibleFromDate, new { @class = "col-sm-3" })
+            @Html.DisplayFor(m => visibleFromDateTime, "span", new { @class = "col-sm-6" })
+        </p>
+        @{
+            var startDateTime = Model.StartDate.ToShortDateString() + " " + Model.StartTime.ToString(@"hh\:mm");
+        }
+        <p class="row">
+            @Html.LabelFor(m => m.StartDate, new { @class = "col-sm-3" })
+            @Html.DisplayFor(m => startDateTime, "span", new { @class = "col-sm-6" })
+        </p>
+        @{
+            var endDateTime = Model.EndDate.ToShortDateString() + " " + @Model.EndTime.ToString(@"hh\:mm");
+        }
+        <p class="row">
+            @Html.LabelFor(m => m.EndDate, new { @class = "col-sm-3" })
+            @Html.DisplayFor(m => endDateTime, "span", new { @class = "col-sm-6" })
+        </p>
+    </div>
+</section>

@@ -1,0 +1,19 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Reclamation.MutationModel
+
+<tr>
+    <td>@Model.DateIssued.ToLocalTimeInOperatingTimeZone().ToString("dd-MM-yyyy HH:mm")</td>
+    <td>
+        @if (Model.MutationValue > 0)
+        {
+            @Model.MutationValue
+        }
+    </td>
+    <td>
+        @if (Model.MutationValue < 0)
+        {
+            @Math.Abs(Model.MutationValue)
+        }
+    </td>
+    <td>@Model.Source</td>
+    <td>@Model.Comment</td>
+</tr>

@@ -1,0 +1,24 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model DateTime?
+
+@{
+    var date = Model.HasValue ? Model.Value.ToString("yyyy-MM-dd") : "";
+    var dataTo = ViewData["data_to"] != null;
+    var dataFrom = ViewData["data_from"] != null;
+}
+
+@Html.LabelForRequired(m => m, new { @class = "col-sm-2 control-label" })
+<div class="col-sm-4">
+    @if (dataFrom)
+    {
+        @Html.TextBoxFor(m => m, true, date, new { @class = "form-control", @type = "date", placeholder = "yy-mm-dd", data_from = "" })
+    }
+    else if (dataTo)
+    {
+        @Html.TextBoxFor(m => m, true, date, new { @class = "form-control", @type = "date", placeholder = "yy-mm-dd", data_to = "" })
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m, true, date, new { @class = "form-control", @type = "date", placeholder = "yy-mm-dd" })
+    }
+</div>

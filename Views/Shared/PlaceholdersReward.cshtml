@@ -1,0 +1,4 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Placeholder
+@model IList<PlaceholderModel>
+
+@Html.Partial("Placeholders", Model, new ViewDataDictionary { { "HtmlFieldNamePrefix", "SelectedRule." } })

@@ -1,0 +1,66 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Models.Segmentation
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+@model SegmentationIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+@using (Html.BeginForm(Model.GetSearchRouteValues()))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="well form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-3">
+                @Html.DropDownListFor(m => m.SearchColumn, true, Model.SearchColumns, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.SearchValue, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="pull-right">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink(Model.Column_Name, MVC.Segmentation.ActionNames.Index, Model.GetSortRouteValues(Model.Column_Name))</th>
+            <th>@Html.ActionLink(Model.Column_ModifiedOn, MVC.Segmentation.ActionNames.Index, Model.GetSortRouteValues(Model.Column_ModifiedOn))</th>
+            <th>@Model.Column_DeletedOn</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedList)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.TouchedOn)</td>
+                <td>@Html.DisplayFor(modelItem => item.DeletedOn)</td>
+                <td class="actions">
+                    @Html.ActionLinkIcon(MVC.Segmentation.ActionNames.Edit, MVC.Segmentation.Edit(item.Id), new { @class = "icon-btn icon-edit", title = "Edit" }, new { @class = "sr-only" })
+                    @if (!item.DeletedOn.HasValue)
+                    {
+                        @Html.ModalButton(Model.ConfirmDeleteModal.Id, string.Empty, MVC.Segmentation.ActionNames.Delete, MVC.Segmentation.Name, item.Name, "Segment",
+                            new { id = item.Id, name = item.Name, version = string.Empty, page = Model.PagedList.PageNumber }, new { @class = "icon-btn icon-remove", title = "Delete" })
+                    }
+                    else
+                    {
+                        <div style="width:26px;height:26px;margin-left:8px;display:inline-block;position:relative"></div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="3">@Html.PagedListPager(Model.PagedList, page => Url.Action(MVC.Segmentation.ActionNames.Index, Model.GetPagerRouteValues(page)), PagedListRenderOptions.ClassicPlusFirstAndLast)</td>
+            <td class="actions">@Html.ActionLinkIcon(MVC.Segmentation.ActionNames.Create, MVC.Segmentation.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>
+@Html.Partial("_Modal", Model.ConfirmDeleteModal)

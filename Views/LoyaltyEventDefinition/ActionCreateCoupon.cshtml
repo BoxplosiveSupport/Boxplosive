@@ -1,0 +1,15 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.LoyaltyEventDefinition.LoyaltyEventDefinitionModel
+
+@{
+    bool campaignIdHasError = !ViewData.ModelState.IsValidField(Model.Field_CampaignId);
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CampaignId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-5 @Html.Raw(campaignIdHasError ? "has-error" : "")">
+        @Html.DropDownListFor(m => m.CampaignId, true, Model.Campaigns, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CampaignId, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+@Html.EditorFor(m => m.RedemptionPeriod, new { labelClass = "col-sm-3", textboxClass = "col-sm-5" })

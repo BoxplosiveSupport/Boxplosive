@@ -1,0 +1,27 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models
+@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+
+@model AppConfigItemGroupModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+    string formId = "draft-form";
+}
+
+@using (Html.BeginForm(null, null, new { group = Model.Group }, FormMethod.Post, new { id = formId, @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Tab)
+    @Html.HiddenFor(m => m.Group)
+    @Html.DisplayFor(m => m, "DraftableTabs", new { currentTab = Model.Tab, routeValues = new { group = Model.Group } })
+    if (Model.Tab == DraftableTab.Live)
+    {
+        @Html.Partial("LiveObjects", Model)
+    }
+    else if (Model.Tab == DraftableTab.Staging)
+    {
+        @Html.Partial("Drafts", Model)
+    }
+    @Html.DisplayFor(m => m, "DraftableButtons",
+        new { currentTab = Model.Tab, formId, modalId = Model.ConfirmDeleteModal.Id, routevalues = new { group = Model.Group } })
+
+    @Html.Partial("_Modal", Model.ConfirmDeleteModal)
+}

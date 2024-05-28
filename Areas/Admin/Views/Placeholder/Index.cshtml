@@ -1,0 +1,38 @@
+﻿@using System.Web.Mvc.Html
+@using nl.boxplosive.BackOffice.Mvc.Areas.Admin.Models
+@using nl.boxplosive.BackOffice.Mvc.Helpers
+@using PagedList.Mvc
+
+@model PlaceholderIndexModel
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.LabelFor(m => m.Placeholders.First().FieldName)</th>
+            <th>@Html.LabelFor(m => m.Placeholders.First().Label)</th>
+            <th>@Html.LabelFor(m => m.Placeholders.First().DataType)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Placeholders)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FieldName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Label)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataType)</td>
+            <td></td>
+        </tr>
+        }
+    </tbody>
+    <tfoot class="well">
+        <tr>
+            <td colspan="3" />
+            <td class="actions">@Html.ActionLinkIcon(MVC.AdminArea.Placeholder.ActionNames.Create, MVC.AdminArea.Placeholder.Create(), new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })</td>
+        </tr>
+    </tfoot>
+</table>

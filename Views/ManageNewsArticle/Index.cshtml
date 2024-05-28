@@ -1,0 +1,44 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.ManageNewsArticle.ManageNewsArticleModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>News articles</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Start</th>
+            <th>End</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var newsArticle in @Model.NewsArticles)
+            {
+                <tr>
+                    <td><img src="@newsArticle.ImageUrl" height="100"/></td>
+                    <td>@newsArticle.Title</td>
+                    <td>@Html.DisplayFor(m => newsArticle.Type)</td>
+                    <td style="white-space: nowrap;">@newsArticle.StartDate.ToString("dd-MM-yyyy")</td>
+                    <td style="white-space: nowrap;">@newsArticle.EndDate.ToString("dd-MM-yyyy")</td>
+                    <td class="actions">
+                        @Html.ActionLinkIcon("Edit", "Edit", new {id = @newsArticle.Id}, new {@class = "icon-btn icon-edit"}, new {@class = "sr-only"})
+                        @Html.ActionLinkIcon("Delete", "Delete", new {id = @newsArticle.Id}, new {@class = "icon-btn icon-remove"}, new {@class = "sr-only"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+        <td colspan="5"></td>
+        <td class="actions">
+            @Html.ActionLinkIcon("Add", "Edit", null, new { @class = "icon-btn icon-plus" }, new { @class = "sr-only" })
+        </td>
+        </tfoot>
+    </table>
+</div>

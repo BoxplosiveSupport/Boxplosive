@@ -1,0 +1,25 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    margin-top:0;
+    font-weight:bold;
+}
+
+pre {
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+.text-truncate {
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  max-width:100%;
+}

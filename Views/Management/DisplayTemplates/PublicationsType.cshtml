@@ -1,0 +1,30 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+@model nl.boxplosive.BackOffice.Mvc.Models.Management.PublicationsType
+
+<nav class="panel panel-primary">
+    <div class="panel-body">
+        <ul class="nav nav-pills">
+            @{
+                TagBuilder li;
+                TagBuilder a;
+                foreach (var type in EnumHelper<nl.boxplosive.BackOffice.Mvc.Models.Management.PublicationsType>.GetValues(nl.boxplosive.BackOffice.Mvc.Models.Management.PublicationsType.Promotions))
+                {
+                    li = new TagBuilder("li");
+                    li.MergeAttribute("role", "presentation");
+                    if (type == Model)
+                    {
+                        li.MergeAttribute("class", "active");
+                    }
+                    
+                    a = new TagBuilder("a");
+                    a.MergeAttribute("href", String.Format("?type={0}", type.ToString()));
+                    a.SetInnerText(type.ToString());
+
+                    li.InnerHtml = a.ToString();
+
+                    @Html.Raw(li.ToString());
+                }
+            }
+        </ul>
+    </div>
+</nav>

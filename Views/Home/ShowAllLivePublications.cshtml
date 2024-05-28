@@ -1,0 +1,39 @@
+﻿@model nl.boxplosive.BackOffice.Mvc.Models.Home.AnalyseModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h3 class="h2">Live campaigns (@Model.LiveCampaigns.Campaigns.Count)</h3>
+
+@if (Model.LiveCampaigns.Campaigns != null && Model.LiveCampaigns.Campaigns.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var campaign in @Model.LiveCampaigns.Campaigns)
+                {
+                    <tr>
+                        <td>@campaign.Title</td>
+                        <td>@campaign.StartDate.Value.ToString("dd-MM-yyyy")</td>
+                        <td>@campaign.ExpiryDate.Value.ToString("dd-MM-yyyy")</td>
+                        <td class="actions">
+                            <a href="@campaign.ModifyUrl" class="icon-btn icon-edit" title="Edit">
+                                <span class="sr-only">Edit</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}

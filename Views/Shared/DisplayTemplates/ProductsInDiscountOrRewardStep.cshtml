@@ -1,0 +1,29 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Models.Shared
+@using nl.boxplosive.Configuration;
+@model List<ProductModel>
+
+@{ 
+    var labelText = ViewData["labelText"] as string;
+    var countLabelText = ViewData["countLabelText"] as string;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    if (!string.IsNullOrEmpty(labelText))
+    {
+        @labelText
+    }
+    <br />
+    if (Model.Count < AppConfig.Settings.ProductListThreshold)
+    {
+        foreach (var product in Model)
+        {
+            <strong>@product.Name</strong>
+            <br />
+        }
+    }
+    else
+    {
+        <strong>@Model.Count @countLabelText</strong>
+    }
+}

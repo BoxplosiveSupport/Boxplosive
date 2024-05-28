@@ -1,0 +1,81 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.datapanel {
+    border-top:3px solid $text-color;
+    margin-bottom:1.25em;
+    &[data-action] {
+      cursor:pointer;
+    }
+    img {
+        max-width:100%;
+        max-height:100%;
+    }
+}
+
+.datapanel-heading {
+    padding: $datapanel-body-padding-vertical $datapanel-body-padding-horizontal $datapanel-body-padding-vertical 0;
+    @media (max-width: $screen-xs-max) {
+      padding-left:0;
+      padding-right:0;
+    }
+    h2 {
+      float:left;
+    }
+    a, button {
+      &.icon, .icon {
+        &:before {
+          color:$text-color;
+        }
+      }
+      &.icon-btn, .icon-btn {
+        &:before {
+          background-color:$text-color;
+        }
+      }
+    }
+    .actions {
+      float:right;
+    }
+}
+
+.datapanel-body {
+    padding: $datapanel-body-padding-vertical $datapanel-body-padding-horizontal;
+    clear:both;
+    @media (max-width: $screen-xs-max) {
+      padding-left:0;
+      padding-right:0;
+    }
+    @media (min-width: $screen-sm-min) {
+      .popout, > .well, > hr {
+        margin-left:-$datapanel-body-padding-horizontal;
+        margin-right:-$datapanel-body-padding-horizontal;
+      }
+      .popout.row {
+        margin-left:-($datapanel-body-padding-horizontal+$grid-gutter-width/2);
+        margin-right:-($datapanel-body-padding-horizontal+$grid-gutter-width/2);
+      }
+    }
+}
+
+// Contextual variations
+.datapanel-default {
+  @include datapanel-variant($panel-default-border, $panel-default-text);
+}
+.datapanel-primary {
+  @include datapanel-variant($panel-primary-border, $panel-primary-text);
+}
+.datapanel-success {
+  @include datapanel-variant($panel-success-border, $panel-success-text);
+}
+.datapanel-info {
+  @include datapanel-variant($panel-info-border, $panel-info-text);
+}
+.datapanel-warning {
+  @include datapanel-variant($panel-warning-border, $panel-warning-text);
+}
+.datapanel-danger {
+  @include datapanel-variant($panel-danger-border, $panel-danger-text);
+}

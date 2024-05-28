@@ -1,0 +1,31 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.row {
+  list-style:none;
+  padding:0;
+  @media (min-width: $screen-sm-min) {
+    &.row-middle {
+      display:table;
+      width:100%;
+      table-layout: fixed;
+      > * {
+        display:table-cell;
+        float:none;
+        vertical-align:middle;
+        &:first-child {
+          padding-left:0;
+        }
+        &:last-child {
+          padding-right:0;
+        }
+      }
+    }
+  }
+}
+
+.word-overflow-wrap {
+    overflow-wrap: break-word;
+}

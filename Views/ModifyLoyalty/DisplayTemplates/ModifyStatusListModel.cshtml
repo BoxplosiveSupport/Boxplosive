@@ -1,0 +1,48 @@
+﻿@using nl.boxplosive.BackOffice.Mvc.Helpers
+
+@model nl.boxplosive.BackOffice.Mvc.Models.ModifyLoyalty.ModifyStatusListModel
+
+<div class="panel panel-secondary">
+    <div class="panel-body">
+        <h2 class="panel-color">Loyalty - @Model.LoyaltyProgramId</h2>
+        <ol class="status-list">
+            <li class="@Model.BasicsStyle"><a href="#datapanel-basics">Basics <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.TimeframeStyle"><a href="#datapanel-timeframe">Timeframe <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.RewardsStyle"><a href="#datapanel-rewards">Rewards <span class="icon icon-check pull-right"></span></a></li>
+            <li class="@Model.SavingsStyle"><a href="#datapanel-savings">Savings <span class="icon icon-check pull-right"></span></a></li>
+        </ol>
+
+        @using (Html.BeginForm(MVC.ModifyLoyalty.ActionNames.Cancel, MVC.ModifyLoyalty.Name))
+        {
+            @Html.AntiForgeryToken()
+            <button name="@MVC.ModifyPromotion.ActionNames.Cancel" class="btn btn-info btn-block">Cancel</button>
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.ModifyLoyalty.ActionNames.ContinueLater, MVC.ModifyLoyalty.GetType().Namespace, MVC.ModifyLoyalty.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.ModifyLoyalty.ActionNames.ContinueLater, MVC.ModifyLoyalty.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.ModifyLoyalty.ActionNames.ContinueLater" class="btn btn-success btn-block">Continue later</button>
+            }
+        }
+
+        @if (UserRolesPermissions.EnableDisable(MVC.ModifyLoyalty.ActionNames.Publish, MVC.ModifyLoyalty.GetType().Namespace, MVC.ModifyLoyalty.Name, User, false))
+        {
+            using (Html.BeginForm(MVC.ModifyLoyalty.ActionNames.Publish, MVC.ModifyLoyalty.Name))
+            {
+                @Html.AntiForgeryToken()
+                <button name="@MVC.ModifyLoyalty.ActionNames.Publish" class="btn btn-success btn-block @Model.PublishStyle">Publish</button>
+            }
+        }
+    </div>
+</div>
+
+<div class="panel">
+    @foreach (var errorMessage in Model.ErrorMessages.Keys)
+    {
+        <div class="text-danger">
+            <strong>@errorMessage</strong>
+        </div>
+    }
+</div>

@@ -1,0 +1,10 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.caret-up {
+  @extend .caret;
+  border-top:none;
+  border-bottom: $caret-width-base solid;
+}

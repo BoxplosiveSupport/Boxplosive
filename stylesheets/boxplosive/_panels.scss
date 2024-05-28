@@ -1,0 +1,204 @@
+﻿// Core variables and mixins
+@import "variables";
+@import "../../Content/bootstrap/mixins";
+@import "mixins";
+
+.panel {
+    border:none;
+    &, &:hover, &:focus, &:active {
+      text-decoration:none;
+    }
+    &.processmodule {
+        .panel-heading {
+            background:none;
+            border:none;
+            padding-bottom:0;
+            display:table;
+            width:100%;
+            > * {
+                display:table-cell;
+                vertical-align:middle;
+            }
+            > .icon {
+                vertical-align:top;
+            }
+        }
+        .icon {
+            font-size:(5600px/$screen-xs-max)+vw;
+            width:((5600px/$screen-xs-max)+4)+vw;
+            line-height:1;
+            &:before {
+                display:block;
+            }
+        }
+        .panel-body {
+            padding-top:0;
+        }
+        p {
+            margin:0;
+        }
+        .count {
+            font-size:2em;
+            line-height:1;
+        }
+        @media (min-width: $screen-sm-min) {
+            .icon {
+              font-size:56px;
+              width:66px;
+            }
+            .panel-body {
+                padding-left:$panel-body-padding+65;
+            }
+            .count {
+                font-size:4em;
+            }
+        }
+        &:after {
+          position:absolute;
+          content:'';
+          width:100%;
+          height:15px;
+          left:0;
+          right:0;
+          bottom:0;
+        }
+    }
+    > .row > * {
+      padding-left:$grid-gutter-width*0.75;
+      padding-right:$grid-gutter-width*0.75;
+    }
+    .pagination {
+        > li > a,
+        > li > span {
+          &:hover,
+          &:focus {
+            background-color: $body-bg;
+          }
+          &.icon-btn {
+            &:hover,
+            &:focus {
+              background-color:transparent;
+              border-color:transparent;
+            }
+          }
+        }
+        > .active > a,
+        > .active > span {
+          &,
+          &:hover,
+          &:focus {
+            background-color: $body-bg;
+          }
+        }
+    }
+    .tosticky {
+      border-radius:$border-radius-base $border-radius-base 0 0;
+      position:fixed;
+      bottom:0;
+      left:50%;
+      width:20%;
+      margin-left:-10%;
+      z-index:1000;
+    }
+}
+
+.panel-tabs {
+    list-style:none;
+    padding:0;
+    margin-bottom:-$panel-border-radius;
+    position:relative;
+    z-index:1;
+    .panel {
+        display:block;
+        &:focus, &:hover {
+            outline:none;
+            text-decoration:none;
+        }
+    }
+    &.active {
+        li {
+            padding-top:0;
+        }
+        .panel {
+            margin-bottom:0;
+            border-radius: $panel-border-radius $panel-border-radius 0 0;
+            @include box-shadow(none);
+            position:static;
+            &:after {
+              display:none;
+            }
+        }
+        li:not(.active) .panel {
+            background:none;
+        }
+        .panel-body {
+            display:none;
+        }
+    }
+    + .tab-content {
+        position:relative;
+        .panel-body {
+            padding-top:$panel-body-padding*2;
+        }
+        [data-closealltabs] {
+            position:absolute;
+            top:$panel-body-padding;
+            right:$panel-body-padding;
+        }
+    }
+    @media (min-width: $screen-sm-min) {
+         &.active .processmodule .panel-heading {
+             padding:$panel-heading-padding;
+         }
+    }
+    @media (max-width: $screen-xs-max) {
+        + .tab-content {
+          .panel-body {
+              padding-top:$panel-body-padding*3;
+          }
+        }
+        .processmodule .icon {
+          font-size:(8400px/$screen-xs-max)+vw;
+          width:((8400px/$screen-xs-max)+2)+vw;
+        }
+        .processmodule {
+            .panel-heading {
+                padding:10px 10px 20px 10px;
+                text-align:center;
+                position:relative;
+                height:100%;
+            }
+            .panel-body {
+                padding:0;
+                font-size:4vw;
+                position:absolute;
+                left:0;
+                right:0;
+                bottom:12.5%;
+                text-align:center;
+                z-index:1;
+                margin-bottom:-0.5em;
+                * {
+                    font-size:inherit;
+                }
+                br {
+                    display:none;
+                }
+            }
+            .count {
+                font-weight:bold;
+                ~ .count-alt:before {
+                    content: ' / '
+                }
+            }
+        }
+    }
+}
+
+// Contextual variations
+.panel-secondary {
+    @include panel-variant($panel-secondary-border, $panel-secondary-text, $panel-secondary-heading-bg, $panel-secondary-border);
+}
+.panel-help {
+    @include panel-variant($panel-help-border, $panel-help-text, $panel-help-heading-bg, $panel-help-border, false);
+}
