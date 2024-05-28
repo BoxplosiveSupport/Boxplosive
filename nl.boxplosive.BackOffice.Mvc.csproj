@@ -1,0 +1,1577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C53A68E-4720-4CF1-A774-E86B6B1539C6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nl.boxplosive.BackOffice.Mvc</RootNamespace>
+    <AssemblyName>nl.boxplosive.BackOffice.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort>1077</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <MvcBuildViews>false</MvcBuildViews>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+  <Import Project="..\.properties\BuildConfigs.PropertyGroups" Condition="Exists('..\.properties\BuildConfigs.PropertyGroups')" />
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppConfigItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PlaceholderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IssuerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TemplateController.cs" />
+    <Compile Include="Areas\Admin\Models\IssuerDeleteModel.cs" />
+    <Compile Include="Areas\Admin\Models\PlaceholderCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\PlaceholderModelBase.cs" />
+    <Compile Include="Areas\Admin\Models\IssuerCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\IssuerEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\TemplateEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\TemplateCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\PlaceholderIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\IssuerIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\IssuerModelBase.cs" />
+    <Compile Include="Areas\Admin\Models\TemplateModelBase.cs" />
+    <Compile Include="Areas\Admin\Models\TemplateIndexModel.cs" />
+    <Compile Include="Attributes\AiHandleErrorAttribute.cs" />
+    <Compile Include="Attributes\ToStringLengthAdapter.cs" />
+    <Compile Include="Attributes\ToStringLengthAttribute.cs" />
+    <Compile Include="Attributes\FeatureAttribute.cs" />
+    <Compile Include="Binders\DateTimeModelBinder.cs" />
+    <Compile Include="Binders\HtmlEditorModelBinder.cs" />
+    <Compile Include="Binders\PlaceholderModelBinder.cs" />
+    <Compile Include="Controllers\AppCardStackDefinitionController.cs" />
+    <Compile Include="Controllers\LanguageDeliveryProviderController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\LanguageMessageGroupController.cs" />
+    <Compile Include="Controllers\LanguageMessageTemplateController.cs" />
+    <Compile Include="Controllers\LanguageNavController.cs" />
+    <Compile Include="Controllers\SegmentationController.cs" />
+    <Compile Include="Controllers\WebhookEventController.cs" />
+    <Compile Include="Controllers\NotificationDefinitionController.cs" />
+    <Compile Include="Controllers\LoyaltyProgramController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Enums\HtmlElementModel.cs" />
+    <Compile Include="Enums\LoyaltyMutationCreditDebitType.cs" />
+    <Compile Include="Enums\MessageType.cs" />
+    <Compile Include="Enums\StockTypeModel.cs" />
+    <Compile Include="Enums\UserVisibilityModel.cs" />
+    <Compile Include="Factories\PlaceholderFactory.cs" />
+    <Compile Include="Factories\ExternalSupplierFactory.cs" />
+    <Compile Include="Factories\TemplateFactory.cs" />
+    <Compile Include="Factories\AppCardStackDefinitionFactory.cs" />
+    <Compile Include="Factories\NotificationDefinitionFactory.cs" />
+    <Compile Include="Helpers\CacheSettings.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Html\CheckBoxListExtensions.cs" />
+    <Compile Include="Html\CheckBoxListItem.cs" />
+    <Compile Include="Models\Admin\AdminModel.cs" />
+    <Compile Include="Models\AppCardStackDefinition\AppCardStackDefinitionPageModel.cs" />
+    <Compile Include="Models\AppCardStackDefinition\AppCardStackDefinitionModel.cs" />
+    <Compile Include="Models\AppConfigItems\AppConfigItemGroupModel.cs" />
+    <Compile Include="Controllers\AppConfigItemGroupController.cs" />
+    <Compile Include="Models\AppConfigItems\AppConfigItemGroupPermission.cs" />
+    <Compile Include="Models\AppConfigItems\AppConfigItemGroupsModel.cs" />
+    <Compile Include="Areas\Admin\Models\AppConfigItemIndexModel.cs" />
+    <Compile Include="Models\LanguageDeliveryProvider\LanguageDeliveryProviderCreateModel.cs" />
+    <Compile Include="Models\LanguageDeliveryProvider\LanguageDeliveryProviderEditModel.cs" />
+    <Compile Include="Models\LanguageDeliveryProvider\LanguageDeliveryProviderIndexModel.cs" />
+    <Compile Include="Models\LanguageDeliveryProvider\LanguageDeliveryProviderModel.cs" />
+    <Compile Include="Models\LanguageDeliveryProvider\LanguageDeliveryProviderPropertyModel.cs" />
+    <Compile Include="Models\LanguageMessageGroup\LanguageMessageGroupCreateModel.cs" />
+    <Compile Include="Models\LanguageMessageGroup\LanguageMessageGroupEditModel.cs" />
+    <Compile Include="Models\LanguageMessageGroup\LanguageMessageGroupIndexModel.cs" />
+    <Compile Include="Models\LanguageMessageGroup\LanguageMessageGroupModel.cs" />
+    <Compile Include="Models\LanguageMessageTemplate\LanguageMessageTemplateCreateModel.cs" />
+    <Compile Include="Models\LanguageMessageTemplate\LanguageMessageTemplateEditModel.cs" />
+    <Compile Include="Models\LanguageMessageTemplate\LanguageMessageTemplateIndexModel.cs" />
+    <Compile Include="Models\LanguageMessageTemplate\LanguageMessageTemplateModel.cs" />
+    <Compile Include="Models\LanguageMessageTemplate\LanguageMessageTemplatePropertyModel.cs" />
+    <Compile Include="Models\LanguageNav\LanguageNavModel.cs" />
+    <Compile Include="Models\Language\LanguageEditModel.cs" />
+    <Compile Include="Models\Language\LanguageIndexModel.cs" />
+    <Compile Include="Models\Language\LanguageModel.cs" />
+    <Compile Include="Models\Language\LanguageCreateModel.cs" />
+    <Compile Include="Models\LoyaltyPointsProgramDraft\LoyaltyPointsProgramDraftModel.cs" />
+    <Compile Include="Models\LoyaltyPointsProgram\LoyaltyProgramPermission.cs" />
+    <Compile Include="Models\NotificationDefinition\NotificationDefinitionModel.cs" />
+    <Compile Include="Models\NotificationDefinition\NotificationDefinitionsModel.cs" />
+    <Compile Include="Models\NotificationDefinition\NotificationType.cs" />
+    <Compile Include="Models\PageConst.cs" />
+    <Compile Include="Models\PermissionBase.cs" />
+    <Compile Include="Models\DraftActions.cs" />
+    <Compile Include="Models\DraftableModelBase.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\LoyaltyEventDefinitionController.cs" />
+    <Compile Include="Controllers\ManageVersionMessageController.cs" />
+    <Compile Include="Controllers\LoyaltyControllerBase.cs" />
+    <Compile Include="Controllers\LoyaltyRewardReminderController.cs" />
+    <Compile Include="Controllers\ManageNewsArticleController.cs" />
+    <Compile Include="Controllers\ManageProductsController.cs" />
+    <Compile Include="Controllers\ManageRetailerStoresController.cs" />
+    <Compile Include="Controllers\PromotionControllerBase.cs" />
+    <Compile Include="Enums\InternalCampaignType.cs" />
+    <Compile Include="Enums\StepType.cs" />
+    <Compile Include="Enums\ProductsType.cs" />
+    <Compile Include="Enums\DayRuleChecks.cs" />
+    <Compile Include="Factories\BaseFactory.cs" />
+    <Compile Include="Factories\LoyaltyEventDefinitionFactory.cs" />
+    <Compile Include="Helpers\ProcessModuleExtensions.cs" />
+    <Compile Include="Factories\BackOfficeBusinessCallFactory.cs" />
+    <Compile Include="Factories\NewsArticleFactory.cs" />
+    <Compile Include="Factories\ProductFactory.cs" />
+    <Compile Include="Factories\RetailerStoreFactory.cs" />
+    <Compile Include="Factories\ViewModelBaseFactory.cs" />
+    <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\UserRolesPermissions.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Models\DraftListPropertiesExtensions.cs" />
+    <Compile Include="Models\DraftMessages.cs" />
+    <Compile Include="Models\Home\ActionMetadata.cs" />
+    <Compile Include="Models\LoyaltyEventDefinition\LoyaltyEventDefinitionsModel.cs" />
+    <Compile Include="Models\LoyaltyEventDefinition\LoyaltyEventDefinitionModel.cs" />
+    <Compile Include="Models\LoyaltyPointsProgram\LoyaltyProgramModel.cs" />
+    <Compile Include="Models\LoyaltyRewardReminder\RewardReminderDetail.cs" />
+    <Compile Include="Models\LoyaltyRewardReminder\RewardReminderOverview.cs" />
+    <Compile Include="Models\LoyaltyRewardReminder\RewardReminder.cs" />
+    <Compile Include="Models\LoyaltyRewardReminder\RewardReminderBase.cs" />
+    <Compile Include="Models\Management\EdmBatchDetailsModel.cs" />
+    <Compile Include="Models\Management\EdmBatchCheckPromotionModel.cs" />
+    <Compile Include="Models\Management\EdmBatchPromotionModel.cs" />
+    <Compile Include="Models\Management\EdmBatchOverviewModel.cs" />
+    <Compile Include="Models\Management\EdmBatchModel.cs" />
+    <Compile Include="Models\ManageNewsArticle\ManageNewsArticleModel.cs" />
+    <Compile Include="Models\ManageNewsArticle\NewsArticleModel.cs" />
+    <Compile Include="Models\ManageProducts\ManageProductsModel.cs" />
+    <Compile Include="Models\ManageProducts\ProductItemOverrideModel.cs" />
+    <Compile Include="Models\ManageRetailerStores\ManageRetailerStoresModel.cs" />
+    <Compile Include="Models\ManageRetailerStores\RetailerStoreDateModel.cs" />
+    <Compile Include="Models\ManageRetailerStores\RetailerStoreInfoModel.cs" />
+    <Compile Include="Models\ManageRetailerStores\RetailerStoreModel.cs" />
+    <Compile Include="Models\ModifyLoyalty\ModifyLoyaltyCustomersModel.cs" />
+    <Compile Include="Models\ModifyLoyalty\ModifyLoyaltyGrantLoyaltyPointsModel.cs" />
+    <Compile Include="Models\Placeholder\PlaceholderRichTextEditorModel.cs" />
+    <Compile Include="Models\Placeholder\PlaceholderTextModel.cs" />
+    <Compile Include="Models\Placeholder\PlaceholderTextAreaModel.cs" />
+    <Compile Include="Models\Placeholder\PlaceholderImageModel.cs" />
+    <Compile Include="Models\Placeholder\PlaceholderModel.cs" />
+    <Compile Include="Models\Reclamation\EditCouponModel.cs" />
+    <Compile Include="Models\Reclamation\BalanceTabModel.cs" />
+    <Compile Include="Models\Reclamation\ReclamationSearchValueModel.cs" />
+    <Compile Include="Models\Segmentation\SegmentationCreateModel.cs" />
+    <Compile Include="Models\Segmentation\SegmentationEditModel.cs" />
+    <Compile Include="Models\Segmentation\SegmentationIndexModel.cs" />
+    <Compile Include="Models\Segmentation\SegmentationModel.cs" />
+    <Compile Include="Models\Shared\ButtonState.cs" />
+    <Compile Include="Models\Shared\DraftableTab.cs" />
+    <Compile Include="Models\Shared\IProductListsModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\CodeActionAdditionalSettings.cs" />
+    <Compile Include="Models\Shared\Loyalty\CodeActionTypeModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\ILoyaltyModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\LoyaltySteps.cs" />
+    <Compile Include="Models\Shared\Loyalty\SavingsDisplayTypeModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\SavingsRuleTypeModel.cs" />
+    <Compile Include="Models\Shared\ModalInfo.cs" />
+    <Compile Include="Models\Shared\Promotion\DiscountStepModel.cs" />
+    <Compile Include="Models\Shared\Promotion\IPromotionModel.cs" />
+    <Compile Include="Models\ManageVersionMessage\VersionMessageItemsModel.cs" />
+    <Compile Include="Models\ManageVersionMessage\VersionMessageModel.cs" />
+    <Compile Include="Models\Shared\Modal.cs" />
+    <Compile Include="Models\Shared\Promotion\PromotionTimeframeStepModel.cs" />
+    <Compile Include="Models\Shared\TabModel.cs" />
+    <Compile Include="Models\Shared\UiMessage.cs" />
+    <Compile Include="Models\Shared\TabState.cs" />
+    <Compile Include="Models\StepModelBase.cs" />
+    <Compile Include="Models\VersionedViewModelBase.cs" />
+    <Compile Include="Models\Webhook\WebhookEventModel.cs" />
+    <Compile Include="Models\Webhook\WebhookEventState.cs" />
+    <Compile Include="Models\Webhook\WebhookEventIndexModel.cs" />
+    <Compile Include="Models\Webhook\WebhookEventType.cs" />
+    <Compile Include="T4MVC\AccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.AppConfigItemController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.IssuerController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.PlaceholderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.TemplateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\AdminController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\AppCardStackDefinitionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\AppConfigItemGroupController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\CampaignControllerBaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\CreateLoyaltyController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\CreatePromotionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Factories\CronJobFactory.cs" />
+    <Compile Include="T4MVC\DraftBaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\DraftControllerBaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LanguageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LanguageDeliveryProviderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LanguageMessageGroupController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LanguageMessageTemplateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LanguageNavController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyControllerBaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyEventController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyEventDefinitionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyProgramController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\LoyaltyRewardReminderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ManagementController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapExtensions.cs" />
+    <Compile Include="Models\Home\CampaignsModel.cs" />
+    <Compile Include="Models\Home\CampaignModel.cs" />
+    <Compile Include="Models\Management\LogModel.cs" />
+    <Compile Include="T4MVC\ManageNewsArticleController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ManageProductsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ManageRetailerStoresController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ManageVersionMessageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ModifyLoyaltyController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ModifyPromotionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\NotificationDefinitionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\PlatformController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\PromotionControllerBaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\PublishLoyaltyController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\PublishPromotionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ReclamationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SegmentationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\StyleguideController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ValidationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\WebhookEventController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ClaimConstants.cs" />
+    <Compile Include="Utils\ClaimsPrincipalExtension.cs" />
+    <Compile Include="Utils\Globals.cs" />
+    <Compile Include="Utils\MsalAppBuilder.cs" />
+    <Compile Include="Utils\MSALPerUserMemoryTokenCache.cs" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-display.html" />
+    <Content Include="Ajax-Stub\createloyalty-Savings-display.html" />
+    <Content Include="Ajax-Stub\createloyalty-Savings-edit-p4pdtorpdtg.html" />
+    <Content Include="Ajax-Stub\createloyalty-StatusList.html" />
+    <Content Include="Ajax-Stub\createloyalty-Savings-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-edit-fixedprice.html" />
+    <Content Include="Ajax-Stub\createcampaign-Stores-display.html" />
+    <Content Include="Ajax-Stub\createcampaign-Stores-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-edit-generic.html" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-edit-percentage.html" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-edit-x+1.html" />
+    <Content Include="Ajax-Stub\createcampaign-Discount-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-Promotion-display.html" />
+    <Content Include="Ajax-Stub\createcampaign-Promotion-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-StatusList.html" />
+    <Content Include="Ajax-Stub\createcampaign-Timeframe-display.html" />
+    <Content Include="Ajax-Stub\createcampaign-Timeframe-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-Basics-edit.html" />
+    <Content Include="Ajax-Stub\createcampaign-Basics-display.html" />
+    <Content Include="Ajax-Stub\reclamation-loyaltyprograms.html" />
+    <Content Include="Ajax-Stub\reclamation-coupons.html" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload.css" />
+    <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
+    <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
+    <Content Include="Content\jquery.timepicker.css" />
+    <Content Include="Content\jquery.timepicker.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicons\android-chrome-144x144.png" />
+    <Content Include="favicons\android-chrome-192x192.png" />
+    <Content Include="favicons\android-chrome-256x256.png" />
+    <Content Include="favicons\android-chrome-36x36.png" />
+    <Content Include="favicons\android-chrome-48x48.png" />
+    <Content Include="favicons\android-chrome-72x72.png" />
+    <Content Include="favicons\android-chrome-96x96.png" />
+    <Content Include="favicons\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-114x114.png" />
+    <Content Include="favicons\apple-touch-icon-120x120-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-120x120.png" />
+    <Content Include="favicons\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-144x144.png" />
+    <Content Include="favicons\apple-touch-icon-152x152-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-152x152.png" />
+    <Content Include="favicons\apple-touch-icon-180x180-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-180x180.png" />
+    <Content Include="favicons\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-57x57.png" />
+    <Content Include="favicons\apple-touch-icon-60x60-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-60x60.png" />
+    <Content Include="favicons\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-72x72.png" />
+    <Content Include="favicons\apple-touch-icon-76x76-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon-76x76.png" />
+    <Content Include="favicons\apple-touch-icon-precomposed.png" />
+    <Content Include="favicons\apple-touch-icon.png" />
+    <Content Include="favicons\browserconfig.xml" />
+    <Content Include="favicons\favicon-16x16.png" />
+    <Content Include="favicons\favicon-32x32.png" />
+    <Content Include="favicons\favicon.ico" />
+    <Content Include="favicons\mstile-144x144.png" />
+    <Content Include="favicons\mstile-150x150.png" />
+    <Content Include="favicons\mstile-310x150.png" />
+    <Content Include="favicons\mstile-310x310.png" />
+    <Content Include="favicons\mstile-70x70.png" />
+    <Content Include="favicons\safari-pinned-tab.svg" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\boxplosive\boxplosive.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\boxplosive\boxplosive.eot" />
+    <Content Include="fonts\boxplosive\boxplosive.ttf" />
+    <Content Include="fonts\boxplosive\boxplosive.woff" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-Black.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-BlackIt.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-Bold.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-BoldIt.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-ExtraLight.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-ExtraLightIt.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-It.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-Light.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-LightIt.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-Regular.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-Semibold.eot" />
+    <Content Include="fonts\source-sans-pro\EOT\SourceSansPro-SemiboldIt.eot" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-Black.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-BlackIt.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-Bold.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-BoldIt.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-ExtraLight.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-ExtraLightIt.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-It.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-Light.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-LightIt.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-Regular.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-Semibold.otf" />
+    <Content Include="fonts\source-sans-pro\OTF\SourceSansPro-SemiboldIt.otf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-Black.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-BlackIt.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-Bold.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-BoldIt.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-ExtraLightIt.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-It.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-Light.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-LightIt.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-Regular.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-Semibold.ttf" />
+    <Content Include="fonts\source-sans-pro\TTF\SourceSansPro-SemiboldIt.ttf" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-Black.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-BlackIt.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-Bold.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-BoldIt.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-ExtraLight.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-ExtraLightIt.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-It.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-Light.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-LightIt.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-Regular.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-Semibold.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\OTF\SourceSansPro-SemiboldIt.otf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-Black.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-BlackIt.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-Bold.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-BoldIt.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-ExtraLight.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-ExtraLightIt.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-It.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-Light.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-LightIt.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-Regular.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-Semibold.ttf.woff" />
+    <Content Include="fonts\source-sans-pro\WOFF\TTF\SourceSansPro-SemiboldIt.ttf.woff" />
+    <Compile Include="Binders\DoubleModelBinder.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ModifyPromotionController.cs" />
+    <Compile Include="Controllers\ModifyLoyaltyController.cs" />
+    <Compile Include="Controllers\ReclamationController.cs" />
+    <Compile Include="Factories\AnalyseFactory.cs" />
+    <Compile Include="Factories\PublicationsFactory.cs" />
+    <Compile Include="Factories\ReclamationFactory.cs" />
+    <Content Include="images\ahtogo\logo.png" />
+    <Content Include="images\alvo\Logo.png" />
+    <Content Include="images\janlinders\logo.png" />
+    <Content Include="images\blokker\logo.png" />
+    <Content Include="images\boxplosive\logo.png" />
+    <Content Include="images\brand\logo.png" />
+    <Content Include="images\cc.jpg" />
+    <Content Include="images\loader.gif" />
+    <Content Include="images\loader.png" />
+    <Content Include="images\wymeditor.png" />
+    <Content Include="images\wymeditor_icon.png" />
+    <Content Include="images\xenos\logo.png" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\boxplosive.js.map" />
+    <Content Include="images\etos\logo.png" />
+    <Content Include="Scripts\boxplosive.js" />
+    <Content Include="Ajax-Stub\test.json" />
+    <Content Include="Ajax-Stub\products.json" />
+    <Content Include="Ajax-Stub\stores.json" />
+    <Content Include="Ajax-Stub\subproducts.json" />
+    <Content Include="Ajax-Stub\substores.json" />
+    <Content Include="Ajax-Stub\storegroups.json" />
+    <Content Include="Ajax-Stub\checkstore.json" />
+    <Content Include="Areas\Admin\Views\Template\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Template\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Template\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Placeholder\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Placeholder\Create.cshtml" />
+    <Content Include="favicons\manifest.json" />
+    <Content Include="Areas\Admin\Views\Issuer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Issuer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Issuer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Issuer\Delete.cshtml" />
+    <Content Include="ApplicationInsights.config" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\bootstrap\mixins\_alerts.scss" />
+    <Content Include="Content\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Content\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Content\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Content\bootstrap\mixins\_center-block.scss" />
+    <Content Include="Content\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Content\bootstrap\mixins\_forms.scss" />
+    <Content Include="Content\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Content\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Content\bootstrap\mixins\_grid.scss" />
+    <Content Include="Content\bootstrap\mixins\_hide-text.scss" />
+    <Content Include="Content\bootstrap\mixins\_image.scss" />
+    <Content Include="Content\bootstrap\mixins\_labels.scss" />
+    <Content Include="Content\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Content\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Content\bootstrap\mixins\_nav-vertical-align.scss" />
+    <Content Include="Content\bootstrap\mixins\_opacity.scss" />
+    <Content Include="Content\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Content\bootstrap\mixins\_panels.scss" />
+    <Content Include="Content\bootstrap\mixins\_progress-bar.scss" />
+    <Content Include="Content\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="Content\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Content\bootstrap\mixins\_resize.scss" />
+    <Content Include="Content\bootstrap\mixins\_responsive-visibility.scss" />
+    <Content Include="Content\bootstrap\mixins\_size.scss" />
+    <Content Include="Content\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="Content\bootstrap\mixins\_table-row.scss" />
+    <Content Include="Content\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Content\bootstrap\mixins\_text-overflow.scss" />
+    <Content Include="Content\bootstrap\mixins\_vendor-prefixes.scss" />
+    <Content Include="Content\bootstrap\_alerts.scss" />
+    <Content Include="Content\bootstrap\_badges.scss" />
+    <Content Include="Content\bootstrap\_breadcrumbs.scss" />
+    <Content Include="Content\bootstrap\_button-groups.scss" />
+    <Content Include="Content\bootstrap\_buttons.scss" />
+    <Content Include="Content\bootstrap\_carousel.scss" />
+    <Content Include="Content\bootstrap\_close.scss" />
+    <Content Include="Content\bootstrap\_code.scss" />
+    <Content Include="Content\bootstrap\_component-animations.scss" />
+    <Content Include="Content\bootstrap\_dropdowns.scss" />
+    <Content Include="Content\bootstrap\_forms.scss" />
+    <Content Include="Content\bootstrap\_glyphicons.scss" />
+    <Content Include="Content\bootstrap\_grid.scss" />
+    <Content Include="Content\bootstrap\_input-groups.scss" />
+    <Content Include="Content\bootstrap\_jumbotron.scss" />
+    <Content Include="Content\bootstrap\_labels.scss" />
+    <Content Include="Content\bootstrap\_list-group.scss" />
+    <Content Include="Content\bootstrap\_media.scss" />
+    <Content Include="Content\bootstrap\_mixins.scss" />
+    <Content Include="Content\bootstrap\_modals.scss" />
+    <Content Include="Content\bootstrap\_navbar.scss" />
+    <Content Include="Content\bootstrap\_navs.scss" />
+    <Content Include="Content\bootstrap\_normalize.scss" />
+    <Content Include="Content\bootstrap\_pager.scss" />
+    <Content Include="Content\bootstrap\_pagination.scss" />
+    <Content Include="Content\bootstrap\_panels.scss" />
+    <Content Include="Content\bootstrap\_popovers.scss" />
+    <Content Include="Content\bootstrap\_print.scss" />
+    <Content Include="Content\bootstrap\_progress-bars.scss" />
+    <Content Include="Content\bootstrap\_responsive-embed.scss" />
+    <Content Include="Content\bootstrap\_responsive-utilities.scss" />
+    <Content Include="Content\bootstrap\_scaffolding.scss" />
+    <Content Include="Content\bootstrap\_tables.scss" />
+    <Content Include="Content\bootstrap\_theme.scss" />
+    <Content Include="Content\bootstrap\_thumbnails.scss" />
+    <Content Include="Content\bootstrap\_tooltip.scss" />
+    <Content Include="Content\bootstrap\_type.scss" />
+    <Content Include="Content\bootstrap\_utilities.scss" />
+    <Content Include="Content\bootstrap\_variables_original.scss" />
+    <Content Include="Content\bootstrap\_wells.scss" />
+    <Content Include="Content\_bootstrap-compass.scss" />
+    <Content Include="Content\_bootstrap-mincer.scss" />
+    <Content Include="Content\_bootstrap-sprockets.scss" />
+    <Content Include="Content\_bootstrap.scss" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap\_variables.scss" />
+    <None Include="nl.boxplosive.BackOffice.Mvc.obproj" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\additional-methods.min.js.map">
+      <DependentUpon>additional-methods.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\boxplosive\boxplosive-product.js" />
+    <Content Include="Scripts\boxplosive\initCharts.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\boxplosive\custom-jquery-validation.js" />
+    <Content Include="Scripts\jquery-3.7.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.min.js" />
+    <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\jquery.timepicker.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Scripts\polyfills\excanvas.js" />
+    <Content Include="Scripts\timepicker.js" />
+    <Content Include="stylesheets\boxplosive\_jquerytimepicker.scss" />
+    <Content Include="stylesheets\boxplosive\_ckeditor5.scss" />
+    <None Include="T4MVC\T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC\T4MVC.tt.settings.xml" />
+    <Content Include="Scripts\boxplosive\init.js" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\Index.cshtml" />
+    <Content Include="Views\Management\Index.cshtml" />
+    <Content Include="Views\Management\Publications.cshtml" />
+    <Content Include="Views\Home\DisplayTemplates\ProcessModule.cshtml" />
+    <Content Include="Views\Home\PublishModel.cshtml" />
+    <Content Include="Views\Home\EditorTemplates\CampaignType.cshtml" />
+    <Content Include="Views\PublishPromotion\ReadyToPublish.cshtml" />
+    <Content Include="Views\PublishLoyalty\ReadyToPublish.cshtml" />
+    <Content Include="Views\PublishPromotion\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\PublishPromotion\DisplayTemplates\DiscountStepModel.cshtml" />
+    <Content Include="Views\PublishPromotion\DisplayTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\PublishPromotion\DisplayTemplates\SegmentationStepModel.cshtml" />
+    <Content Include="Views\PublishPromotion\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\PublishLoyalty\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\PublishLoyalty\DisplayTemplates\RewardsStepModel.cshtml" />
+    <Content Include="Views\PublishLoyalty\DisplayTemplates\SavingsStepModel.cshtml" />
+    <Content Include="Views\PublishLoyalty\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\RemoveLoyalty.cshtml" />
+    <Content Include="Views\CreatePromotion\RemovePromotion.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Numeric.cshtml" />
+    <Content Include="Views\Styleguide\Batches.cshtml" />
+    <Content Include="Views\Styleguide\Batch.cshtml" />
+    <Content Include="Views\Styleguide\BatchRetract.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Styleguide\Analyse.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PaginationModel.cshtml" />
+    <Content Include="Views\Management\EditorTemplates\PublicationFilterModel.cshtml" />
+    <Content Include="Views\Management\EditorTemplates\SearchQuery.cshtml" />
+    <Content Include="Views\Management\EditorTemplates\DatePicker.cshtml" />
+    <Content Include="Views\Management\DisplayTemplates\PublicationsType.cshtml" />
+    <Content Include="Views\ModifyLoyalty\Index.cshtml" />
+    <Content Include="Views\ModifyLoyalty\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\DisplayTemplates\RewardsStepModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\DisplayTemplates\SavingsStepModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\DisplayTemplates\ModifyStatusListModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\EditorTemplates\RewardsRuleModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\EditorTemplates\RewardsStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\StatusListModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\SegmentationStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\Amount.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\SegmentationStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\Index.cshtml" />
+    <Content Include="Views\ModifyPromotion\RemovePromotion.cshtml" />
+    <Content Include="Views\ModifyLoyalty\RemoveLoyalty.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RepeatableTimes.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CustomBoolean.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CustomBoolean.cshtml" />
+    <Content Include="Views\Home\AnalyseModel.cshtml" />
+    <Content Include="Views\Management\BackgroundProcesses.cshtml" />
+    <Content Include="Views\Home\DisplayTemplates\CampaignModel.cshtml" />
+    <Content Include="Views\Styleguide\Reclamation.cshtml" />
+    <Content Include="Views\ModifyLoyalty\EditorTemplates\SavingsStepModel.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\FixedLoyaltyPointsOnProducts.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\FixedLoyaltyPointsOnTransaction.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\FixedLoyaltyPointsOnUniqueProductsInTransaction.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\LoyaltyPointsOnProductsByValue.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\SavingsRuleTemplate.cshtml" />
+    <Content Include="Views\Reclamation\Index.cshtml" />
+    <Content Include="Views\Reclamation\DisplayTemplates\CouponTabModel.cshtml" />
+    <Content Include="Views\Reclamation\DisplayTemplates\CouponModel.cshtml" />
+    <Content Include="Views\Reclamation\DisplayTemplates\LoyaltyTabModel.cshtml" />
+    <Content Include="Views\Reclamation\DisplayTemplates\MutationModel.cshtml" />
+    <Content Include="Views\Reclamation\DisplayTemplates\PaginationModel.cshtml" />
+    <Content Include="Views\Management\DisplayTemplates\PaginationModel.cshtml" />
+    <Content Include="Views\Home\ShowAllCampaigns.cshtml" />
+    <Content Include="Views\ModifyLoyalty\EditorTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\EditorTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\LoyaltyPointsOnTransactionByValue.cshtml" />
+    <Content Include="Views\LoyaltyRewardReminder\Index.cshtml" />
+    <Content Include="Views\LoyaltyRewardReminder\Edit.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\SavingsRuleCommonTemplate.cshtml" />
+    <Content Include="Views\ModifyLoyalty\Customers.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultiItemBrowser.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\DiscountStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\DiscountRuleModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DiscountStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\DisplayTemplates\DiscountStepModel.cshtml" />
+    <Content Include="Views\ModifyPromotion\EditorTemplates\DiscountRuleModel.cshtml" />
+    <Content Include="Views\ModifyLoyalty\GrantLoyaltyPoints.cshtml" />
+    <Content Include="Views\Reclamation\EditCoupon.cshtml" />
+    <Content Include="Views\ManageProducts\Index.cshtml" />
+    <Content Include="Views\ManageNewsArticle\Delete.cshtml" />
+    <Content Include="Views\ManageNewsArticle\Edit.cshtml" />
+    <Content Include="Views\ManageNewsArticle\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NewsArticleType.cshtml" />
+    <Content Include="Views\Management\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NoFormDatePicker.cshtml" />
+    <Content Include="Views\ManageRetailerStores\Delete.cshtml" />
+    <Content Include="Views\ManageRetailerStores\Edit.cshtml" />
+    <Content Include="Views\ManageRetailerStores\EditorTemplates\DatePicker.cshtml" />
+    <Content Include="Views\ManageRetailerStores\EditorTemplates\RetailerStoreDateModel.cshtml" />
+    <Content Include="Views\ManageRetailerStores\EditorTemplates\StoreDates.cshtml" />
+    <Content Include="Views\ManageRetailerStores\EditorTemplates\TimePicker.cshtml" />
+    <Content Include="Views\ManageRetailerStores\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ProductsInDiscountOrRewardStep.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProductsInDiscountOrRewardRule.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RewardsStep.cshtml" />
+    <Content Include="Views\ManageVersionMessage\Delete.cshtml" />
+    <Content Include="Views\ManageVersionMessage\Edit.cshtml" />
+    <Content Include="Views\ManageVersionMessage\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SavingsStep.cshtml" />
+    <Content Include="Views\CreateLoyalty\DisplayTemplates\SavingsStepModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DiscountStep.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error403.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Management\EdmBatches.cshtml" />
+    <Content Include="Views\Management\EdmBatch.cshtml" />
+    <Content Include="Views\Management\EditorTemplates\EdmBatchCheckPromotionModel.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\CreateOrEdit.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\Live.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DraftableTabs.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Tab.cshtml" />
+    <Content Include="Views\Shared\TabBarBegin.cshtml" />
+    <Content Include="Views\Shared\TabBarEnd.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DraftableButtons.cshtml" />
+    <Content Include="Views\Shared\BottomBarBegin.cshtml" />
+    <Content Include="Views\Shared\BottomBarEnd.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Button.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\EditorTemplates\AppConfigItemDraftBso.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\Staging.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\AppConfigItemGroup.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\Drafts.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\EditorTemplates\AppConfigItemBso.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\LiveObjects.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\NoRecords.cshtml" />
+    <Content Include="Views\Shared\_Modal.cshtml" />
+    <Content Include="Views\LoyaltyProgram\Live.cshtml" />
+    <Content Include="Views\LoyaltyProgram\Staging.cshtml" />
+    <Content Include="Views\LoyaltyProgram\ShareLoyaltyPoints.cshtml" />
+    <Content Include="Views\LoyaltyProgram\EditorTemplates\LoyaltyPointsProgram.cshtml" />
+    <Content Include="Views\LoyaltyProgram\EditorTemplates\LoyaltyPointsProgramDraftModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HtmlEditor.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\Empty.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\ActionCreateCoupon.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\ActionGrantPoints.cshtml" />
+    <Content Include="Views\NotificationDefinition\CreateOrEdit.cshtml" />
+    <Content Include="Views\NotificationDefinition\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\ActionSendNotification.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\TypeNewReward.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\TypeSavingGoalUnlocked.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\FieldLoyaltyRewardId.cshtml" />
+    <Content Include="Views\AppConfigItemGroup\Index.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\ActionCreateCouponWithTrigger.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\LoyaltyEventDefinition\TypeRewardAlmostExpired.cshtml" />
+    <Content Include="Areas\Admin\Views\AppConfigItem\Index.cshtml" />
+    <Content Include="Views\Shared\Placeholders.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PlaceholderModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlaceholderModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PlaceholderImageModel.cshtml" />
+    <Content Include="Views\Shared\PlaceholderBase.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Image.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlaceholderImageModel.cshtml" />
+    <Content Include="Views\Shared\PlaceholdersReward.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlaceholderTextAreaModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PlaceholderTextAreaModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlaceholderTextModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PlaceholderTextModel.cshtml" />
+    <Content Include="Views\Loyalty\SavingRuleTypeTemplates\CodeActionSaving.cshtml" />
+    <Content Include="Views\AppCardStackDefinition\CreateOrEdit.cshtml" />
+    <Content Include="Views\AppCardStackDefinition\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlaceholderRichTextEditorModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PlaceholderRichTextEditorModel.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ShowAllFinishedPublications.cshtml" />
+    <Content Include="Views\Home\ShowAllLivePublications.cshtml" />
+    <Content Include="Views\Account\LoggedOut.cshtml" />
+    <Content Include="Views\WebhookEvent\Index.cshtml" />
+    <Content Include="Views\Shared\_ModalInfo.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\LanguageMessageGroup\Create.cshtml" />
+    <Content Include="Views\LanguageMessageGroup\Edit.cshtml" />
+    <Content Include="Views\LanguageMessageGroup\Index.cshtml" />
+    <Content Include="Views\LanguageDeliveryProvider\Index.cshtml" />
+    <Content Include="Views\LanguageDeliveryProvider\Create.cshtml" />
+    <Content Include="Views\LanguageDeliveryProvider\NameSendGrid.cshtml" />
+    <Content Include="Views\LanguageDeliveryProvider\Empty.cshtml" />
+    <Content Include="Views\LanguageDeliveryProvider\Edit.cshtml" />
+    <Content Include="Views\LanguageMessageTemplate\Index.cshtml" />
+    <Content Include="Views\LanguageMessageTemplate\Create.cshtml" />
+    <Content Include="Views\LanguageMessageTemplate\Empty.cshtml" />
+    <Content Include="Views\LanguageMessageTemplate\MessageGroupNameEmail.cshtml" />
+    <Content Include="Views\LanguageMessageTemplate\Edit.cshtml" />
+    <Content Include="Views\LanguageNav\Index.cshtml" />
+    <Content Include="Views\Segmentation\Index.cshtml" />
+    <Content Include="Views\Segmentation\Create.cshtml" />
+    <Content Include="Views\Segmentation\Edit.cshtml" />
+    <Content Include="Views\Shared\CKEditorScript.cshtml" />
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.PublishModule.ts" />
+    <Content Include="Scripts\boxplosive\modal.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-video.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mustache.js" />
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Scripts\boxplosive\boxAutocomplete.js" />
+    <Content Include="Scripts\boxplosive\boxSpinner.js" />
+    <Content Include="Scripts\boxplosive\equalHeights.js" />
+    <Content Include="Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="Scripts\plugins\load-image.all.js" />
+    <Content Include="Scripts\polyfills\es5-sham.js" />
+    <Content Include="Scripts\polyfills\es5-shim.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <None Include="Scripts\_references.js" />
+    <Content Include="stylesheets\boxplosive.css">
+      <DependentUpon>boxplosive.scss</DependentUpon>
+    </Content>
+    <Content Include="stylesheets\boxplosive.min.css">
+      <DependentUpon>boxplosive.css</DependentUpon>
+    </Content>
+    <Content Include="stylesheets\boxplosive\mixins\_datapanels.scss" />
+    <Content Include="stylesheets\boxplosive\_alerts.scss" />
+    <Content Include="stylesheets\boxplosive\_footer-primary.scss" />
+    <Content Include="stylesheets\boxplosive\_navs.scss" />
+    <Content Include="stylesheets\boxplosive\_grid.scss" />
+    <Content Include="stylesheets\boxplosive\_thumbnails.scss" />
+    <Content Include="stylesheets\boxplosive\_media.scss" />
+    <Content Include="stylesheets\boxplosive\_input-groups.scss" />
+    <Content Include="stylesheets\boxplosive\_pagination.scss" />
+    <Content Include="stylesheets\boxplosive\mixins\_pagination.scss" />
+    <Content Include="stylesheets\boxplosive\_close.scss" />
+    <Content Include="stylesheets\boxplosive\_jquery-ui.scss" />
+    <Content Include="stylesheets\boxplosive\_modals.scss" />
+    <Content Include="stylesheets\boxplosive\_tables.scss" />
+    <Content Include="stylesheets\boxplosive\_wells.scss" />
+    <Content Include="stylesheets\boxplosive\_browser.scss" />
+    <Content Include="stylesheets\boxplosive\_dropdowns.scss" />
+    <Content Include="stylesheets\boxplosive\_sticky.scss" />
+    <Content Include="stylesheets\boxplosive\_utilities.scss" />
+    <Content Include="stylesheets\boxplosive\_badges.scss" />
+    <Content Include="stylesheets\boxplosive\_chartjs.scss" />
+    <None Include="T4MVC\T4MVC.tt.hooks.t4" />
+    <None Include="stylesheets\boxplosive\mixins\_panels.scss" />
+    <None Include="stylesheets\boxplosive\mixins\_grid-framework.scss" />
+    <None Include="stylesheets\boxplosive\_type.scss" />
+    <None Include="stylesheets\boxplosive\_button-groups.scss" />
+    <None Include="stylesheets\boxplosive\_buttons.scss" />
+    <None Include="stylesheets\boxplosive\_panels.scss" />
+    <None Include="stylesheets\boxplosive\_mixins.scss" />
+    <None Include="stylesheets\boxplosive\_fonts.scss" />
+    <None Include="stylesheets\boxplosive\_datapanels.scss" />
+    <None Include="stylesheets\boxplosive\_scaffolding.scss" />
+    <None Include="stylesheets\boxplosive\_lists.scss" />
+    <Content Include="Views\Home\DisplayTemplates\ClientModule.cshtml" />
+    <Content Include="Views\Styleguide\CreateCampaign.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\SegmentationStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\SegmentationStepModel.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimePicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
+    <Content Include="Views\CreatePromotion\EditorTemplates\Amount.cshtml" />
+    <Content Include="Views\CreatePromotion\DisplayTemplates\StatusListModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\Index.cshtml" />
+    <Content Include="Views\Styleguide\CreateLoyalty.cshtml" />
+    <Content Include="Views\Styleguide\PublishCampaign.cshtml" />
+    <Content Include="Views\CreateLoyalty\DisplayTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\DisplayTemplates\StatusListModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\DisplayTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\EditorTemplates\BasicStepModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DatePicker.cshtml" />
+    <Content Include="Views\CreateLoyalty\EditorTemplates\TimeframeStepModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\EditorTemplates\SavingsStepModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RuleType.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NoFormNumeric.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NoFormEnum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProductBrowser.cshtml" />
+    <Content Include="Views\CreateLoyalty\DisplayTemplates\RewardsStepModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\EditorTemplates\RewardsRuleModel.cshtml" />
+    <Content Include="Views\CreateLoyalty\EditorTemplates\RewardsStepModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\.properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\AtLeastOneItem.cs" />
+    <Compile Include="Attributes\AuthorizeAttribute.cs" />
+    <Compile Include="Attributes\MultipleSubmitButtons.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CreateLoyaltyController.cs" />
+    <Compile Include="Controllers\CreatePromotionController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\PlatformController.cs" />
+    <Compile Include="Controllers\PublishLoyaltyController.cs" />
+    <Compile Include="Controllers\PublishPromotionController.cs" />
+    <Compile Include="Factories\HomeFactory.cs" />
+    <Compile Include="Factories\ServiceCallFactory.cs" />
+    <Compile Include="Factories\CampaignFactory.cs" />
+    <Compile Include="Factories\PublishFactory.cs" />
+    <Compile Include="Factories\LoyaltyFactory.cs" />
+    <Compile Include="Factories\PromotionFactory.cs" />
+    <Compile Include="Controllers\Styleguide.cs" />
+    <Compile Include="Helpers\AuthenticationHelpers.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Helpers\JsonNetResult.cs" />
+    <Compile Include="Helpers\PlatformHelper.cs" />
+    <Compile Include="Helpers\GenericHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CreateLoyalty\CreateLoyaltyModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\StatusListModel.cs" />
+    <Compile Include="Models\Home\AnalyseModel.cs" />
+    <Compile Include="Models\Management\BackgroundProcessesModel.cs" />
+    <Compile Include="Models\Management\BackgroundProcessModel.cs" />
+    <Compile Include="Models\ModifyPromotion\ModifyPromotionModel.cs" />
+    <Compile Include="Models\ModifyPromotion\StatusListModel.cs" />
+    <Compile Include="Models\Home\CreateModule.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Management\PublicationFilterModel.cs" />
+    <Compile Include="Models\Management\PublicationModel.cs" />
+    <Compile Include="Models\Management\PublicationsModel.cs" />
+    <Compile Include="Models\Management\ManagementModel.cs" />
+    <Compile Include="Models\Home\PublishModel.cs" />
+    <Compile Include="Models\ModifyLoyalty\ModifyLoyaltyModel.cs" />
+    <Compile Include="Models\ModifyLoyalty\ModifyStatusListModel.cs" />
+    <Compile Include="Models\PaginationModel.cs" />
+    <Compile Include="Models\PublishLoyalty\PublishLoyaltyModel.cs" />
+    <Compile Include="Models\Reclamation\CouponModel.cs" />
+    <Compile Include="Models\Reclamation\CouponTabModel.cs" />
+    <Compile Include="Models\Reclamation\LoyaltyTabModel.cs" />
+    <Compile Include="Models\Reclamation\MutationModel.cs" />
+    <Compile Include="Models\Reclamation\ReclamationModel.cs" />
+    <Compile Include="Models\Reclamation\TabModelBase.cs" />
+    <Compile Include="Models\Shared\Enums.cs" />
+    <Compile Include="Models\Shared\Loyalty\BasicStepModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\RewardsRuleModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\LoyaltyModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\SavingsRuleModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\RewardsStepModel.cs" />
+    <Compile Include="Models\Shared\Loyalty\SavingsStepModel.cs" />
+    <Compile Include="Models\Shared\ProductModel.cs" />
+    <Compile Include="Models\CreatePromotion\StatusListModel.cs" />
+    <Compile Include="Models\Shared\Promotion\BasicStepModel.cs" />
+    <Compile Include="Models\Shared\Promotion\SegmentationStepModel.cs" />
+    <Compile Include="Models\Home\ExplanationPanel.cs" />
+    <Compile Include="Models\Home\ProcessModule.cs" />
+    <Compile Include="Models\Shared\Promotion\PromotionModel.cs" />
+    <Compile Include="Models\Shared\Promotion\DiscountRuleModel.cs" />
+    <Compile Include="Models\Shared\Promotion\PromotionStepModel.cs" />
+    <Compile Include="Models\Shared\TimeframeStepModel.cs" />
+    <Compile Include="Models\Styleguide\StyleguideModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\CreatePromotion\CreatePromotionModel.cs" />
+    <Compile Include="Models\Home\HomeModel.cs" />
+    <Compile Include="Models\PublishPromotion\PublishPromotionModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\CreatePromotion\Index.cshtml" />
+    <Content Include="stylesheets\boxplosive\_forms.scss" />
+    <Content Include="stylesheets\boxplosive\_header-primary.scss" />
+    <Content Include="stylesheets\boxplosive\_icons.scss" />
+    <Content Include="stylesheets\boxplosive\_variables.scss" />
+    <Content Include="stylesheets\boxplosive.scss" />
+    <Content Include="stylesheets\boxplosive\mixins\_buttons.scss" />
+    <Content Include="stylesheets\boxplosive\mixins\_forms.scss" />
+    <Content Include="stylesheets\boxplosive.css.map">
+      <DependentUpon>boxplosive.css</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PromotionStepModel.cshtml" />
+    <Content Include="Views\Styleguide\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="Web.Base.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Octopus.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Octopus.Internal.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.Base.config">
+      <DependentUpon>NLog.config</DependentUpon>
+    </None>
+    <None Include="NLog.Debug.config">
+      <DependentUpon>NLog.config</DependentUpon>
+    </None>
+    <None Include="NLog.Release.config">
+      <DependentUpon>NLog.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Content\Promotion\" />
+    <Folder Include="Views\CampaignControllerBase\" />
+    <Folder Include="Views\DraftBase\" />
+    <Folder Include="Views\DraftControllerBase\" />
+    <Folder Include="Views\LoyaltyControllerBase\" />
+    <Folder Include="Views\LoyaltyEvent\" />
+    <Folder Include="Views\PromotionControllerBase\" />
+    <Folder Include="Views\Reclamation\EditorTemplates\" />
+    <Folder Include="Views\Validation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.Partial.ts" />
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.Partialstep.ts" />
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.PartialstepsManager.ts" />
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.Repeatable.ts" />
+    <TypeScriptCompile Include="Scripts\boxplosive\Boxplosive.Upload.ts" />
+    <None Include="Scripts\typings\jquery\jquery.d.ts" />
+    <Content Include="Scripts\boxplosive\tab.js" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\boxplosive\boxplosive.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.fileupload\jquery.fileupload.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\modernizr\modernizr.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\mustache\mustache.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nl.boxplosive.BackOffice.Business\nl.boxplosive.BackOffice.Business.csproj">
+      <Project>{7ca615b1-74e5-4839-a355-2a5cd3cca99c}</Project>
+      <Name>nl.boxplosive.BackOffice.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Data.Web\nl.boxplosive.Data.Web.csproj">
+      <Project>{B3DA80B5-27FF-4AED-93C2-75062FC32856}</Project>
+      <Name>nl.boxplosive.Data.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Shared\nl.boxplosive.Shared.csproj">
+      <Project>{e2bb8160-241a-4645-aa8d-e7c464d2fd6b}</Project>
+      <Name>nl.boxplosive.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Azure\nl.boxplosive.Azure.csproj">
+      <Project>{83f24525-526a-48af-be52-cc4bb7bc7bf7}</Project>
+      <Name>nl.boxplosive.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.BoxplosiveApi.SDK\nl.boxplosive.BoxplosiveApi.SDK.csproj">
+      <Project>{3ee63c4d-0a97-4f38-a189-51ce8e395c25}</Project>
+      <Name>nl.boxplosive.BoxplosiveApi.SDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.BoxplosiveUtilities\nl.boxplosive.BoxplosiveUtilities.csproj">
+      <Project>{4979c45f-bc4c-4d9b-9140-dc6cbb8f1124}</Project>
+      <Name>nl.boxplosive.BoxplosiveUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Account\nl.boxplosive.Business.Account.csproj">
+      <Project>{77d1bb47-81b9-4e4f-bf52-f2e48834b405}</Project>
+      <Name>nl.boxplosive.Business.Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Campaign\nl.boxplosive.Business.Campaign.csproj">
+      <Project>{918707ae-9114-4a39-88e3-2678a287de7d}</Project>
+      <Name>nl.boxplosive.Business.Campaign</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Core\nl.boxplosive.Business.Core.csproj">
+      <Project>{9880a09e-a108-4b45-9752-4055efa31bbb}</Project>
+      <Name>nl.boxplosive.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Customer\nl.boxplosive.Business.Customer.csproj">
+      <Project>{3b380e06-585a-4dba-8043-819fcba12dc8}</Project>
+      <Name>nl.boxplosive.Business.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Product\nl.boxplosive.Business.Product.csproj">
+      <Project>{2a0abb8b-448e-4ab0-8c4c-12c009266a75}</Project>
+      <Name>nl.boxplosive.Business.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Sdk\nl.boxplosive.Business.Sdk.csproj">
+      <Project>{F66473EA-5302-4186-8B9C-E5C6322D64E3}</Project>
+      <Name>nl.boxplosive.Business.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Session\nl.boxplosive.Business.Session.csproj">
+      <Project>{35c99437-7aa1-466f-9a64-cd8fee329303}</Project>
+      <Name>nl.boxplosive.Business.Session</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Transaction.Rules\nl.boxplosive.Business.Transaction.Rules.csproj">
+      <Project>{cdc03c96-06d6-4b3c-8792-d2ea5bbfc900}</Project>
+      <Name>nl.boxplosive.Business.Transaction.Rules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business.Transaction\nl.boxplosive.Business.Transaction.csproj">
+      <Project>{9e3c07b9-d716-43bb-91ff-143af2cba252}</Project>
+      <Name>nl.boxplosive.Business.Transaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Business\nl.boxplosive.Business.csproj">
+      <Project>{2f1960af-7b04-4fa3-8570-aacc4735f524}</Project>
+      <Name>nl.boxplosive.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Common.Wcf\nl.boxplosive.Common.Wcf.csproj">
+      <Project>{f0d68400-188f-4fae-87f5-a698a6c61330}</Project>
+      <Name>nl.boxplosive.Common.Wcf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Configuration\nl.boxplosive.Configuration.csproj">
+      <Project>{BECCF82B-0358-46F4-9F0C-A6C0EAB20D2D}</Project>
+      <Name>nl.boxplosive.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Data.MsSql\nl.boxplosive.Data.MsSql.csproj">
+      <Project>{596b6951-4e01-4a6a-aff8-1a10e3a64dfb}</Project>
+      <Name>nl.boxplosive.Data.MsSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Data.Sdk\nl.boxplosive.Data.Sdk.csproj">
+      <Project>{a943b310-232b-4d4c-85b8-83e45a07c309}</Project>
+      <Name>nl.boxplosive.Data.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Sdk\nl.boxplosive.Sdk.csproj">
+      <Project>{d0f644fc-b514-4e7f-b461-af13217daa06}</Project>
+      <Name>nl.boxplosive.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Service\nl.boxplosive.Service.csproj">
+      <Project>{18c2b426-9c09-4696-9701-dec88c6f9e9d}</Project>
+      <Name>nl.boxplosive.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nl.boxplosive.Utilities\nl.boxplosive.Utilities.csproj">
+      <Project>{b3b77f41-d2ba-4e10-b0dc-dbfae6528dcd}</Project>
+      <Name>nl.boxplosive.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\ckeditor5\**\*.*" />
+    <Content Remove="Scripts\ckeditor5\**\tsconfig.json" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <Optimize>true</Optimize>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TypeScriptOutFile>Scripts/boxplosive.js</TypeScriptOutFile>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Antlr">
+      <Version>3.5.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="bootstrap.sass">
+      <Version>3.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="bootstrap.TypeScript.DefinitelyTyped">
+      <Version>0.9.8</Version>
+    </PackageReference>
+    <PackageReference Include="CsvHelper">
+      <Version>31.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="foolproof">
+      <Version>0.9.4518</Version>
+    </PackageReference>
+    <PackageReference Include="Insight.Database">
+      <Version>6.3.11</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery">
+      <Version>3.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.FileUpload">
+      <Version>10.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="jquery.fileupload.TypeScript.DefinitelyTyped">
+      <Version>0.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="jquery.TypeScript.DefinitelyTyped">
+      <Version>3.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.UI.Combined">
+      <Version>1.13.2</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.Validation">
+      <Version>1.20.0</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.Validation.AdditionalMethods">
+      <Version>1.17.0</Version>
+    </PackageReference>
+    <PackageReference Include="jquery.validation.TypeScript.DefinitelyTyped">
+      <Version>0.4.6</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.Validation.Unobtrusive.Native.MVC5">
+      <Version>1.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="jquery-timepicker-jt">
+      <Version>1.11.15</Version>
+    </PackageReference>
+    <PackageReference Include="jqueryui.TypeScript.DefinitelyTyped">
+      <Version>1.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="LightInject">
+      <Version>6.6.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.NLogTarget">
+      <Version>2.22.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.Web">
+      <Version>2.22.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer">
+      <Version>2.22.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core">
+      <Version>2.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin">
+      <Version>2.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Mvc">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Razor">
+      <Version>3.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <Version>1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Web.Optimization">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebPages">
+      <Version>3.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Web.TokenCache">
+      <Version>2.17.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens">
+      <Version>7.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect">
+      <Version>7.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.Cookies">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.OAuth">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild">
+      <Version>5.4.4</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.Infrastructure">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Modernizr">
+      <Version>2.8.3</Version>
+    </PackageReference>
+    <PackageReference Include="modernizr.TypeScript.DefinitelyTyped">
+      <Version>0.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="mustache.js">
+      <Version>0.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="mustache.TypeScript.DefinitelyTyped">
+      <Version>0.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NLog">
+      <Version>5.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Owin">
+      <Version>1.0</Version>
+    </PackageReference>
+    <PackageReference Include="PagedList">
+      <Version>1.17.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="PagedList.Mvc">
+      <Version>4.5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="PostSharp" GeneratePathProperty="true">
+      <Version>4.3.48</Version>
+    </PackageReference>
+    <PackageReference Include="protobuf-net">
+      <Version>2.4.8</Version>
+    </PackageReference>
+    <PackageReference Include="Quartz">
+      <Version>2.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="Respond">
+      <Version>1.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="SmartFormat.NET">
+      <Version>2.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.ComponentModel.EventBasedAsync">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Dynamic.Runtime">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt">
+      <Version>7.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Linq.Queryable">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Requests">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="T4MVC">
+      <Version>4.2.5</Version>
+    </PackageReference>
+    <PackageReference Include="T4MVCExtensions">
+      <Version>4.2.5</Version>
+    </PackageReference>
+    <PackageReference Include="WebGrease">
+      <Version>1.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\libraries\lz4.net\1.0.98\content\net45\x64\lz4X64.dll">
+      <Link>x64\lz4X64.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\libraries\lz4.net\1.0.98\content\net45\x86\lz4X86.dll">
+      <Link>x86\lz4X86.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(PkgPostSharp)\tools\PostSharp.targets" Condition="Exists('$(PkgPostSharp)\tools\PostSharp.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49859</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://local.boxplosive.nl/BackOffice</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://local.boxplosive.nl/BackOffice</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- Config transformation -->
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <Target Name="WriteEmptyConfigFileOnBuild">
+    <WriteLinesToFile Condition="Exists('Web.Base.config')" File="Web.config" Lines="" Overwrite="true" />
+    <WriteLinesToFile Condition="Exists('App.Base.config')" File="App.config" Lines="" Overwrite="true" />
+    <WriteLinesToFile Condition="Exists('NLog.Base.config')" File="NLog.config" Lines="" Overwrite="true" />
+  </Target>
+  <PropertyGroup>
+    <CleanDependsOn>
+      $(CleanDependsOn);
+      WriteEmptyConfigFileOnBuild
+    </CleanDependsOn>
+  </PropertyGroup>
+  <Target Name="TransformConfigFileOnBuild">
+    <TransformXml Condition="Exists('Web.Base.config')" Source="Web.Base.config" Transform="Web.$(Configuration).config" Destination="Web.config" />
+    <TransformXml Condition="Exists('App.Base.config')" Source="App.Base.config" Transform="App.$(Configuration).config" Destination="App.config" />
+    <TransformXml Condition="Exists('NLog.Base.config')" Source="NLog.Base.config" Transform="NLog.$(Configuration).config" Destination="NLog.config" />
+  </Target>
+  <PropertyGroup>
+    <BuildDependsOn>
+      TransformConfigFileOnBuild;
+      $(BuildDependsOn)
+    </BuildDependsOn>
+  </PropertyGroup>
+  <!-- end: Config transformation -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+</Project>
